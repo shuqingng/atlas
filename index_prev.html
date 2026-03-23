@@ -107,11 +107,8 @@
   .stop-dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid; background: var(--paper); flex-shrink: 0; margin-top: 5px; }
   .stop-connector { width: 1px; flex: 1; min-height: 20px; background: var(--border); margin: 4px 0; }
   .stop-body { padding-bottom: 32px; }
-  .stop-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
+  .stop-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
   .stop-card:hover { transform: translateY(-2px); box-shadow: 0 6px 32px rgba(26,26,24,0.12); }
-  .stop-card-img { width: 100%; height: 180px; object-fit: cover; display: block; background: var(--paper2); }
-  .stop-card-img.errored { display: none; }
-  .stop-card-body { padding: 20px 24px; }
   .stop-name { font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
   .stop-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
   .tag { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
@@ -317,7 +314,7 @@ function groupByDay(rows){
   rows.forEach(r=>{
     const n=r.day_number;
     if(!map[n]) map[n]={ num:n, label:r.day_label||`Day ${n}`, city:(r.city||"tokyo").toLowerCase(), title:r.day_title||"", desc:r.day_description||"", tip:r.day_tip||"", stops:[] };
-    if(r.stop_name) map[n].stops.push({ time:r.stop_time||"", name:r.stop_name||"", tags:r.stop_tags||"", note:r.stop_note||"", maps_url:r.stop_maps_url||"", img_url:r.stop_image_url||"" });
+    if(r.stop_name) map[n].stops.push({ time:r.stop_time||"", name:r.stop_name||"", tags:r.stop_tags||"", note:r.stop_note||"", maps_url:r.stop_maps_url||"" });
   });
   return Object.values(map).sort((a,b)=>Number(a.num)-Number(b.num));
 }
@@ -368,13 +365,10 @@ function renderDays(days){
           ${!isLast?'<div class="stop-connector"></div>':''}
         </div>
         <div class="stop-body"><div class="stop-card">
-          ${s.img_url?`<img class="stop-card-img" src="${s.img_url}" alt="${s.name}" loading="lazy" onerror="this.classList.add('errored')">`:''}
-          <div class="stop-card-body">
-            <div class="stop-name">${s.name}</div>
-            ${tagHtml?`<div class="stop-tags">${tagHtml}</div>`:''}
-            <div class="stop-note">${s.note}</div>
-            ${s.maps_url?`<a class="maps-link" href="${s.maps_url}" target="_blank" rel="noopener">📍 Open in Maps</a>`:''}
-          </div>
+          <div class="stop-name">${s.name}</div>
+          ${tagHtml?`<div class="stop-tags">${tagHtml}</div>`:''}
+          <div class="stop-note">${s.note}</div>
+          ${s.maps_url?`<a class="maps-link" href="${s.maps_url}" target="_blank" rel="noopener">📍 Open in Maps</a>`:''}
         </div></div>
       </div>`;
     }).join("");
