@@ -232,6 +232,18 @@
   .btn-mig-export { padding: 7px 14px; font-size: 12px; font-weight: 500; border-radius: 8px; border: none; background: var(--green); color: #fff; cursor: pointer; }
   .btn-mig-dismiss { padding: 7px 14px; font-size: 12px; font-weight: 500; border-radius: 8px; border: 1px solid var(--border); background: #fff; cursor: pointer; color: var(--muted); }
 
+  /* Options editor (in modal) */
+  .options-editor { display: flex; flex-direction: column; gap: 8px; }
+  .option-editor-row { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px; position: relative; }
+  .option-editor-row-header { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+  .option-editor-badge { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: var(--gold-light); color: var(--gold); padding: 2px 7px; border-radius: 6px; flex-shrink: 0; }
+  .option-editor-row .form-input, .option-editor-row .form-textarea { font-size: 13px; padding: 7px 10px; }
+  .option-editor-row .form-textarea { min-height: 52px; }
+  .btn-remove-option { margin-left: auto; width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--border); background: #fff; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; color: var(--muted); flex-shrink: 0; transition: all 0.15s; }
+  .btn-remove-option:hover { background: #fdecea; border-color: #f5c6c2; color: var(--red); }
+  .btn-add-option { display: flex; align-items: center; gap: 5px; padding: 8px 12px; font-size: 12px; font-weight: 500; border-radius: 8px; border: 1px dashed var(--border); background: transparent; cursor: pointer; color: var(--muted); transition: all 0.2s; width: 100%; justify-content: center; margin-top: 2px; }
+  .btn-add-option:hover { border-color: var(--ink); color: var(--ink); background: var(--paper2); }
+
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes sectionIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:0.7} }
@@ -409,17 +421,9 @@
         <input class="form-input" id="f-stop-image-url" type="url" placeholder="https://...">
       </div>
       <div class="form-group">
-        <label class="form-label">Options (alternatives)</label>
-        <input class="form-input" id="f-stop-options" placeholder="Option A | Option B | Option C">
-        <div class="form-hint">Separate options with |</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Option Notes</label>
-        <input class="form-input" id="f-stop-option-notes" placeholder="Note for A | Note for B | Note for C">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Option Maps URLs</label>
-        <input class="form-input" id="f-stop-option-urls" placeholder="https://... | https://... | https://...">
+        <label class="form-label">Options / Alternatives</label>
+        <div class="options-editor" id="options-editor"></div>
+        <button type="button" class="btn-add-option" onclick="addOptionEditorRow()">＋ Add alternative</button>
       </div>
     </div>
     <div class="modal-footer">
@@ -504,6 +508,7 @@ async function loadData() {
       const parsed = JSON.parse(lsRaw);
       if (parsed && Array.isArray(parsed.days) && parsed.days.length > 0) {
         state.days = parsed.days;
+        normalizeAllOptions();
         state.dataSource = 'localstorage';
         state.dirty = true;
         return;
@@ -518,6 +523,7 @@ async function loadData() {
       const data = await res.json();
       if (data && Array.isArray(data.days) && data.days.length > 0) {
         state.days = data.days;
+        normalizeAllOptions();
         state.dataSource = 'json';
         return;
       }
@@ -537,6 +543,7 @@ async function loadFromSheets() {
     const json = JSON.parse(txt.replace(/^[^(]*\(/, "").replace(/\);\s*$/, ""));
     const rows = parseGviz(json);
     state.days = groupByDay(rows);
+    normalizeAllOptions();
     state.dataSource = 'sheets';
   } catch(e) {
     showError(`<strong>⚠️ Could not load itinerary</strong>
@@ -580,9 +587,7 @@ function groupByDay(rows) {
       note: r.stop_note || "",
       maps_url: r.stop_maps_url || "",
       img_url: r.stop_image_url || "",
-      options: r.stop_options || "",
-      option_notes: r.stop_option_notes || "",
-      option_urls: r.stop_option_urls || ""
+      options: normalizeOptions(r.stop_options || "", r.stop_option_notes || "", r.stop_option_urls || ""),
     });
   });
   return Object.values(map).sort((a, b) => Number(a.num) - Number(b.num));
@@ -756,19 +761,17 @@ function buildStopHtml(d, s, si, isLast) {
     .map(t => `<span class="tag tag-${t}">${TAG_LABELS[t] || t}</span>`).join("");
   const dc = dotColor(s.tags);
 
+  const opts = Array.isArray(s.options) ? s.options : normalizeOptions(s.options || "", s.option_notes || "", s.option_urls || "");
   let optionsHtml = "";
-  if (s.options) {
-    const names  = s.options.split("|").map(x => x.trim()).filter(Boolean);
-    const notes  = s.option_notes ? s.option_notes.split("|").map(x => x.trim()) : [];
-    const urls   = s.option_urls  ? s.option_urls.split("|").map(x => x.trim())  : [];
-    const rows = names.map((name, i) => `
+  if (opts.length > 0) {
+    const rows = opts.map((opt, i) => `
       <div class="option-row">
         <div class="option-top">
           ${i > 0 ? '<span class="option-or">or</span>' : ''}
-          <div class="option-name">${escHtml(name)}</div>
+          <div class="option-name">${escHtml(opt.name)}</div>
         </div>
-        ${notes[i] ? `<div class="option-note">${escHtml(notes[i])}</div>` : ""}
-        ${urls[i]  ? `<a class="option-maps" href="${escAttr(urls[i])}" target="_blank" rel="noopener">📍 Maps</a>` : ""}
+        ${opt.note ? `<div class="option-note">${renderNote(opt.note)}</div>` : ""}
+        ${opt.url  ? `<a class="option-maps" href="${escAttr(opt.url)}" target="_blank" rel="noopener">📍 Maps</a>` : ""}
       </div>`).join("");
     optionsHtml = `<div class="options-label">Options</div><div class="options-list">${rows}</div>`;
   }
@@ -787,7 +790,7 @@ function buildStopHtml(d, s, si, isLast) {
       <div class="stop-card-body">
         <div class="stop-name">${escHtml(s.name)}</div>
         ${tagHtml ? `<div class="stop-tags">${tagHtml}</div>` : ""}
-        <div class="stop-note">${escHtml(s.note)}</div>
+        <div class="stop-note">${renderNote(s.note)}</div>
         ${s.maps_url ? `<a class="maps-link" href="${escAttr(s.maps_url)}" target="_blank" rel="noopener">📍 Open in Maps</a>` : ""}
         ${optionsHtml}
       </div>
@@ -831,15 +834,17 @@ function openStopModal(di, si) {
   const isNew = si === null;
   document.getElementById("stop-modal-title").textContent = isNew ? "Add Stop" : "Edit Stop";
   const s = isNew ? {} : state.days[di].stops[si];
-  document.getElementById("f-stop-name").value        = s.name         || "";
-  document.getElementById("f-stop-time").value        = s.time         || "";
-  document.getElementById("f-stop-tags").value        = s.tags         || "";
-  document.getElementById("f-stop-note").value        = s.note         || "";
-  document.getElementById("f-stop-maps-url").value    = s.maps_url     || "";
-  document.getElementById("f-stop-image-url").value   = s.img_url      || "";
-  document.getElementById("f-stop-options").value     = s.options      || "";
-  document.getElementById("f-stop-option-notes").value= s.option_notes || "";
-  document.getElementById("f-stop-option-urls").value = s.option_urls  || "";
+  document.getElementById("f-stop-name").value     = s.name     || "";
+  document.getElementById("f-stop-time").value     = s.time     || "";
+  document.getElementById("f-stop-tags").value     = s.tags     || "";
+  document.getElementById("f-stop-note").value     = s.note     || "";
+  document.getElementById("f-stop-maps-url").value = s.maps_url || "";
+  document.getElementById("f-stop-image-url").value= s.img_url  || "";
+  // Populate options editor
+  const opts = Array.isArray(s.options) ? s.options : normalizeOptions(s.options || "", s.option_notes || "", s.option_urls || "");
+  const editor = document.getElementById("options-editor");
+  editor.innerHTML = "";
+  opts.forEach(opt => addOptionEditorRow(opt));
   openModal("stop-modal");
 }
 
@@ -847,15 +852,13 @@ function saveStopModal() {
   if (!_stopCtx) return;
   const { di, si } = _stopCtx;
   const stop = {
-    name:         document.getElementById("f-stop-name").value.trim(),
-    time:         document.getElementById("f-stop-time").value.trim(),
-    tags:         document.getElementById("f-stop-tags").value.trim(),
-    note:         document.getElementById("f-stop-note").value.trim(),
-    maps_url:     document.getElementById("f-stop-maps-url").value.trim(),
-    img_url:      document.getElementById("f-stop-image-url").value.trim(),
-    options:      document.getElementById("f-stop-options").value.trim(),
-    option_notes: document.getElementById("f-stop-option-notes").value.trim(),
-    option_urls:  document.getElementById("f-stop-option-urls").value.trim(),
+    name:     document.getElementById("f-stop-name").value.trim(),
+    time:     document.getElementById("f-stop-time").value.trim(),
+    tags:     document.getElementById("f-stop-tags").value.trim(),
+    note:     document.getElementById("f-stop-note").value.trim(),
+    maps_url: document.getElementById("f-stop-maps-url").value.trim(),
+    img_url:  document.getElementById("f-stop-image-url").value.trim(),
+    options:  getOptionsFromEditor(),
   };
   if (!stop.name) { alert("Stop name is required."); return; }
   if (si === null) {
@@ -944,8 +947,70 @@ document.addEventListener("keydown", e => {
 });
 
 // ════════════════════════════════════════════════════════════════════
+//  Options editor helpers
+// ════════════════════════════════════════════════════════════════════
+
+// Converts old pipe-format strings to new array format.
+// Also accepts an already-array value (passthrough).
+function normalizeOptions(optionsOrArray, optionNotes, optionUrls) {
+  if (Array.isArray(optionsOrArray)) return optionsOrArray;
+  const str = optionsOrArray || "";
+  if (!str.trim()) return [];
+  const names = str.split("|").map(x => x.trim()).filter(Boolean);
+  const notes = (optionNotes || "").split("|").map(x => x.trim());
+  const urls  = (optionUrls  || "").split("|").map(x => x.trim());
+  return names.map((name, i) => ({ name, note: notes[i] || "", url: urls[i] || "" }));
+}
+
+// Normalizes all stops in state.days to use the array options format.
+function normalizeAllOptions() {
+  state.days.forEach(d => d.stops.forEach(s => {
+    s.options = normalizeOptions(s.options || "", s.option_notes || "", s.option_urls || "");
+    delete s.option_notes;
+    delete s.option_urls;
+  }));
+}
+
+function addOptionEditorRow(opt = {}) {
+  const editor = document.getElementById("options-editor");
+  const idx = editor.children.length;
+  const row = document.createElement("div");
+  row.className = "option-editor-row";
+  row.innerHTML = `
+    <div class="option-editor-row-header">
+      <span class="option-editor-badge">${idx === 0 ? "Primary" : "Or"}</span>
+      <button type="button" class="btn-remove-option" title="Remove" onclick="this.closest('.option-editor-row').remove(); refreshOptionBadges()">✕</button>
+    </div>
+    <input class="form-input opt-name" placeholder="Option name" value="${escAttr(opt.name || '')}">
+    <textarea class="form-textarea opt-note" placeholder="Note (optional)">${escHtml(opt.note || '')}</textarea>
+    <input class="form-input opt-url" type="url" placeholder="Maps URL (optional)" value="${escAttr(opt.url || '')}">`;
+  editor.appendChild(row);
+}
+
+function refreshOptionBadges() {
+  document.querySelectorAll("#options-editor .option-editor-badge").forEach((badge, i) => {
+    badge.textContent = i === 0 ? "Primary" : "Or";
+  });
+}
+
+function getOptionsFromEditor() {
+  return Array.from(document.querySelectorAll("#options-editor .option-editor-row")).map(row => ({
+    name: row.querySelector(".opt-name").value.trim(),
+    note: row.querySelector(".opt-note").value.trim(),
+    url:  row.querySelector(".opt-url").value.trim(),
+  })).filter(opt => opt.name);
+}
+
+// ════════════════════════════════════════════════════════════════════
 //  Utilities
 // ════════════════════════════════════════════════════════════════════
+
+// Render a note string as HTML — allows <br>, <a>, <strong> etc.
+// Also converts plain newlines to <br> so the textarea UX is natural.
+function renderNote(note) {
+  return (note || "").replace(/\n/g, "<br>");
+}
+
 function escHtml(str) {
   return (str || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
