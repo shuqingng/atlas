@@ -10,15 +10,13 @@
       "tip": "Clear immigration and collect luggage by ~18:30–19:00. Don't plan anything demanding — a short walk and a good dinner is the perfect first night.",
       "stops": [
         {
-          "time": "Morning 09:25",
           "name": "Depart Singapore Changi (SIN)",
+          "time": "Morning 09:25",
           "tags": "flight",
-          "note": "Singapore Airlines SQ12<br>\nDeparts at 09:15, arrives at Narita Terminal 1 at 17:30<br>\nFlight departs from Changi Airport T3<br>\n3 x Business, 2 x Economy",
+          "note": "Singapore Airlines SQ12\nDeparts at 09:15, arrives at Narita Terminal 1 at 17:30\nFlight departs from Changi Airport T3\n3 x Business, 2 x Economy",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Evening 17:30",
@@ -27,9 +25,7 @@
           "note": "Arrive at Narita International Airport Terminal 1.<br>Expect 45-60min for immigration and baggage claim.",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Evenining 18:30",
@@ -38,9 +34,7 @@
           "note": "Purchase Limousine Bus tickets from ticket counters on 1F Arrival Lobby (both South & North Wings).<br>Departing bus timings: 18:25, 18:55, 19:25<br>\nLimousine bus takes around 1.5hrs to 2hours, and brings us directly to our hotel.<br>\n<a href='https://www.limousinebus.co.jp/en'>More info on bus timings</a>",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Evening",
@@ -49,9 +43,7 @@
           "note": "Check in to hotel & freshen up",
           "maps_url": "https://maps.app.goo.gl/2PjXsGkEuccY9wQb9",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Dinner",
@@ -60,9 +52,18 @@
           "note": "Walking distance from the hotel.",
           "maps_url": "",
           "img_url": "",
-          "options": "Tsukemen Gonokami Seisakusho | Fūunji Shinjuku",
-          "option_notes": "Understated, compact restaurant offering bowls of ramen noodles in a relaxed ambiance. Slight further from hotel (1.3km walk, 19min) |  Tsukemen dipping noodles with a choice of sauces, served at the counter of this busy ramen shop. 6min walk away.",
-          "option_urls": "https://maps.app.goo.gl/dBVuNKVHfxX4fFR87 | https://maps.app.goo.gl/rBcswKMHHkpmVnEd8"
+          "options": [
+            {
+              "name": "Tsukemen Gonokami Seisakusho",
+              "note": "Understated, compact restaurant offering bowls of ramen noodles in a relaxed ambiance. Slight further from hotel (1.3km walk, 19min)",
+              "url": "https://maps.app.goo.gl/dBVuNKVHfxX4fFR87"
+            },
+            {
+              "name": "Fūunji Shinjuku",
+              "note": "Tsukemen dipping noodles with a choice of sauces, served at the counter of this busy ramen shop. 6min walk away.",
+              "url": "https://maps.app.goo.gl/rBcswKMHHkpmVnEd8"
+            }
+          ]
         }
       ]
     },
@@ -81,9 +82,7 @@
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Morning",
@@ -92,9 +91,7 @@
           "note": "Most stalls open around 5:00-6:00 AM and close by 14:00 - 15:00",
           "maps_url": "https://share.google/scZHIM869f7q2qis7",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Lunch 12:00",
@@ -103,9 +100,7 @@
           "note": "",
           "maps_url": "https://share.google/jZJfWWUzgP27gXFyJ",
           "img_url": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/isdsmjGkuacU/v0/-1x-1.webp",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Afternoon",
@@ -114,9 +109,7 @@
           "note": "Sumida Park stretches along both sides of the Sumida River and is particularly stunning in late April. Provides one of the best unobstructed photo spots of the Tokyo Skytree across the water.",
           "maps_url": "",
           "img_url": "https://www.wowabouts.com/z-media/2018/10/Chidorigafuchi%20Park%202.jpg",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Afternoon",
@@ -125,9 +118,7 @@
           "note": "Senso-ji is Tokyo’s oldest and most significant Buddhist temple, dedicated to Kannon, the Bodhisattva of Mercy. Entering through the massive Kaminarimon (Thunder Gate) is a quintessential Tokyo experience. The approach to the temple, known as Nakamise-dori, is a historic shopping street lined with dozens of stalls selling traditional snacks like age-manju (fried bean cakes) and authentic souvenirs.",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Afternoon",
@@ -136,9 +127,7 @@
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Dinner",
@@ -147,9 +136,18 @@
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "Asakusa Imahan | Daikokuya Tempura",
-          "option_notes": "Sukiyaki and Shabu-shabu | Tendon",
-          "option_urls": "https://maps.app.goo.gl/uAnN8Ro8F3jSZwHQ8 |  https://maps.app.goo.gl/zNNyv9ZJUreuwTSZ9"
+          "options": [
+            {
+              "name": "Asakusa Imahan",
+              "note": "Sukiyaki and Shabu-shabu",
+              "url": "https://maps.app.goo.gl/uAnN8Ro8F3jSZwHQ8"
+            },
+            {
+              "name": "Daikokuya Tempura",
+              "note": "Tendon",
+              "url": "https://maps.app.goo.gl/zNNyv9ZJUreuwTSZ9"
+            }
+          ]
         }
       ]
     },
@@ -157,97 +155,45 @@
       "num": "3",
       "label": "Day 3: 24 Apr (Fri)",
       "city": "tokyo",
-      "title": "Day Trip: Kamakura",
-      "desc": "",
+      "title": "Day Trip: Izu",
+      "desc": "Klook tour: https://www.klook.com/en-SG/activity/180233-mt-omuro-izu-shaboten-zoo-jogasaki-coast-kadowaki-bridge-tour/",
       "tip": "",
       "stops": [
         {
-          "time": "Breakfast",
           "name": "Breakfast at the hotel",
+          "time": "Breakfast",
           "tags": "food",
-          "note": "",
+          "note": "Tour pickup from hotel at around 6.30am. Bus journey takes around 2hrs",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
-          "time": "Morning",
-          "name": "Board train from Shinjuku to Kamakura",
-          "tags": "transit",
-          "note": "About 1 hour from Shinjuku on the JR Shonan-Shinjuku Line.",
-          "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
-        },
-        {
-          "time": "Morning",
-          "name": "Tsurugaoka Hachimangu Shrine",
-          "tags": "culture",
-          "note": "Impressive hilltop shrine with a lovely tree-lined approach.",
-          "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
-        },
-        {
-          "time": "Morning",
-          "name": "Komachi-dori Shopping Street",
-          "tags": "culture",
-          "note": "For snacks and souvenirs",
-          "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
-        },
-        {
-          "time": "Morning",
-          "name": "Kiyosumi Garden",
+          "name": "Mount Omuro & Cactus Park",
+          "time": "",
           "tags": "nature",
-          "note": "",
+          "note": "Mount Omuro Crater Hiking Spectacle: Take a cable car (may be temporarily suspended due to strong winds or heavy rain) to the verdant summit and walk around the giant bowl-shaped crater for a 360-degree panoramic view of the magnificent Izu Peninsula and Sagami Bay. Its unique conical shape is considered one of the prototypes for “Lake Itomori” in “Your Name.”, adding a touch of animated romance to the journey.\nCactus Park: Adorable Pet Interaction Paradise: This is more than just cacti; it’s a paradise for close encounters with popular animals such as cute capybaras, lively meerkats, and leisurely red pandas.",
           "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "img_url": "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_728/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/lcnetdgkazqz8ju8fsnl/Izu:MtOmuroCactusAnimalParkJ%C5%8DgasakiCoastKadowakiSuspensionBridgeDayTrip(IncludesSeaViewTrainExperience).webp",
+          "options": []
         },
         {
-          "time": "Lunch",
-          "name": "Lunch",
-          "tags": "food",
-          "note": "",
+          "name": "Izu Ocean View Train Experience",
+          "time": "",
+          "tags": "nature",
+          "note": "Ride the distinctive “Resort 21” series sightseeing trains, such as the representative trains (Black Ship Train/Kinmedai Train), which feature extra-large observation windows, with some seats even rotating to face the ocean. Soaring above the Pacific: The train speeds along the Izu East Coast, with the boundless blue Pacific Ocean outside the window, like a dream journey into a scene from “Spirited Away.”",
           "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "img_url": "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_728/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/hjvbmiv9r0ld5c5fgxht/Izu:MtOmuroCactusAnimalParkJ%C5%8DgasakiCoastKadowakiSuspensionBridgeDayTrip(IncludesSeaViewTrainExperience).webp",
+          "options": []
         },
         {
-          "time": "Afternoon",
-          "name": "Hasedera Temple",
-          "tags": "culture",
-          "note": "",
+          "name": "Jogasaki Coast · Kadowaki Suspension Bridge",
+          "time": "",
+          "tags": "nature",
+          "note": "A Masterpiece of Volcanic Lava: The coast was formed by lava flows from Mount Omuro thousands of years ago, featuring steep cliffs, rugged reefs, and surging waves, full of natural, raw power.\nHeart-Pounding Suspension Bridge Walk: Walk across the 48-meter-high Kadowaki Suspension Bridge, with the magnificent sight of waves crashing below and the whistling sea breeze in your ears. The dual shock of sight and sound makes it an excellent photo spot.",
           "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
-        },
-        {
-          "time": "Afternoon",
-          "name": "Kotoku-in",
-          "tags": "culture",
-          "note": "The Great Buddha, open 8am - 4.45pm",
-          "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "img_url": "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_728/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/l1wjez9zvimczl4lwuzn/Izu:MtOmuroCactusAnimalParkJ%C5%8DgasakiCoastKadowakiSuspensionBridgeDayTrip(IncludesSeaViewTrainExperience).webp",
+          "options": []
         },
         {
           "time": "Dinner",
@@ -256,9 +202,7 @@
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         }
       ]
     },
@@ -277,9 +221,7 @@
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Morning",
@@ -288,9 +230,7 @@
           "note": "Free, serene forest walk. Arrive earlier to beat the crowds.",
           "maps_url": "https://maps.app.goo.gl/S2AyyFEPgbhLnTMw6",
           "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR7cKFoS9w0OEDTcVgp8MlfTLjGN4YrEiBiw&s",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Morning",
@@ -299,9 +239,7 @@
           "note": "Stroll through Harajuku for some quirky browsing.",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Lunch",
@@ -310,20 +248,16 @@
           "note": "Udon restaurant along Takeshita street. 4.2 ★",
           "maps_url": "https://maps.app.goo.gl/rYuEBixWz7F5HrL56",
           "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/5e/4b/89/2010-open.jpg?w=700&h=400&s=1",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
-          "time": "Afternoon",
           "name": "Shinjuku Gyoen National Garden",
+          "time": "Afternoon",
           "tags": "nature",
           "note": "By late April, the Yaezakura (double-flowered chery blossoms), which are late-blooming cherry blossoms, reach their peak.",
-          "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "maps_url": "https://maps.app.goo.gl/wGWsUeQU23j77Eee6",
+          "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIBQqJxiKBVmMSegFCbblp3cn2Q_TgqcBJMg&s",
+          "options": []
         },
         {
           "time": "Dinner",
@@ -332,20 +266,16 @@
           "note": "Unique dinner right in the hotel — catch your own fish! Restaurant is right in the lobby of our hotel.<br>Reservation made for 5 pax at 7.30pm (Japan time).",
           "maps_url": "https://maps.app.goo.gl/p1MgfuDgX6Zc1KiQA",
           "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAxz_Oq0h6i45GgS-p1rn5IKc1yhiQR9nweg&s",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
-          "time": "Night",
           "name": "Pack bags — highway bus to Kawaguchiko tomorrow",
-          "tags": "transit",
+          "time": "Night",
+          "tags": "",
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         }
       ]
     },
@@ -364,9 +294,7 @@
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Morning 10:45",
@@ -375,9 +303,7 @@
           "note": "Depart hotel by 9.30am.<br>Bus departs 10.45am from Busta Shinjuku. Fully reserved seats. Journey takes around 1h45min",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Afternoon 12:30",
@@ -386,64 +312,83 @@
           "note": "Toyota Rent-a-car Kawaguchiko Branch",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
+          "name": "Try hōtō noodles",
           "time": "Lunch",
-          "name": "Oishi North Shore Lakeside lunch — try hōtō noodles",
           "tags": "food",
           "note": "Several restaurants along the north shore have Fuji-view windows. Hōtō is Yamanashi's regional specialty: thick flat noodles in miso soup with pumpkin. A must-try.",
           "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "img_url": "https://www.justonecookbook.com/wp-content/uploads/2019/03/Hoto-I-1.jpg",
+          "options": [
+            {
+              "name": "Kosaku Kawaguchiko",
+              "note": "(★4.2, 6,600+ reviews — most popular locally) — The one most locals and repeat visitors recommend. Served bubbling in a huge iron pot, miso-based broth with thick chewy noodles and big chunks of sweet pumpkin. You can get pork, duck, or chicken houtou here — not just the vegetarian version. Also does horse sashimi if you're adventurous. Traditional floor seating. Can sell out by evening so go at lunch. 10 min drive from the station.",
+              "url": "https://maps.app.goo.gl/g2MNYwDMnrNGs3Qj6"
+            },
+            {
+              "name": "Hotokura Funari Kawaguchiko",
+              "note": "(★4.2, 3,300+ reviews) — The pick if you want the most atmospheric interior and the latest kitchen hours (open until 8:30pm). Chicken houtou is a standout, and they occasionally run specials like king crab houtou. Good side dishes for sharing. Queues can hit 45–60 min at dinner — arrive before 5:30pm or after 7:30pm.",
+              "url": "https://maps.app.goo.gl/YgwHYnRH3pLtTmSf7"
+            },
+            {
+              "name": "Hotou Fudo",
+              "note": "(★3.8) — The most famous chain in the area, directly opposite Kawaguchiko Station, so it's the most convenient. The dramatic thatched-roof building is iconic. But the rating tells the story — it's more tourist trap than destination, the base houtou is vegetarian-only (meat costs extra), and it's almost always queued. Fine if you just want the experience without going out of your way, but Kosaku is worth the short drive.",
+              "url": "https://maps.app.goo.gl/pn8pVuU7kYFR3j7U8"
+            }
+          ]
         },
         {
+          "name": "Shimoyoshida Honcho Street",
           "time": "Afternoon",
-          "name": "Shimoyoshia Honcho Street",
           "tags": "culture",
-          "note": "",
+          "note": "This long retro Showa-era shopping street has a straight-line view of Fuji at the far end — one of those only-in-Japan compositions. Many shops are local and quirky. A reviewer notes it feels dead after 4pm, so arriving by 3:30 is ideal. Don't step into the road for photos — there's a traffic controller there for a reason, and you can get just as good a shot from the sidewalk where the road bends.",
           "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "img_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1728533498/yxjy5hodtvlvg08dws2t.webp",
+          "options": []
         },
         {
-          "time": "Afternoon",
           "name": "Arakuyama Sengen Park (Chureito Pagoda)",
+          "time": "Afternoon",
           "tags": "nature",
-          "note": "398 steps up to the iconic five-storey pagoda with Mt. Fuji behind it. Best views before 10am. Steep — suitable for parents; Auntie may prefer to wait at the base car park.",
+          "note": "398 steps up to the iconic five-storey pagoda with Mt. Fuji behind it. Best views before 10am. Steep — suitable for parents; Auntie may prefer to wait at the base car park. Free entry, parking ~¥1,000–1,500.\nOnline sources note that you will need to queue for a photo.",
           "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "img_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1728533716/mtt7b2rkqlmxaur5yyye.webp",
+          "options": []
         },
         {
+          "name": "Arakura Fuji Sengen Jinja Shrine",
+          "time": "",
+          "tags": "culture",
+          "note": "Within Arakuyama Sengen Park",
+          "maps_url": "",
+          "img_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1728533806/i223s3y8gka79gmxrdom.webp",
+          "options": []
+        },
+        {
+          "name": "Sunset at Oishi Park",
           "time": "Evening",
-          "name": "Sunset at Oishi Park or hotel lakeside",
           "tags": "nature",
-          "note": "The late-April sunset behind Mt. Fuji from the north shore is exceptional. 10-minute drive from most accommodation.",
-          "maps_url": "",
+          "note": "The late-April sunset behind Mt. Fuji from the north shore is exceptional. 10-minute drive from most accommodation. The north shore of the lake has the classic Fuji reflection view. Free entry and parking. Stay as long as the light holds.",
+          "maps_url": "https://maps.app.goo.gl/yJVxqVFJfsi8vjmj6",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
-          "time": "Dinner",
           "name": "Dinner",
+          "time": "Dinner",
           "tags": "food",
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": [
+            {
+              "name": "Dino DINER",
+              "note": "On the way home, this is a genuinely surprising find: a vintage American diner tucked into the Japanese countryside, complete with country music, floor cushions, and American memorabilia on the walls. The burgers are some of the best in the area, the onion rings and fried squid are must-orders, and the vibe is unlike anything else nearby. ⚠️ Closed Monday & Thursday. Opens for dinner at 6pm.",
+              "url": "https://maps.app.goo.gl/7EczwcVxA8vcTzgY8"
+            }
+          ]
         }
       ]
     },
@@ -456,70 +401,78 @@
       "tip": "",
       "stops": [
         {
+          "name": "Kodachi Cafe",
           "time": "Breakfast",
-          "name": "Yamatoya Cafe",
           "tags": "food",
-          "note": "Breakfast cafe near the accoms.",
-          "maps_url": "https://maps.app.goo.gl/BRjhoCE8P9KNRnP19",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "note": "Breakfast cafe near the accoms. Opens at 7.30am. \nCosy log cabin with Fuji views out the window. Try the cream mountain toast or fluffy french toast. Sells out fast! Closed Tue & Wed.",
+          "maps_url": "https://maps.app.goo.gl/s16ezoVn62eGHG4H9",
+          "img_url": "https://www.porta-y.jp/wp-content/uploads/2024/06/kodachi-cafe-240606-4.jpg",
+          "options": []
         },
         {
-          "time": "Mid-morning",
-          "name": "Oshino Hakkai — 8 Sacred Springs",
+          "name": "Mt Fuji Panoramic Ropeway (Kachi-Kachi Yama)",
+          "time": "",
           "tags": "nature",
-          "note": "",
-          "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "note": "Buy tickets online in advance to skip the queue. Glides up to Tenjoyama Park for panoramic views of Kawaguchiko and Fuji. Shrine, love bell, and a swing at the top with a famous edge-of-the-sky photo spot. Opens 9am (sometimes 8:30am). About 1 hour including the ride up and down.",
+          "maps_url": "https://maps.app.goo.gl/Sq6bpf9cwRyfAiV56",
+          "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsjMzcZFZJV6EV4bWByBRMWkO-Umf0yF4g3g&s",
+          "options": []
         },
         {
+          "name": "Oishi Park & Nagasaki Park",
+          "time": "",
+          "tags": "nature",
+          "note": "Park at Oishi and walk 5 min west towards Nagasaki Park. Quieter and more photogenic than Oishi, with open unobstructed lake views. No dedicated parking so bikes or the short walk is the move.\nWalk the Flower Road promenade.",
+          "maps_url": "https://maps.app.goo.gl/sPNMX9df8CcFqAq87",
+          "img_url": "data:image/jpeg;base64,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",
+          "options": []
+        },
+        {
+          "name": "Lunch",
           "time": "Lunch",
-          "name": "Soba at Ikemotochaya Oshino Hakkai",
           "tags": "food",
-          "note": "A traditional thatched-roof restaurant right at the ponds. Excellent fresh soba in a picturesque setting.",
+          "note": "Grab something light at the café inside Oishi Park area, or pack snacks — you're heading west next and there's a café at the traditional village.",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
-          "time": "Afternoon",
-          "name": "Lake Kawaguchiko Sightseeing Boat",
+          "name": "Saiko Iyashi-no-Sato Nemba (Traditional Village)",
+          "time": "",
           "tags": "culture",
-          "note": "",
-          "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "note": "Thatched-roof village with Fuji in the backdrop. Café on site if you haven't eaten",
+          "maps_url": "https://maps.app.goo.gl/P56tq8TAQLjsM7T48",
+          "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ09Bn1ihpPrzQGCiQOAamuYh21YVwN6PwIQ&s",
+          "options": []
         },
         {
-          "time": "Late afternoon",
-          "name": "Kawaguchiko Music Forest Museum",
-          "tags": "culture",
-          "note": "",
-          "maps_url": "",
+          "name": "Saiko Wild Bird Forest Park",
+          "time": "",
+          "tags": "",
+          "note": "¥100 sunflower seeds, birds on your hand, forest trail. ⚠️ Closed Thursdays.",
+          "maps_url": "https://maps.app.goo.gl/tMYwiJNsmhcPo7Wg9",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
-          "time": "Dinner",
           "name": "Dinner",
+          "time": "Dinner",
           "tags": "food",
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": [
+            {
+              "name": "Japanese Dining Suzukiya",
+              "note": "A5 wagyu from the owner's father's farm, beautifully pressed sushi, unagi. The splurge dinner of the trip. Book well in advance. Dinner 5:30–9pm. ⚠️ Closed Tuesdays.",
+              "url": "https://maps.app.goo.gl/rwWXPMnYmz2CxrcUA"
+            },
+            {
+              "name": "炭焼ところ SUMIYAKI TOCORO.",
+              "note": "Charcoal yakitori near your hotel. ⚠️ Opens 5pm, closes 7pm sharp.",
+              "url": "https://maps.app.goo.gl/7BPeaeyvCLrpTZA8A"
+            }
+          ]
         }
       ]
     },
@@ -527,8 +480,8 @@
       "num": "7",
       "label": "Day 7: 28 Apr (Tue)",
       "city": "kawaguchiko",
-      "title": "Day trip to Hakone",
-      "desc": "",
+      "title": "South & East",
+      "desc": "Motosuko + Fujinomiya + Yamanakako",
       "tip": "",
       "stops": [
         {
@@ -538,20 +491,61 @@
           "note": "Opens at 8.30am. Serves pancakes, sandwiches and pastas.",
           "maps_url": "https://share.google/KZGA3E2Q8zIE77Sbp",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
-          "time": "Evening",
-          "name": "Farewell Kawaguchiko dinner",
+          "name": "Fuji Shibazakura Festival",
+          "time": "Morning",
+          "tags": "",
+          "note": "From mid-April to late May every year, the nearby Fuji Motosuko Resort plays host to the stunning Fuji Shibazakura Festival. Witness sprawling fields of vibrant pink moss, all against the magnificent backdrop of Mt. Fuji.\nTour buses flood in after 11am. ¥1,000–1,300 entry + ¥500 parking. Walk the pink fields, soak your feet in the panoramic foot bath, grab food from the festival stalls.",
+          "maps_url": "https://maps.app.goo.gl/uHYk8iqKeYmiEP5K6",
+          "img_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1728534570/bisxrc55vtvio7yohp6w.webp",
+          "options": []
+        },
+        {
+          "name": "Lake Motosu",
+          "time": "Morning",
+          "tags": "",
+          "note": "Take out a 1000 yen note, and you’ll see Lake Motosu on the back of it! Out of the five lakes, Lake Motosu has the clearest waters — making it a popular diving spot.",
+          "maps_url": "https://maps.app.goo.gl/UtfkwHVLxmzXr7oAA",
+          "img_url": "",
+          "options": []
+        },
+        {
+          "name": "Shiraito Falls",
+          "time": "",
+          "tags": "nature",
+          "note": "A wide curtain of waterfalls fed directly by Mt. Fuji's snowmelt. On a clear day you can frame both the falls and Fuji in the same shot. Easy 1km loop walk, free entry, ¥500 parking.",
+          "maps_url": "https://maps.app.goo.gl/oVFaZwMipNdLegJ28",
+          "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStCeBahcIfM_IST_brWYdLzohareCwtxDhyw&s",
+          "options": []
+        },
+        {
+          "name": "金山テラス (Kanayama Terrace)",
+          "time": "Lunch",
           "tags": "food",
-          "note": "",
+          "note": "15 min from the falls. Floor-to-ceiling glass panels with a dramatic unobstructed Fuji view. Order the pork-deer burger. Note the ¥500/person parking surcharge applies even when dining. Open 10am–5pm.",
+          "maps_url": "https://maps.app.goo.gl/6zh9KNYDumgJcP1h8",
+          "img_url": "https://tblg.k-img.com/restaurant/images/Rvw/307228/320x320_square_206d44b113c4daa1e7d00a3db024e57c.jpg",
+          "options": []
+        },
+        {
+          "name": "Hirano Beach, Lake Yamanakako",
+          "time": "Afternoon",
+          "tags": "nature",
+          "note": "Swans on the water, free parking, open Fuji views. Morning light is technically best here, but late afternoon before sunset is still lovely and far less busy. Don't linger too long — you have a dinner reservation to catch.",
+          "maps_url": "https://maps.app.goo.gl/aDBt4DcS4Ytx8vD1A",
+          "img_url": "https://res.klook.com/image/upload/c_crop,h_801,w_1281,x_0,y_10,z_0.6/w_750,h_469,c_fill,q_85/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/fapdd70g3kelvddqtxtw.jpg",
+          "options": []
+        },
+        {
+          "name": "XX",
+          "time": "Dinner",
+          "tags": "",
+          "note": "XX",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         }
       ]
     },
@@ -570,20 +564,7 @@
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
-        },
-        {
-          "time": "Late morning",
-          "name": "XX",
-          "tags": "",
-          "note": "",
-          "maps_url": "",
-          "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Lunch",
@@ -592,9 +573,16 @@
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
+        },
+        {
+          "name": "Top up petrol for rental car",
+          "time": "",
+          "tags": "",
+          "note": "Save the receipt.",
+          "maps_url": "",
+          "img_url": "",
+          "options": []
         },
         {
           "time": "Afternoon",
@@ -603,20 +591,16 @@
           "note": "Return timing: 2pm",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
-          "time": "Afternoon",
           "name": "Highway bus: Kawaguchiko → Shinjuku",
+          "time": "Afternoon",
           "tags": "transit",
-          "note": "",
+          "note": "Bus timings: 2pm, 2.10pm, 2.40pm, 3pm, 3.10pm, 3.40pm\n<a href=\"https://www.highwaybus.com/gp/inbound/inbTimeTbl?lineId=110&upDownKbn=1&action=update&year=2026&month=04&day=29&fromTime=00&toTime=24#direction\">More bus timings</a>",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Evening",
@@ -625,9 +609,7 @@
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Dinner",
@@ -636,9 +618,7 @@
           "note": "",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         }
       ]
     },
@@ -657,20 +637,16 @@
           "note": "Breakfast near the hotel",
           "maps_url": "https://maps.app.goo.gl/E2JHhuH793rfWcz4A",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
-          "time": "Morning 11:30",
           "name": "Airport Limousine to Narita Airport",
+          "time": "Morning 11:30",
           "tags": "transit",
-          "note": "Check out and board Airport Limousine. Journey is around 2 hours.<br>\nDeparting bus timings: 11:40->14:10, 12:40->15:05",
+          "note": "Check out and board Airport Limousine. Journey is around 2 hours.<br>\nDeparting bus timings: 11:40->14:10, 12:40->15:05\nTo book the 11.40am bus.",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         },
         {
           "time": "Afternoon 16:50",
@@ -679,9 +655,7 @@
           "note": "Zipair ZG053<br> Departs at 16:50, arrives in Singapore at 23:00<br>\nNRT Terminal 1 - SIN Terminal 1<br>\n2 x LieFlat, 3 x Economy",
           "maps_url": "",
           "img_url": "",
-          "options": "",
-          "option_notes": "",
-          "option_urls": ""
+          "options": []
         }
       ]
     }
