@@ -37,12 +37,13 @@
           "options": []
         },
         {
-          "time": "Evening",
           "name": "Shinjuku Washington Hotel",
+          "time": "Evening",
           "tags": "",
           "note": "Check in to hotel & freshen up",
           "maps_url": "https://maps.app.goo.gl/2PjXsGkEuccY9wQb9",
-          "img_url": "",
+          "parking_url": "",
+          "img_url": "https://res.klook.com/klook-hotel/image/upload/w_750,c_fill,q_85/travelapi/1000000/50000/48700/48635/f389fb71_z.jpg",
           "options": []
         },
         {
@@ -85,12 +86,13 @@
           "options": []
         },
         {
-          "time": "Morning",
           "name": "Tsukiji Outer Market",
+          "time": "Morning",
           "tags": "food",
           "note": "Most stalls open around 5:00-6:00 AM and close by 14:00 - 15:00",
           "maps_url": "https://share.google/scZHIM869f7q2qis7",
-          "img_url": "",
+          "parking_url": "",
+          "img_url": "https://www.snowmonkeyresorts.com/wp-content/uploads/2024/05/2EF689DF-FCBB-4B36-9EEF-7A1408709F75-1024x599.jpeg",
           "options": []
         },
         {
@@ -112,12 +114,13 @@
           "options": []
         },
         {
-          "time": "Afternoon",
           "name": "Asakusa Senso-ji",
+          "time": "Afternoon",
           "tags": "culture",
           "note": "Senso-ji is Tokyo’s oldest and most significant Buddhist temple, dedicated to Kannon, the Bodhisattva of Mercy. Entering through the massive Kaminarimon (Thunder Gate) is a quintessential Tokyo experience. The approach to the temple, known as Nakamise-dori, is a historic shopping street lined with dozens of stalls selling traditional snacks like age-manju (fried bean cakes) and authentic souvenirs.",
           "maps_url": "",
-          "img_url": "",
+          "parking_url": "",
+          "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8vlTMevv6mZ1HdoHmGV_LixxBx2a1U6qKbw&s",
           "options": []
         },
         {
@@ -156,15 +159,16 @@
       "label": "Day 3: 24 Apr (Fri)",
       "city": "tokyo",
       "title": "Day Trip: Izu",
-      "desc": "Klook tour: https://www.klook.com/en-SG/activity/180233-mt-omuro-izu-shaboten-zoo-jogasaki-coast-kadowaki-bridge-tour/",
+      "desc": "More info: <a href='https://www.klook.com/en-SG/activity/180233-mt-omuro-izu-shaboten-zoo-jogasaki-coast-kadowaki-bridge-tour/'>1-Day Mt Omuro, Izu Tour</a>",
       "tip": "",
       "stops": [
         {
-          "name": "Breakfast at the hotel",
-          "time": "Breakfast",
-          "tags": "food",
-          "note": "Tour pickup from hotel at around 6.30am. Bus journey takes around 2hrs",
+          "name": "Tour pick up",
+          "time": "Morning 6.30",
+          "tags": "transit",
+          "note": "Tour pickup from hotel at around 6.30am. Bus journey takes around 2hrs.\nBreakfast starts at 6.30am, so we might need to prepare breakfast from the convenience store.",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         },
@@ -204,7 +208,8 @@
           "img_url": "",
           "options": []
         }
-      ]
+      ],
+      "route_url": ""
     },
     {
       "num": "4",
@@ -284,7 +289,7 @@
       "label": "Day 5: 26 Apr (Sun)",
       "city": "kawaguchiko",
       "title": "Arrival & First Fuji Views",
-      "desc": "Travel to the Fuji Five Lakes region and spend a relaxed afternoon getting oriented with the best effortless view of Mt. Fuji.",
+      "desc": "Travel to the Fuji Five Lakes region and spend a relaxed afternoon getting oriented with the best effortless view of Mt. Fuji.\n<a href='https://maps.app.goo.gl/1jHbSfJd7NZ8irup7'>Driving Route</a>",
       "tip": "With a rental car you are completely independent. Parking at Kawaguchiko attractions is generally free. Mt. Fuji mornings tend to be clearest — plan viewpoint stops before 11am.",
       "stops": [
         {
@@ -297,11 +302,12 @@
           "options": []
         },
         {
-          "time": "Morning 10:45",
           "name": "Highway bus: Shinjuku → Kawaguchiko",
+          "time": "Morning 10:45",
           "tags": "transit",
-          "note": "Depart hotel by 9.30am.<br>Bus departs 10.45am from Busta Shinjuku. Fully reserved seats. Journey takes around 1h45min",
+          "note": "Depart hotel by 9.30am - 10-15min walk to Busta Shinjuku.<br>Bus departs 10.45am from Busta Shinjuku. Fully reserved seats. Journey takes around 1h45min",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         },
@@ -344,7 +350,8 @@
           "time": "Afternoon",
           "tags": "culture",
           "note": "This long retro Showa-era shopping street has a straight-line view of Fuji at the far end — one of those only-in-Japan compositions. Many shops are local and quirky. A reviewer notes it feels dead after 4pm, so arriving by 3:30 is ideal. Don't step into the road for photos — there's a traffic controller there for a reason, and you can get just as good a shot from the sidewalk where the road bends.",
-          "maps_url": "",
+          "maps_url": "https://maps.app.goo.gl/cFJuPzZAtPqGw4zL7",
+          "parking_url": "https://maps.app.goo.gl/2SvkstQRw1hc1gFq6",
           "img_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1728533498/yxjy5hodtvlvg08dws2t.webp",
           "options": []
         },
@@ -352,8 +359,9 @@
           "name": "Arakuyama Sengen Park (Chureito Pagoda)",
           "time": "Afternoon",
           "tags": "nature",
-          "note": "398 steps up to the iconic five-storey pagoda with Mt. Fuji behind it. Best views before 10am. Steep — suitable for parents; Auntie may prefer to wait at the base car park. Free entry, parking ~¥1,000–1,500.\nOnline sources note that you will need to queue for a photo.",
+          "note": "398 steps up to the iconic five-storey pagoda with Mt. Fuji behind it. Best views before 10am. Steep — suitable for parents; Auntie may prefer to wait at the base car park. Free entry, parking ~¥1,000–1,500 if you park at the base of the shrine.\nOnline sources note that you will need to queue for a photo.",
           "maps_url": "",
+          "parking_url": "https://maps.app.goo.gl/EdNJBNdcsNYZNR6n7",
           "img_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1728533716/mtt7b2rkqlmxaur5yyye.webp",
           "options": []
         },
@@ -390,7 +398,8 @@
             }
           ]
         }
-      ]
+      ],
+      "route_url": "https://www.google.com/maps/embed?pb=!1m52!1m12!1m3!1d25984.30487866687!2d138.7541843884188!3d35.50333587894363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m37!3e0!4m5!1s0x6019609c4699dd91%3A0x82715aa64f35ff!2sToyota%20Rent%20a%20Car%20-%20Fuji-Kawaguchiko%2C%204657%20Funatsu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0301%2C%20Japan!3m2!1d35.4976774!2d138.7727845!4m5!1s0x6019610066bb9b19%3A0xbac9cb210581c124!2sCOZY%20FUJI%20VIEW%20STAY%2C%20Japan%2C%20%E3%80%92401-0301%20Yamanashi%2C%20Fujikawaguchiko%2C%20Funatsu%2C%203571-5!3m2!1d35.4937897!2d138.7704896!4m5!1s0x60195fd50839c517%3A0xe5b44defe874686d!2sKosaku%20Kawaguchiko%20(houtou)%2C%201638-1%20Funatsu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0301%2C%20Japan!3m2!1d35.4957481!2d138.7568631!4m5!1s0x601967343b160537%3A0xdbcf1faff554a9d5!2sFujiyoshida%20Shiei%20Honmachidori%20Parking%20Lot%2C%202%20Chome-1%20Shimoyoshida%2C%20Fujiyoshida%2C%20Yamanashi%20403-0004%2C%20Japan!3m2!1d35.4923145!2d138.80383!4m5!1s0x6019610033ea7d17%3A0xa25a608e1f12ecb0!2z5b-g6ZyK5aGU5YWl5Y-j56ysMemnkOi7iuWgtO-8iOaWsOWAieWxsea1hemWk-WFrOWcku-8iSwgSmFwYW4sIOOAkjQwMy0wMDMxIFlhbWFuYXNoaSwgRnVqaXlvc2hpZGEsIEFzYW1hLCAyLWNob21l4oiSMuKIkjE1!3m2!1d35.498803599999995!2d138.79913299999998!4m5!1s0x60195fecbf411877%3A0x5cf375c10c48dc69!2sOishi%20Park%20Parking%20Lot%2C%20Oishi%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0305%2C%20Japan!3m2!1d35.523201!2d138.7457502!5e0!3m2!1sen!2ssg!4v1774791494922!5m2!1sen!2ssg"
     },
     {
       "num": "6",
