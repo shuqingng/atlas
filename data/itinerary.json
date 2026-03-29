@@ -13,33 +13,40 @@
           "name": "Depart Singapore Changi (SIN)",
           "time": "Morning 09:25",
           "tags": "flight",
+          "booked": null,
           "note": "Singapore Airlines SQ12\nDeparts at 09:15, arrives at Narita Terminal 1 at 17:30\nFlight departs from Changi Airport T3\n3 x Business, 2 x Economy",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         },
         {
-          "time": "Evening 17:30",
           "name": "Arrive Tokyo Narita (NRT)",
+          "time": "Evening 17:30",
           "tags": "flight",
+          "booked": true,
           "note": "Arrive at Narita International Airport Terminal 1.<br>Expect 45-60min for immigration and baggage claim.",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         },
         {
-          "time": "Evenining 18:30",
           "name": "Board Airport Limousine bus to Hotel",
+          "time": "Evenining 18:30",
           "tags": "transit",
+          "booked": false,
           "note": "Purchase Limousine Bus tickets from ticket counters on 1F Arrival Lobby (both South & North Wings).<br>Departing bus timings: 18:25, 18:55, 19:25<br>\nLimousine bus takes around 1.5hrs to 2hours, and brings us directly to our hotel.<br>\n<a href='https://www.limousinebus.co.jp/en'>More info on bus timings</a>",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         },
         {
           "name": "Shinjuku Washington Hotel",
-          "time": "Evening",
+          "time": "",
           "tags": "",
+          "booked": null,
           "note": "Check in to hotel & freshen up",
           "maps_url": "https://maps.app.goo.gl/2PjXsGkEuccY9wQb9",
           "parking_url": "",
@@ -66,7 +73,9 @@
             }
           ]
         }
-      ]
+      ],
+      "date": "2026-04-22",
+      "route_url": ""
     },
     {
       "num": "2",
@@ -87,8 +96,9 @@
         },
         {
           "name": "Tsukiji Outer Market",
-          "time": "Morning",
+          "time": "",
           "tags": "food",
+          "booked": null,
           "note": "Most stalls open around 5:00-6:00 AM and close by 14:00 - 15:00",
           "maps_url": "https://share.google/scZHIM869f7q2qis7",
           "parking_url": "",
@@ -105,18 +115,21 @@
           "options": []
         },
         {
-          "time": "Afternoon",
           "name": "Sumida Park / Chidorigafuchi",
+          "time": "",
           "tags": "nature",
+          "booked": null,
           "note": "Sumida Park stretches along both sides of the Sumida River and is particularly stunning in late April. Provides one of the best unobstructed photo spots of the Tokyo Skytree across the water.",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "https://www.wowabouts.com/z-media/2018/10/Chidorigafuchi%20Park%202.jpg",
           "options": []
         },
         {
           "name": "Asakusa Senso-ji",
-          "time": "Afternoon",
+          "time": "",
           "tags": "culture",
+          "booked": null,
           "note": "Senso-ji is Tokyo’s oldest and most significant Buddhist temple, dedicated to Kannon, the Bodhisattva of Mercy. Entering through the massive Kaminarimon (Thunder Gate) is a quintessential Tokyo experience. The approach to the temple, known as Nakamise-dori, is a historic shopping street lined with dozens of stalls selling traditional snacks like age-manju (fried bean cakes) and authentic souvenirs.",
           "maps_url": "",
           "parking_url": "",
@@ -124,11 +137,13 @@
           "options": []
         },
         {
-          "time": "Afternoon",
           "name": "XX",
+          "time": "",
           "tags": "",
+          "booked": null,
           "note": "",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         },
@@ -152,7 +167,9 @@
             }
           ]
         }
-      ]
+      ],
+      "date": "2026-04-23",
+      "route_url": ""
     },
     {
       "num": "3",
@@ -166,7 +183,8 @@
           "name": "Tour pick up",
           "time": "Morning 6.30",
           "tags": "transit",
-          "note": "Tour pickup from hotel at around 6.30am. Bus journey takes around 2hrs.\nBreakfast starts at 6.30am, so we might need to prepare breakfast from the convenience store.",
+          "booked": true,
+          "note": "Tour pickup from hotel between 6.30am - 7.30am. Bus journey takes around 2hrs.\nBreakfast starts at 6.30am, so we might need to prepare breakfast from the convenience store.\n\nKlook Operator Whatsapp: 86-13657671089\nTour Guide: Chinese",
           "maps_url": "",
           "parking_url": "",
           "img_url": "",
@@ -209,14 +227,15 @@
           "options": []
         }
       ],
-      "route_url": ""
+      "route_url": "",
+      "date": "2026-04-24"
     },
     {
       "num": "4",
       "label": "Day 4: 25 Apr (Sat)",
       "city": "tokyo",
       "title": "Tokyo City",
-      "desc": "",
+      "desc": "Meiji Jingu + Shinjuku area",
       "tip": "",
       "stops": [
         {
@@ -229,20 +248,24 @@
           "options": []
         },
         {
-          "time": "Morning",
           "name": "Meiji Jingu",
+          "time": "",
           "tags": "nature",
+          "booked": null,
           "note": "Free, serene forest walk. Arrive earlier to beat the crowds.",
           "maps_url": "https://maps.app.goo.gl/S2AyyFEPgbhLnTMw6",
+          "parking_url": "",
           "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR7cKFoS9w0OEDTcVgp8MlfTLjGN4YrEiBiw&s",
           "options": []
         },
         {
-          "time": "Morning",
           "name": "Harajuku / Takeshita Street",
+          "time": "",
           "tags": "culture",
+          "booked": null,
           "note": "Stroll through Harajuku for some quirky browsing.",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         },
@@ -257,19 +280,23 @@
         },
         {
           "name": "Shinjuku Gyoen National Garden",
-          "time": "Afternoon",
+          "time": "",
           "tags": "nature",
+          "booked": null,
           "note": "By late April, the Yaezakura (double-flowered chery blossoms), which are late-blooming cherry blossoms, reach their peak.",
           "maps_url": "https://maps.app.goo.gl/wGWsUeQU23j77Eee6",
+          "parking_url": "",
           "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIBQqJxiKBVmMSegFCbblp3cn2Q_TgqcBJMg&s",
           "options": []
         },
         {
-          "time": "Dinner",
           "name": "Zauo Fishing Restaurant",
+          "time": "Dinner",
           "tags": "food",
+          "booked": true,
           "note": "Unique dinner right in the hotel — catch your own fish! Restaurant is right in the lobby of our hotel.<br>Reservation made for 5 pax at 7.30pm (Japan time).",
           "maps_url": "https://maps.app.goo.gl/p1MgfuDgX6Zc1KiQA",
+          "parking_url": "",
           "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAxz_Oq0h6i45GgS-p1rn5IKc1yhiQR9nweg&s",
           "options": []
         },
@@ -282,7 +309,9 @@
           "img_url": "",
           "options": []
         }
-      ]
+      ],
+      "route_url": "",
+      "date": "2026-04-25"
     },
     {
       "num": "5",
@@ -305,6 +334,7 @@
           "name": "Highway bus: Shinjuku → Kawaguchiko",
           "time": "Morning 10:45",
           "tags": "transit",
+          "booked": true,
           "note": "Depart hotel by 9.30am - 10-15min walk to Busta Shinjuku.<br>Bus departs 10.45am from Busta Shinjuku. Fully reserved seats. Journey takes around 1h45min",
           "maps_url": "",
           "parking_url": "",
@@ -312,11 +342,13 @@
           "options": []
         },
         {
-          "time": "Afternoon 12:30",
           "name": "Collect rental car",
+          "time": "Afternoon 12:30",
           "tags": "transit",
+          "booked": true,
           "note": "Toyota Rent-a-car Kawaguchiko Branch",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         },
@@ -347,8 +379,9 @@
         },
         {
           "name": "Shimoyoshida Honcho Street",
-          "time": "Afternoon",
+          "time": "",
           "tags": "culture",
+          "booked": null,
           "note": "This long retro Showa-era shopping street has a straight-line view of Fuji at the far end — one of those only-in-Japan compositions. Many shops are local and quirky. A reviewer notes it feels dead after 4pm, so arriving by 3:30 is ideal. Don't step into the road for photos — there's a traffic controller there for a reason, and you can get just as good a shot from the sidewalk where the road bends.",
           "maps_url": "https://maps.app.goo.gl/cFJuPzZAtPqGw4zL7",
           "parking_url": "https://maps.app.goo.gl/2SvkstQRw1hc1gFq6",
@@ -357,9 +390,10 @@
         },
         {
           "name": "Arakuyama Sengen Park (Chureito Pagoda)",
-          "time": "Afternoon",
+          "time": "",
           "tags": "nature",
-          "note": "398 steps up to the iconic five-storey pagoda with Mt. Fuji behind it. Best views before 10am. Steep — suitable for parents; Auntie may prefer to wait at the base car park. Free entry, parking ~¥1,000–1,500 if you park at the base of the shrine.\nOnline sources note that you will need to queue for a photo.",
+          "booked": null,
+          "note": "398 steps up to the iconic five-storey pagoda with Mt. Fuji behind it. Best views before 10am. Steep climb. Free entry, parking ~¥1,000–1,500 if you park at the base of the shrine.\nOnline sources note that you will need to queue for a photo.",
           "maps_url": "",
           "parking_url": "https://maps.app.goo.gl/EdNJBNdcsNYZNR6n7",
           "img_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1728533716/mtt7b2rkqlmxaur5yyye.webp",
@@ -399,7 +433,8 @@
           ]
         }
       ],
-      "route_url": "https://www.google.com/maps/embed?pb=!1m52!1m12!1m3!1d25984.30487866687!2d138.7541843884188!3d35.50333587894363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m37!3e0!4m5!1s0x6019609c4699dd91%3A0x82715aa64f35ff!2sToyota%20Rent%20a%20Car%20-%20Fuji-Kawaguchiko%2C%204657%20Funatsu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0301%2C%20Japan!3m2!1d35.4976774!2d138.7727845!4m5!1s0x6019610066bb9b19%3A0xbac9cb210581c124!2sCOZY%20FUJI%20VIEW%20STAY%2C%20Japan%2C%20%E3%80%92401-0301%20Yamanashi%2C%20Fujikawaguchiko%2C%20Funatsu%2C%203571-5!3m2!1d35.4937897!2d138.7704896!4m5!1s0x60195fd50839c517%3A0xe5b44defe874686d!2sKosaku%20Kawaguchiko%20(houtou)%2C%201638-1%20Funatsu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0301%2C%20Japan!3m2!1d35.4957481!2d138.7568631!4m5!1s0x601967343b160537%3A0xdbcf1faff554a9d5!2sFujiyoshida%20Shiei%20Honmachidori%20Parking%20Lot%2C%202%20Chome-1%20Shimoyoshida%2C%20Fujiyoshida%2C%20Yamanashi%20403-0004%2C%20Japan!3m2!1d35.4923145!2d138.80383!4m5!1s0x6019610033ea7d17%3A0xa25a608e1f12ecb0!2z5b-g6ZyK5aGU5YWl5Y-j56ysMemnkOi7iuWgtO-8iOaWsOWAieWxsea1hemWk-WFrOWcku-8iSwgSmFwYW4sIOOAkjQwMy0wMDMxIFlhbWFuYXNoaSwgRnVqaXlvc2hpZGEsIEFzYW1hLCAyLWNob21l4oiSMuKIkjE1!3m2!1d35.498803599999995!2d138.79913299999998!4m5!1s0x60195fecbf411877%3A0x5cf375c10c48dc69!2sOishi%20Park%20Parking%20Lot%2C%20Oishi%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0305%2C%20Japan!3m2!1d35.523201!2d138.7457502!5e0!3m2!1sen!2ssg!4v1774791494922!5m2!1sen!2ssg"
+      "route_url": "https://www.google.com/maps/embed?pb=!1m52!1m12!1m3!1d25984.30487866687!2d138.7541843884188!3d35.50333587894363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m37!3e0!4m5!1s0x6019609c4699dd91%3A0x82715aa64f35ff!2sToyota%20Rent%20a%20Car%20-%20Fuji-Kawaguchiko%2C%204657%20Funatsu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0301%2C%20Japan!3m2!1d35.4976774!2d138.7727845!4m5!1s0x6019610066bb9b19%3A0xbac9cb210581c124!2sCOZY%20FUJI%20VIEW%20STAY%2C%20Japan%2C%20%E3%80%92401-0301%20Yamanashi%2C%20Fujikawaguchiko%2C%20Funatsu%2C%203571-5!3m2!1d35.4937897!2d138.7704896!4m5!1s0x60195fd50839c517%3A0xe5b44defe874686d!2sKosaku%20Kawaguchiko%20(houtou)%2C%201638-1%20Funatsu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0301%2C%20Japan!3m2!1d35.4957481!2d138.7568631!4m5!1s0x601967343b160537%3A0xdbcf1faff554a9d5!2sFujiyoshida%20Shiei%20Honmachidori%20Parking%20Lot%2C%202%20Chome-1%20Shimoyoshida%2C%20Fujiyoshida%2C%20Yamanashi%20403-0004%2C%20Japan!3m2!1d35.4923145!2d138.80383!4m5!1s0x6019610033ea7d17%3A0xa25a608e1f12ecb0!2z5b-g6ZyK5aGU5YWl5Y-j56ysMemnkOi7iuWgtO-8iOaWsOWAieWxsea1hemWk-WFrOWcku-8iSwgSmFwYW4sIOOAkjQwMy0wMDMxIFlhbWFuYXNoaSwgRnVqaXlvc2hpZGEsIEFzYW1hLCAyLWNob21l4oiSMuKIkjE1!3m2!1d35.498803599999995!2d138.79913299999998!4m5!1s0x60195fecbf411877%3A0x5cf375c10c48dc69!2sOishi%20Park%20Parking%20Lot%2C%20Oishi%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0305%2C%20Japan!3m2!1d35.523201!2d138.7457502!5e0!3m2!1sen!2ssg!4v1774791494922!5m2!1sen!2ssg",
+      "date": "2026-04-26"
     },
     {
       "num": "6",
@@ -471,8 +506,10 @@
           "name": "Narusawa Ice Cave",
           "time": "",
           "tags": "nature",
-          "note": "The Narusawa Ice Cave is a lava tube located in the Aokigahara forest, in the part that belongs to Narusawa Village, Yamanashi Prefecture, Japan. It is one of the three larger lava tubes at the northern foot of Mount Fuji, the other two caves being Fugaku Wind Cave and Lake Sai Bat Cave.",
+          "booked": null,
+          "note": "The Narusawa Ice Cave is a lava tube located in the Aokigahara forest, in the part that belongs to Narusawa Village, Yamanashi Prefecture, Japan. It is one of the three larger lava tubes at the northern foot of Mount Fuji, the other two caves being Fugaku Wind Cave and Lake Sai Bat Cave. Short 15-20min walk through the cave.",
           "maps_url": "https://share.google/NZW33nWrLUTfmlGqX",
+          "parking_url": "",
           "img_url": "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_862/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/odjbvwledpydoaum1er3/MtFuji5thStationNarusawaIceCaveDayTourMuscatGrapePickingandAll-You-Can-EatExperience(DepartfromShinjuku).jpg",
           "options": []
         },
@@ -497,7 +534,8 @@
           ]
         }
       ],
-      "route_url": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m64!1m12!1m3!1d103941.13616568818!2d138.6270416874497!3d35.50030923727038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m49!3e0!4m5!1s0x6019610066bb9b19%3A0xbac9cb210581c124!2sCOZY%20FUJI%20VIEW%20STAY%2C%20Japan%2C%20%E3%80%92401-0301%20Yamanashi%2C%20Fujikawaguchiko%2C%20Funatsu%2C%203571-5!3m2!1d35.4937897!2d138.7704896!4m5!1s0x60195fca6be41fc1%3A0x8104acd8bf7390f6!2sKodachi%20Cafe%2C%20Japan%2C%20%E3%80%92401-0302%20Yamanashi%2C%20Minamitsuru%20District%2C%20Fujikawaguchiko%2C%20Kodachi%2C%201814!3m2!1d35.5059052!2d138.7524777!4m5!1s0x60195e268ba95555%3A0x4fa724d1d92f7142!2sMt.%20Fuji%20Panoramic%20Ropeway%2C%201163-1%20Azagawa%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0303%2C%20Japan!3m2!1d35.504032099999996!2d138.7720895!4m5!1s0x60195fa68c0b2b95%3A0xa22e530b3a652904!2zT2lzaGkgUGFyaywg77yS77yV77yS77yV55Wq5Zyw44Gu77yR77yR5YWIIE9pc2hpLCBGdWppa2F3YWd1Y2hpa28sIE1pbmFtaXRzdXJ1IERpc3RyaWN0LCBZYW1hbmFzaGkgNDAxLTAzMDUsIEphcGFu!3m2!1d35.522904!2d138.7457522!4m5!1s0x601960849091c7db%3A0x531d558922f1baf7!2sSanrokuen%2C%203370-1%20Funatsu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0301%2C%20Japan!3m2!1d35.4934587!2d138.7677082!4m5!1s0x601be1142cbd0f3f%3A0xe38f690fd5eaebe7!2zU2Fpa28gSXlhc2hpLW5vLVNhdG8gTmVtYmEgKFRyYWRpdGlvbmFsIEphcGFuZXNlIFZpbGxhZ2UpLCBKYXBhbiwg44CSNDAxLTAzMzIgWWFtYW5hc2hpLCBNaW5hbWl0c3VydSBEaXN0cmljdCwgRnVqaWthd2FndWNoaWtvLCBTYWlrbywg5qC55aC0IO-8ku-8l--8ke-8kA!3m2!1d35.5050023!2d138.6614772!4m5!1s0x601be0fd768967d3%3A0xcfa263e79da9c9a6!2sSaiko%20Wild%20Bird%20Forest%20Park%20(Fujisan%20Eco%20Net)%2C%202068%20Saiko%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0333%2C%20Japan!3m2!1d35.4981838!2d138.6530043!4m5!1s0x601be06d335ae1d3%3A0x6fd1c75103311772!2sNarusawa%20Ice%20Cave%2C%208533%20%E9%B3%B4%E6%B2%A2%20Narusawa%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0320%2C%20Japan!3m2!1d35.4749276!2d138.6669694!5e0!3m2!1sen!2ssg!4v1774789897236!5m2!1sen!2ssg\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+      "route_url": "https://www.google.com/maps/embed?pb=!1m64!1m12!1m3!1d103941.13616568818!2d138.6270416874497!3d35.50030923727038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m49!3e0!4m5!1s0x6019610066bb9b19%3A0xbac9cb210581c124!2sCOZY%20FUJI%20VIEW%20STAY%2C%20Japan%2C%20%E3%80%92401-0301%20Yamanashi%2C%20Fujikawaguchiko%2C%20Funatsu%2C%203571-5!3m2!1d35.4937897!2d138.7704896!4m5!1s0x60195fca6be41fc1%3A0x8104acd8bf7390f6!2sKodachi%20Cafe%2C%20Japan%2C%20%E3%80%92401-0302%20Yamanashi%2C%20Minamitsuru%20District%2C%20Fujikawaguchiko%2C%20Kodachi%2C%201814!3m2!1d35.5059052!2d138.7524777!4m5!1s0x60195e268ba95555%3A0x4fa724d1d92f7142!2sMt.%20Fuji%20Panoramic%20Ropeway%2C%201163-1%20Azagawa%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0303%2C%20Japan!3m2!1d35.504032099999996!2d138.7720895!4m5!1s0x60195fa68c0b2b95%3A0xa22e530b3a652904!2zT2lzaGkgUGFyaywg77yS77yV77yS77yV55Wq5Zyw44Gu77yR77yR5YWIIE9pc2hpLCBGdWppa2F3YWd1Y2hpa28sIE1pbmFtaXRzdXJ1IERpc3RyaWN0LCBZYW1hbmFzaGkgNDAxLTAzMDUsIEphcGFu!3m2!1d35.522904!2d138.7457522!4m5!1s0x601960849091c7db%3A0x531d558922f1baf7!2sSanrokuen%2C%203370-1%20Funatsu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0301%2C%20Japan!3m2!1d35.4934587!2d138.7677082!4m5!1s0x601be1142cbd0f3f%3A0xe38f690fd5eaebe7!2zU2Fpa28gSXlhc2hpLW5vLVNhdG8gTmVtYmEgKFRyYWRpdGlvbmFsIEphcGFuZXNlIFZpbGxhZ2UpLCBKYXBhbiwg44CSNDAxLTAzMzIgWWFtYW5hc2hpLCBNaW5hbWl0c3VydSBEaXN0cmljdCwgRnVqaWthd2FndWNoaWtvLCBTYWlrbywg5qC55aC0IO-8ku-8l--8ke-8kA!3m2!1d35.5050023!2d138.6614772!4m5!1s0x601be0fd768967d3%3A0xcfa263e79da9c9a6!2sSaiko%20Wild%20Bird%20Forest%20Park%20(Fujisan%20Eco%20Net)%2C%202068%20Saiko%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0333%2C%20Japan!3m2!1d35.4981838!2d138.6530043!4m5!1s0x601be06d335ae1d3%3A0x6fd1c75103311772!2sNarusawa%20Ice%20Cave%2C%208533%20%E9%B3%B4%E6%B2%A2%20Narusawa%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0320%2C%20Japan!3m2!1d35.4749276!2d138.6669694!5e0!3m2!1sen!2ssg!4v1774789897236!5m2!1sen!2ssg",
+      "date": "2026-04-27"
     },
     {
       "num": "7",
@@ -518,17 +556,20 @@
         },
         {
           "name": "Fuji Shibazakura Festival",
-          "time": "Morning",
+          "time": "",
           "tags": "",
+          "booked": null,
           "note": "From mid-April to late May every year, the nearby Fuji Motosuko Resort plays host to the stunning Fuji Shibazakura Festival. Witness sprawling fields of vibrant pink moss, all against the magnificent backdrop of Mt. Fuji.\nTour buses flood in after 11am. ¥1,000–1,300 entry + ¥500 parking. Walk the pink fields, soak your feet in the panoramic foot bath, grab food from the festival stalls.",
           "maps_url": "https://maps.app.goo.gl/uHYk8iqKeYmiEP5K6",
+          "parking_url": "",
           "img_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1728534570/bisxrc55vtvio7yohp6w.webp",
           "options": []
         },
         {
           "name": "Lake Motosu",
-          "time": "Morning",
+          "time": "",
           "tags": "",
+          "booked": null,
           "note": "Take out a 1000 yen note, and you’ll see Lake Motosu on the back of it! Out of the five lakes, Lake Motosu has the clearest waters — making it a popular diving spot.",
           "maps_url": "https://maps.app.goo.gl/UtfkwHVLxmzXr7oAA",
           "parking_url": "https://maps.app.goo.gl/9ddmAprQn6JPDRn47",
@@ -556,8 +597,9 @@
         },
         {
           "name": "Hirano Beach, Lake Yamanakako",
-          "time": "Afternoon",
+          "time": "",
           "tags": "nature",
+          "booked": null,
           "note": "Swans on the water, free parking, open Fuji views. Morning light is technically best here, but late afternoon before sunset is still lovely and far less busy. Don't linger too long — you have a dinner reservation to catch.",
           "maps_url": "https://maps.app.goo.gl/aDBt4DcS4Ytx8vD1A",
           "parking_url": "https://maps.app.goo.gl/FTJWjwJgGkw8mJ7XA",
@@ -574,7 +616,8 @@
           "options": []
         }
       ],
-      "route_url": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m58!1m12!1m3!1d104072.6863495636!2d138.579573613211!3d35.3985215943492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m43!3e0!4m5!1s0x6019610066bb9b19%3A0xbac9cb210581c124!2sCOZY%20FUJI%20VIEW%20STAY%2C%20Japan%2C%20%E3%80%92401-0301%20Yamanashi%2C%20Fujikawaguchiko%2C%20Funatsu%2C%203571-5!3m2!1d35.4937897!2d138.7704896!4m5!1s0x60195f0e69acef3b%3A0x7748b4fa9ec63a21!2sCAFETINO%20MT.FUJI%2C%20Japan%2C%20%E3%80%92401-0302%20Yamanashi%2C%20Minamitsuru%20District%2C%20Fujikawaguchiko%2C%20Kodachi%2C%201167!3m2!1d35.508387899999995!2d138.7586991!4m5!1s0x601be77133534843%3A0xf2276f1961f4c8b8!2sFuji%20Shibazakura%20Festival%20Site%2C%20Motosu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0337%2C%20Japan!3m2!1d35.442776099999996!2d138.603815!4m5!1s0x601be7002eb095d1%3A0x230ed3acbf1e7ad3!2sLake%20Motosuko%20Parking%20Lot%20(North)%2C%20Motosu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0337%2C%20Japan!3m2!1d35.462963099999996!2d138.6029749!4m5!1s0x601bdae2e99682b9%3A0xf5427791c3135ca7!2sShiraito%20Falls%2C%20Kamiide%2C%20Fujinomiya%2C%20Shizuoka%20418-0103%2C%20Japan!3m2!1d35.312904599999996!2d138.5874375!4m5!1s0x601bddd2a5953fff%3A0x6cc6bee5a3c788d1!2z6YeR5bGx44OG44Op44K5LCBKYXBhbiwg44CSNDE4LTAxMDkgU2hpenVva2EsIEZ1amlub21peWEsIEZ1bW90bywgMTU1LTEz!3m2!1d35.4009438!2d138.5611528!4m5!1s0x60196fec8ed01c37%3A0xaea15f41d50a234a!2sHirano%20beach%2C%2013%20Hirano%2C%20Yamanakako%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0502%2C%20Japan!3m2!1d35.4247002!2d138.9008237!5e0!3m2!1sen!2ssg!4v1774790588279!5m2!1sen!2ssg\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+      "route_url": "https://www.google.com/maps/embed?pb=!1m58!1m12!1m3!1d104072.6863495636!2d138.579573613211!3d35.3985215943492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m43!3e0!4m5!1s0x6019610066bb9b19%3A0xbac9cb210581c124!2sCOZY%20FUJI%20VIEW%20STAY%2C%20Japan%2C%20%E3%80%92401-0301%20Yamanashi%2C%20Fujikawaguchiko%2C%20Funatsu%2C%203571-5!3m2!1d35.4937897!2d138.7704896!4m5!1s0x60195f0e69acef3b%3A0x7748b4fa9ec63a21!2sCAFETINO%20MT.FUJI%2C%20Japan%2C%20%E3%80%92401-0302%20Yamanashi%2C%20Minamitsuru%20District%2C%20Fujikawaguchiko%2C%20Kodachi%2C%201167!3m2!1d35.508387899999995!2d138.7586991!4m5!1s0x601be77133534843%3A0xf2276f1961f4c8b8!2sFuji%20Shibazakura%20Festival%20Site%2C%20Motosu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0337%2C%20Japan!3m2!1d35.442776099999996!2d138.603815!4m5!1s0x601be7002eb095d1%3A0x230ed3acbf1e7ad3!2sLake%20Motosuko%20Parking%20Lot%20(North)%2C%20Motosu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0337%2C%20Japan!3m2!1d35.462963099999996!2d138.6029749!4m5!1s0x601bdae2e99682b9%3A0xf5427791c3135ca7!2sShiraito%20Falls%2C%20Kamiide%2C%20Fujinomiya%2C%20Shizuoka%20418-0103%2C%20Japan!3m2!1d35.312904599999996!2d138.5874375!4m5!1s0x601bddd2a5953fff%3A0x6cc6bee5a3c788d1!2z6YeR5bGx44OG44Op44K5LCBKYXBhbiwg44CSNDE4LTAxMDkgU2hpenVva2EsIEZ1amlub21peWEsIEZ1bW90bywgMTU1LTEz!3m2!1d35.4009438!2d138.5611528!4m5!1s0x60196fec8ed01c37%3A0xaea15f41d50a234a!2sHirano%20beach%2C%2013%20Hirano%2C%20Yamanakako%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0502%2C%20Japan!3m2!1d35.4247002!2d138.9008237!5e0!3m2!1sen!2ssg!4v1774790588279!5m2!1sen!2ssg",
+      "date": "2026-04-28"
     },
     {
       "num": "8",
@@ -624,8 +667,10 @@
           "name": "Highway bus: Kawaguchiko → Shinjuku",
           "time": "Afternoon",
           "tags": "transit",
+          "booked": false,
           "note": "Bus timings: 2pm, 2.10pm, 2.40pm, 3pm, 3.10pm, 3.40pm\n<a href=\"https://www.highwaybus.com/gp/inbound/inbTimeTbl?lineId=110&upDownKbn=1&action=update&year=2026&month=04&day=29&fromTime=00&toTime=24#direction\">More bus timings</a>",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         },
@@ -647,7 +692,9 @@
           "img_url": "",
           "options": []
         }
-      ]
+      ],
+      "date": "2026-04-29",
+      "route_url": ""
     },
     {
       "num": "9",
@@ -670,21 +717,50 @@
           "name": "Airport Limousine to Narita Airport",
           "time": "Morning 11:30",
           "tags": "transit",
+          "booked": false,
           "note": "Check out and board Airport Limousine. Journey is around 2 hours.<br>\nDeparting bus timings: 11:40->14:10, 12:40->15:05\nTo book the 11.40am bus.",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         },
         {
-          "time": "Afternoon 16:50",
           "name": "Depart Narita for Singapore",
+          "time": "Afternoon 16:50",
           "tags": "flight",
+          "booked": true,
           "note": "Zipair ZG053<br> Departs at 16:50, arrives in Singapore at 23:00<br>\nNRT Terminal 1 - SIN Terminal 1<br>\n2 x LieFlat, 3 x Economy",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         }
-      ]
+      ],
+      "date": "2026-04-30",
+      "route_url": ""
+    }
+  ],
+  "accoms": [
+    {
+      "name": "Shinjuku Washington Hotel",
+      "checkin": "2026-04-22",
+      "checkout": "2026-04-26",
+      "maps_url": "https://maps.app.goo.gl/sPEQaMeKcnXgMdgMA",
+      "note": "1x Triple Room\n1x Twin Room\nBreakfast included\nBooked on Expedia"
+    },
+    {
+      "name": "Cozy Fuji View Stay (Airbnb)",
+      "checkin": "2026-04-26",
+      "checkout": "2026-04-29",
+      "maps_url": "https://maps.app.goo.gl/J8wpb1U6d5HxRyvX7",
+      "note": "Booked on Airbnb"
+    },
+    {
+      "name": "Shinjuku Washington Hotel",
+      "checkin": "2026-04-29",
+      "checkout": "2026-04-30",
+      "maps_url": "https://maps.app.goo.gl/MbW7vUmVYLomdf418",
+      "note": "1x Triple Room\n1x Twin Room\nBreakfast not included\nBooked on Expedia"
     }
   ]
 }

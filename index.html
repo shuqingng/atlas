@@ -133,11 +133,16 @@
   .tag-food { background: #fdecea; color: var(--red); }
   .tag-transit { background: var(--paper2); color: var(--muted); }
   .tag-flight { background: var(--paper2); color: var(--muted); }
+  .booked-badge { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+  .booked-yes { background: var(--green-light); color: var(--green); }
+  .booked-no  { background: #fdecea; color: var(--red); }
   .stop-note { font-size: 14px; color: var(--muted); line-height: 1.65; }
   .maps-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; font-size: 12px; font-weight: 500; color: var(--green); text-decoration: none; background: var(--green-light); border: 1px solid var(--green-light); padding: 4px 10px; border-radius: 20px; transition: all 0.15s; margin-right: 6px; }
   .maps-link:hover { background: var(--green); color: #fff; }
   .maps-link-parking { color: var(--blue); background: var(--blue-light); border-color: var(--blue-light); }
   .maps-link-parking:hover { background: var(--blue); color: #fff; }
+  .maps-link-paper { color: var(--muted); background: var(--paper); border-color: var(--paper); }
+  .maps-link-paper:hover { background: var(--muted); color: var(--paper); border-color: var(--muted); }
   .options-label { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin: 12px 0 7px; }
   .options-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 4px; }
   .option-row { display: flex; flex-direction: column; gap: 3px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
@@ -148,6 +153,29 @@
   .option-note { font-size: 12px; color: var(--muted); line-height: 1.5; }
   .option-maps { font-size: 11px; font-weight: 500; color: var(--green); text-decoration: none; margin-top: 3px; display: inline-block; }
   .option-maps:hover { text-decoration: underline; }
+
+  /* ACCOMS SECTION */
+  .accom-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 32px; }
+  .accom-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px; position: relative; }
+  .accom-dates { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .accom-name { font-family: 'Shippori Mincho', serif; font-size: 20px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .accom-note { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .accom-edit-controls { display: none; position: absolute; top: 12px; right: 12px; gap: 4px; }
+  body.edit-mode .accom-edit-controls { display: flex; }
+  .accom-edit-controls button { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: #fff; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .accom-edit-controls button:hover { background: var(--paper2); }
+  .accom-edit-controls .btn-delete:hover { background: #fdecea; border-color: #f5c6c2; }
+  .add-accom-row { display: none; margin-top: 24px; }
+  body.edit-mode .add-accom-row { display: block; }
+  .btn-add-accom { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 13px; font-weight: 500; border-radius: 10px; border: 2px dashed var(--border); background: transparent; cursor: pointer; color: var(--muted); transition: all 0.2s; }
+  .btn-add-accom:hover { border-color: var(--ink); color: var(--ink); background: var(--paper2); }
+
+  /* DAY ACCOM BANNER */
+  .day-accom-banner { display: flex; align-items: center; gap: 16px; grid-column: 1 / -1; margin-top: 0; padding: 16px 20px; background: var(--paper2); border-radius: 12px; }
+  .day-accom-icon { font-size: 22px; flex-shrink: 0; }
+  .day-accom-info { flex: 1; }
+  .day-accom-label { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .day-accom-name { font-family: 'Shippori Mincho', serif; font-size: 16px; font-weight: 700; color: var(--ink); }
 
   /* DAY ROUTE MAP */
   .day-route-map { margin-top: 40px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
@@ -288,7 +316,7 @@
     <path d="M380 80 L450 30 L520 80 L490 80 L450 55 L410 80Z" fill="white"/>
   </svg>
   <div style="position:relative;z-index:1">
-    <div class="hero-tag">Family Trip · 22 - 29 April 2026</div>
+    <div class="hero-tag">Family Trip · 22 - 30 April 2026</div>
     <h1>Japan<span>Tokyo & Kawaguchiko</span></h1>
     <div class="hero-meta">
       <div class="hero-meta-item"><div class="num" id="stat-days">8</div><div class="lbl">Days</div></div>
@@ -306,6 +334,7 @@
 <nav class="nav-strip">
   <div class="nav-inner" id="nav-inner">
     <button class="nav-btn active" data-section="overview" onclick="showSection('overview')">Overview</button>
+    <button class="nav-btn" id="accoms-nav-btn" data-section="accoms" onclick="showSection('accoms')">Accoms</button>
     <button class="nav-btn" id="essentials-nav-btn" data-section="essentials" onclick="showSection('essentials')">Essentials</button>
     <div class="nav-spacer"></div>
     <button class="edit-toggle-btn" id="edit-toggle" onclick="toggleEditMode()" title="Toggle edit mode">
@@ -319,7 +348,6 @@
 
   <div class="page-section active" id="sec-overview">
     <div class="section-title">Your Journey</div>
-    <p class="section-sub">Tokyo (Days 1–5 & 8) → Kawaguchiko (Days 5–7) — curated for mixed mobility, nature lovers, and quieter experiences.</p>
     <div id="source-badge-container"></div>
     <div id="migration-banner">
       <div class="mig-icon">📋</div>
@@ -339,6 +367,15 @@
 
   <div class="add-day-row" id="add-day-row">
     <button class="btn-add-day" onclick="openDayModal(null)">＋ Add Day</button>
+  </div>
+
+  <div class="page-section" id="sec-accoms">
+    <div class="section-title">Accommodations</div>
+    <p class="section-sub">Where you're staying each night.</p>
+    <div class="accom-grid" id="accom-grid"></div>
+    <div class="add-accom-row">
+      <button class="btn-add-accom" onclick="openAccomModal(null)">＋ Add accommodation</button>
+    </div>
   </div>
 
   <div class="page-section" id="sec-essentials">
@@ -425,6 +462,14 @@
         <div class="form-hint">Available: nature, mobility, culture, food, transit, flight</div>
       </div>
       <div class="form-group">
+        <label class="form-label">Booking Status</label>
+        <select class="form-select" id="f-stop-booked">
+          <option value="">— not applicable —</option>
+          <option value="true">Booked</option>
+          <option value="false">Not booked</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label class="form-label">Note</label>
         <textarea class="form-textarea" id="f-stop-note" placeholder="Description or notes about this stop"></textarea>
       </div>
@@ -453,6 +498,42 @@
   </div>
 </div>
 
+<!-- Accom edit modal -->
+<div class="modal-overlay" id="accom-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="accom-modal-title">Add Accommodation</div>
+      <button class="modal-close" onclick="closeModal('accom-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Name</label>
+        <input class="form-input" id="f-accom-name" placeholder="e.g. Shinjuku Washington Hotel">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Check-in Date</label>
+        <input class="form-input" id="f-accom-checkin" type="date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Check-out Date</label>
+        <input class="form-input" id="f-accom-checkout" type="date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Google Maps URL</label>
+        <input class="form-input" id="f-accom-maps-url" type="url" placeholder="https://maps.google.com/...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Notes</label>
+        <textarea class="form-textarea" id="f-accom-note" placeholder="Room type, confirmation number, etc."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal('accom-modal')">Cancel</button>
+      <button class="btn-save" onclick="saveAccomModal()">Save</button>
+    </div>
+  </div>
+</div>
+
 <!-- Day edit modal -->
 <div class="modal-overlay" id="day-modal">
   <div class="modal">
@@ -464,6 +545,11 @@
       <div class="form-group">
         <label class="form-label">Day Label</label>
         <input class="form-input" id="f-day-label" placeholder="e.g. Day 1 — Wednesday">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Date</label>
+        <input class="form-input" id="f-day-date" type="date">
+        <div class="form-hint">Used to automatically match tonight's accommodation.</div>
       </div>
       <div class="form-group">
         <label class="form-label">City</label>
@@ -517,6 +603,7 @@ const DOT_COLORS = { nature:"#2d5a3d", mobility:"#1a3a5c", culture:"#b8860b", fo
 // ════════════════════════════════════════════════════════════════════
 let state = {
   days: [],          // array of day objects
+  accoms: [],        // array of accommodation objects
   editMode: false,
   dirty: false,
   dataSource: null,  // 'json' | 'sheets' | 'localstorage'
@@ -533,6 +620,7 @@ async function loadData() {
       const parsed = JSON.parse(lsRaw);
       if (parsed && Array.isArray(parsed.days) && parsed.days.length > 0) {
         state.days = parsed.days;
+        state.accoms = parsed.accoms || [];
         normalizeAllOptions();
         state.dataSource = 'localstorage';
         state.dirty = true;
@@ -548,6 +636,7 @@ async function loadData() {
       const data = await res.json();
       if (data && Array.isArray(data.days) && data.days.length > 0) {
         state.days = data.days;
+        state.accoms = data.accoms || [];
         normalizeAllOptions();
         state.dataSource = 'json';
         return;
@@ -622,7 +711,7 @@ function groupByDay(rows) {
 //  Persistence
 // ════════════════════════════════════════════════════════════════════
 function persistToLS() {
-  localStorage.setItem(LS_KEY, JSON.stringify({ days: state.days, ts: Date.now() }));
+  localStorage.setItem(LS_KEY, JSON.stringify({ days: state.days, accoms: state.accoms, ts: Date.now() }));
   state.dirty = true;
   document.body.classList.add("has-changes");
 }
@@ -639,7 +728,8 @@ function clearLS() {
 function exportJSON() {
   const payload = {
     _comment: "Generated by the Japan Trip itinerary editor. Edit via the webpage or directly in this file.",
-    days: state.days
+    days: state.days,
+    accoms: state.accoms,
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const a = document.createElement("a");
@@ -691,6 +781,7 @@ function renderAll() {
   renderNav();
   renderOverview();
   renderDays();
+  renderAccoms();
   if (state.dataSource === 'sheets') {
     document.getElementById("migration-banner").classList.add("show");
   }
@@ -761,6 +852,7 @@ function renderDays() {
     const sec = document.createElement("div");
     sec.className = "page-section";
     sec.id = `sec-day${d.num}`;
+    const accomBannerHtml = (() => { const a = getAccomForDay(d.date); return a ? `<div class="day-accom-banner"><div class="day-accom-icon">🏡</div><div class="day-accom-info"><div class="day-accom-label">Tonight's stay</div><div class="day-accom-name">${escHtml(a.name)}</div></div>${a.maps_url ? `<a class="maps-link maps-link-paper" href="${escAttr(a.maps_url)}" target="_blank" rel="noopener" style="flex-shrink:0">Maps</a>` : ""}</div>` : ""; })();
     sec.innerHTML = `
       <div class="day-header">
         <div>
@@ -774,6 +866,7 @@ function renderDays() {
           </div>
         </div>
         <div class="day-num-big">${numStr}</div>
+        ${accomBannerHtml}
       </div>
       <div class="stops-grid" id="stops-${di}">${stopsHtml}</div>
       ${routeEmbed ? `<div class="day-route-map"><iframe src="${escAttr(routeEmbed)}" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>` : ""}
@@ -821,7 +914,7 @@ function buildStopHtml(d, s, si, isLast) {
       </div>
       <div class="stop-card-body">
         <div class="stop-name">${escHtml(s.name)}</div>
-        ${tagHtml ? `<div class="stop-tags">${tagHtml}</div>` : ""}
+        ${tagHtml || s.booked !== null && s.booked !== undefined ? `<div class="stop-tags">${tagHtml}${s.booked === true ? '<span class="booked-badge booked-yes">✓ Booked</span>' : s.booked === false ? '<span class="booked-badge booked-no">✗ Not booked</span>' : ''}</div>` : ""}
         <div class="stop-note">${renderNote(s.note)}</div>
         ${s.maps_url ? `<a class="maps-link" href="${escAttr(s.maps_url)}" target="_blank" rel="noopener">📍 Open in Maps</a>` : ""}
         ${s.parking_url ? `<a class="maps-link maps-link-parking" href="${escAttr(s.parking_url)}" target="_blank" rel="noopener">🅿️ Parking</a>` : ""}
@@ -870,6 +963,7 @@ function openStopModal(di, si) {
   document.getElementById("f-stop-name").value     = s.name     || "";
   document.getElementById("f-stop-time").value     = s.time     || "";
   document.getElementById("f-stop-tags").value     = s.tags     || "";
+  document.getElementById("f-stop-booked").value   = s.booked === true ? "true" : s.booked === false ? "false" : "";
   document.getElementById("f-stop-note").value     = s.note     || "";
   document.getElementById("f-stop-maps-url").value    = s.maps_url    || "";
   document.getElementById("f-stop-parking-url").value = s.parking_url || "";
@@ -889,6 +983,7 @@ function saveStopModal() {
     name:     document.getElementById("f-stop-name").value.trim(),
     time:     document.getElementById("f-stop-time").value.trim(),
     tags:     document.getElementById("f-stop-tags").value.trim(),
+    booked:   (() => { const v = document.getElementById("f-stop-booked").value; return v === "true" ? true : v === "false" ? false : null; })(),
     note:     document.getElementById("f-stop-note").value.trim(),
     maps_url:    document.getElementById("f-stop-maps-url").value.trim(),
     parking_url: document.getElementById("f-stop-parking-url").value.trim(),
@@ -978,6 +1073,7 @@ function openDayModal(di) {
   document.getElementById("day-modal-title").textContent = isNew ? "Add Day" : "Edit Day";
   const d = isNew ? {} : state.days[di];
   document.getElementById("f-day-label").value     = d.label     || "";
+  document.getElementById("f-day-date").value      = d.date      || "";
   document.getElementById("f-day-city").value      = d.city      || "tokyo";
   document.getElementById("f-day-title").value     = d.title     || "";
   document.getElementById("f-day-desc").value      = d.desc      || "";
@@ -991,6 +1087,7 @@ function saveDayModal() {
   const di = _dayCtx;
   const dayData = {
     label:     document.getElementById("f-day-label").value.trim(),
+    date:      document.getElementById("f-day-date").value,
     city:      document.getElementById("f-day-city").value,
     title:     document.getElementById("f-day-title").value.trim(),
     desc:      document.getElementById("f-day-desc").value.trim(),
@@ -1019,6 +1116,86 @@ function deleteDay(di) {
   persistToLS();
   renderAll();
   showSection("overview");
+}
+
+// ════════════════════════════════════════════════════════════════════
+//  Accommodations
+// ════════════════════════════════════════════════════════════════════
+
+function getAccomForDay(date) {
+  if (!date) return null;
+  return (state.accoms || []).find(a => a.checkin && a.checkout && a.checkin <= date && date < a.checkout) || null;
+}
+
+function renderAccoms() {
+  const grid = document.getElementById("accom-grid");
+  if (!grid) return;
+  const accoms = state.accoms || [];
+  if (accoms.length === 0) {
+    grid.innerHTML = `<p style="color:var(--muted);font-size:14px">No accommodations added yet. Enter edit mode to add one.</p>`;
+    return;
+  }
+  grid.innerHTML = accoms.map((a, ai) => {
+    const dateRange = [a.checkin, a.checkout].filter(Boolean)
+      .map(d => { const [y,m,day] = d.split("-"); return `${day} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][Number(m)-1]}`; })
+      .join(" → ");
+    return `<div class="accom-card">
+      <div class="accom-edit-controls">
+        <button title="Edit" onclick="openAccomModal(${ai})">✏️</button>
+        <button class="btn-delete" title="Delete" onclick="deleteAccom(${ai})">🗑</button>
+      </div>
+      <div class="accom-dates">${escHtml(dateRange)}</div>
+      <div class="accom-name">${escHtml(a.name)}</div>
+      ${a.maps_url ? `<a class="maps-link" href="${escAttr(a.maps_url)}" target="_blank" rel="noopener">📍 Open in Maps</a>` : ""}
+      ${a.note ? `<div class="accom-note">${renderNote(a.note)}</div>` : ""}
+    </div>`;
+  }).join("");
+}
+
+let _accomCtx = null;
+
+function openAccomModal(ai) {
+  _accomCtx = ai;
+  const isNew = ai === null;
+  document.getElementById("accom-modal-title").textContent = isNew ? "Add Accommodation" : "Edit Accommodation";
+  const a = isNew ? {} : (state.accoms || [])[ai];
+  document.getElementById("f-accom-name").value     = a.name     || "";
+  document.getElementById("f-accom-checkin").value  = a.checkin  || "";
+  document.getElementById("f-accom-checkout").value = a.checkout || "";
+  document.getElementById("f-accom-maps-url").value = a.maps_url || "";
+  document.getElementById("f-accom-note").value     = a.note     || "";
+  openModal("accom-modal");
+}
+
+function saveAccomModal() {
+  const isNew = _accomCtx === null;
+  const name = document.getElementById("f-accom-name").value.trim();
+  if (!name) { alert("Name is required."); return; }
+  const accomData = {
+    name,
+    checkin:  document.getElementById("f-accom-checkin").value,
+    checkout: document.getElementById("f-accom-checkout").value,
+    maps_url: document.getElementById("f-accom-maps-url").value.trim(),
+    note:     document.getElementById("f-accom-note").value.trim(),
+  };
+  if (!state.accoms) state.accoms = [];
+  if (isNew) {
+    state.accoms.push(accomData);
+  } else {
+    Object.assign(state.accoms[_accomCtx], accomData);
+  }
+  persistToLS();
+  renderAccoms();
+  renderDays(); // refresh banners
+  closeModal("accom-modal");
+}
+
+function deleteAccom(ai) {
+  if (!confirm(`Delete "${state.accoms[ai].name}"?`)) return;
+  state.accoms.splice(ai, 1);
+  persistToLS();
+  renderAccoms();
+  renderDays();
 }
 
 // ════════════════════════════════════════════════════════════════════
