@@ -143,6 +143,11 @@
   .option-maps { font-size: 11px; font-weight: 500; color: var(--green); text-decoration: none; margin-top: 3px; display: inline-block; }
   .option-maps:hover { text-decoration: underline; }
 
+  /* DAY ROUTE MAP */
+  .day-route-map { margin-top: 40px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
+  .day-route-map iframe { display: block; width: 100%; height: 360px; border: none; }
+  @media (max-width: 600px) { .day-route-map iframe { height: 260px; } }
+
   /* TIP */
   .tip-box { margin-top: 40px; background: var(--ink); color: #fff; border-radius: 14px; padding: 24px 28px; display: flex; gap: 16px; align-items: flex-start; }
   .tip-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; font-weight: 500; }
@@ -469,6 +474,11 @@
         <label class="form-label">Planner's Tip</label>
         <textarea class="form-textarea" id="f-day-tip" placeholder="Insider tip or logistic note for the day"></textarea>
       </div>
+      <div class="form-group">
+        <label class="form-label">Route Map Embed URL</label>
+        <input class="form-input" id="f-day-route-url" type="url" placeholder="https://www.google.com/maps/embed?pb=...">
+        <div class="form-hint">In Google Maps: Share → Embed a map → copy the <code>src</code> URL from the iframe snippet.</div>
+      </div>
     </div>
     <div class="modal-footer">
       <button class="btn-cancel" onclick="closeModal('day-modal')">Cancel</button>
@@ -755,6 +765,7 @@ function renderDays() {
         <div class="day-num-big">${numStr}</div>
       </div>
       <div class="stops-grid" id="stops-${di}">${stopsHtml}</div>
+      ${d.route_url ? `<div class="day-route-map"><iframe src="${escAttr(d.route_url)}" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>` : ""}
       ${d.tip ? `<div class="tip-box"><div style="font-size:20px;flex-shrink:0">✦</div><div><div class="tip-label">Planner's tip</div><div class="tip-text">${escHtml(d.tip)}</div></div></div>` : ""}`;
     container.appendChild(sec);
   });
@@ -952,11 +963,12 @@ function openDayModal(di) {
   const isNew = di === null;
   document.getElementById("day-modal-title").textContent = isNew ? "Add Day" : "Edit Day";
   const d = isNew ? {} : state.days[di];
-  document.getElementById("f-day-label").value = d.label || "";
-  document.getElementById("f-day-city").value  = d.city  || "tokyo";
-  document.getElementById("f-day-title").value = d.title || "";
-  document.getElementById("f-day-desc").value  = d.desc  || "";
-  document.getElementById("f-day-tip").value   = d.tip   || "";
+  document.getElementById("f-day-label").value     = d.label     || "";
+  document.getElementById("f-day-city").value      = d.city      || "tokyo";
+  document.getElementById("f-day-title").value     = d.title     || "";
+  document.getElementById("f-day-desc").value      = d.desc      || "";
+  document.getElementById("f-day-tip").value       = d.tip       || "";
+  document.getElementById("f-day-route-url").value = d.route_url || "";
   openModal("day-modal");
 }
 
@@ -964,11 +976,12 @@ function saveDayModal() {
   const isNew = _dayCtx === null;
   const di = _dayCtx;
   const dayData = {
-    label: document.getElementById("f-day-label").value.trim(),
-    city:  document.getElementById("f-day-city").value,
-    title: document.getElementById("f-day-title").value.trim(),
-    desc:  document.getElementById("f-day-desc").value.trim(),
-    tip:   document.getElementById("f-day-tip").value.trim(),
+    label:     document.getElementById("f-day-label").value.trim(),
+    city:      document.getElementById("f-day-city").value,
+    title:     document.getElementById("f-day-title").value.trim(),
+    desc:      document.getElementById("f-day-desc").value.trim(),
+    tip:       document.getElementById("f-day-tip").value.trim(),
+    route_url: document.getElementById("f-day-route-url").value.trim(),
   };
   if (!dayData.label) { alert("Day label is required."); return; }
   if (isNew) {
