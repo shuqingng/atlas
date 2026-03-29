@@ -130,8 +130,10 @@
   .tag-transit { background: var(--paper2); color: var(--muted); }
   .tag-flight { background: var(--paper2); color: var(--muted); }
   .stop-note { font-size: 14px; color: var(--muted); line-height: 1.65; }
-  .maps-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; font-size: 12px; font-weight: 500; color: var(--green); text-decoration: none; background: var(--green-light); border: 1px solid var(--green-light); padding: 4px 10px; border-radius: 20px; transition: all 0.15s; }
+  .maps-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; font-size: 12px; font-weight: 500; color: var(--green); text-decoration: none; background: var(--green-light); border: 1px solid var(--green-light); padding: 4px 10px; border-radius: 20px; transition: all 0.15s; margin-right: 6px; }
   .maps-link:hover { background: var(--green); color: #fff; }
+  .maps-link-parking { color: var(--blue); background: var(--blue-light); border-color: var(--blue-light); }
+  .maps-link-parking:hover { background: var(--blue); color: #fff; }
   .options-label { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin: 12px 0 7px; }
   .options-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 4px; }
   .option-row { display: flex; flex-direction: column; gap: 3px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
@@ -425,6 +427,10 @@
       <div class="form-group">
         <label class="form-label">Google Maps URL</label>
         <input class="form-input" id="f-stop-maps-url" type="url" placeholder="https://maps.google.com/...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Parking Spot URL</label>
+        <input class="form-input" id="f-stop-parking-url" type="url" placeholder="https://maps.google.com/...">
       </div>
       <div class="form-group">
         <label class="form-label">Image URL</label>
@@ -813,6 +819,7 @@ function buildStopHtml(d, s, si, isLast) {
         ${tagHtml ? `<div class="stop-tags">${tagHtml}</div>` : ""}
         <div class="stop-note">${renderNote(s.note)}</div>
         ${s.maps_url ? `<a class="maps-link" href="${escAttr(s.maps_url)}" target="_blank" rel="noopener">📍 Open in Maps</a>` : ""}
+        ${s.parking_url ? `<a class="maps-link maps-link-parking" href="${escAttr(s.parking_url)}" target="_blank" rel="noopener">🅿️ Parking</a>` : ""}
         ${optionsHtml}
       </div>
       ${s.img_url ? `<img class="stop-card-img" src="${escAttr(s.img_url)}" alt="${escAttr(s.name)}" loading="lazy" onerror="this.classList.add('errored')">` : ""}
@@ -859,8 +866,9 @@ function openStopModal(di, si) {
   document.getElementById("f-stop-time").value     = s.time     || "";
   document.getElementById("f-stop-tags").value     = s.tags     || "";
   document.getElementById("f-stop-note").value     = s.note     || "";
-  document.getElementById("f-stop-maps-url").value = s.maps_url || "";
-  document.getElementById("f-stop-image-url").value= s.img_url  || "";
+  document.getElementById("f-stop-maps-url").value    = s.maps_url    || "";
+  document.getElementById("f-stop-parking-url").value = s.parking_url || "";
+  document.getElementById("f-stop-image-url").value   = s.img_url     || "";
   // Populate options editor
   const opts = Array.isArray(s.options) ? s.options : normalizeOptions(s.options || "", s.option_notes || "", s.option_urls || "");
   const editor = document.getElementById("options-editor");
@@ -877,8 +885,9 @@ function saveStopModal() {
     time:     document.getElementById("f-stop-time").value.trim(),
     tags:     document.getElementById("f-stop-tags").value.trim(),
     note:     document.getElementById("f-stop-note").value.trim(),
-    maps_url: document.getElementById("f-stop-maps-url").value.trim(),
-    img_url:  document.getElementById("f-stop-image-url").value.trim(),
+    maps_url:    document.getElementById("f-stop-maps-url").value.trim(),
+    parking_url: document.getElementById("f-stop-parking-url").value.trim(),
+    img_url:     document.getElementById("f-stop-image-url").value.trim(),
     options:  getOptionsFromEditor(),
   };
   if (!stop.name) { alert("Stop name is required."); return; }
