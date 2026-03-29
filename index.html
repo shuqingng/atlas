@@ -755,7 +755,7 @@ function renderDays() {
         <div>
           <div class="day-eyebrow">${escHtml(d.label)} · ${d.city === "tokyo" ? "Tokyo" : "Kawaguchiko"}</div>
           <div class="day-title">${escHtml(d.title)}</div>
-          <div class="day-desc">${escHtml(d.desc)}</div>
+          <div class="day-desc">${renderNote(d.desc)}</div>
           <div class="day-edit-row">
             <button onclick="openDayModal(${di})">✏️ Edit day info</button>
             <button class="btn-add-stop" onclick="openStopModal(${di}, null)">＋ Add stop</button>
