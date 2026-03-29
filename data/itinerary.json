@@ -54,22 +54,34 @@
           "options": []
         },
         {
-          "time": "Dinner",
           "name": "Dinner near the hotel",
+          "time": "Dinner",
           "tags": "food",
+          "booked": null,
           "note": "Walking distance from the hotel.",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": [
             {
               "name": "Tsukemen Gonokami Seisakusho",
-              "note": "Understated, compact restaurant offering bowls of ramen noodles in a relaxed ambiance. Slight further from hotel (1.3km walk, 19min)",
+              "note": "Understated, compact restaurant offering bowls of ramen noodles in a relaxed ambiance. Slight further from hotel (1.3km walk, 19min)\nCloses at 9pm",
               "url": "https://maps.app.goo.gl/dBVuNKVHfxX4fFR87"
             },
             {
               "name": "Fūunji Shinjuku",
-              "note": "Tsukemen dipping noodles with a choice of sauces, served at the counter of this busy ramen shop. 6min walk away.",
+              "note": "Tsukemen dipping noodles with a choice of sauces, served at the counter of this busy ramen shop. 6min walk away.\nCloses at 9pm",
               "url": "https://maps.app.goo.gl/rBcswKMHHkpmVnEd8"
+            },
+            {
+              "name": "Beef Kitchen Stand Nishi-Shinjuku",
+              "note": "Mostly beef, but has other options too. Right under the hotel.\nCloses at 11pm.",
+              "url": "https://maps.app.goo.gl/c4gckNwTwoK8Yh8t7"
+            },
+            {
+              "name": "Shinpachi Shokudo Shinjuku",
+              "note": "Syokudo and Teishoku restaurant. Able to order via the iPad, no conversation required. Grilled fish is good. 8min walk from hotel\nCloses at 10.40pm",
+              "url": "https://maps.app.goo.gl/8sW8FpRetBAbjhwe9"
             }
           ]
         }
