@@ -495,7 +495,7 @@
       "label": "Day 7: 28 Apr (Tue)",
       "city": "kawaguchiko",
       "title": "South & East",
-      "desc": "Motosuko + Fujinomiya + Yamanakako",
+      "desc": "Motosuko + Fujinomiya + Yamanakako\n<a href='https://maps.app.goo.gl/6STFyqv2Vht7ae9BA'>Driving Route</a>",
       "tip": "",
       "stops": [
         {
@@ -564,7 +564,8 @@
           "img_url": "",
           "options": []
         }
-      ]
+      ],
+      "route_url": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m58!1m12!1m3!1d104072.6863495636!2d138.579573613211!3d35.3985215943492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m43!3e0!4m5!1s0x6019610066bb9b19%3A0xbac9cb210581c124!2sCOZY%20FUJI%20VIEW%20STAY%2C%20Japan%2C%20%E3%80%92401-0301%20Yamanashi%2C%20Fujikawaguchiko%2C%20Funatsu%2C%203571-5!3m2!1d35.4937897!2d138.7704896!4m5!1s0x60195f0e69acef3b%3A0x7748b4fa9ec63a21!2sCAFETINO%20MT.FUJI%2C%20Japan%2C%20%E3%80%92401-0302%20Yamanashi%2C%20Minamitsuru%20District%2C%20Fujikawaguchiko%2C%20Kodachi%2C%201167!3m2!1d35.508387899999995!2d138.7586991!4m5!1s0x601be77133534843%3A0xf2276f1961f4c8b8!2sFuji%20Shibazakura%20Festival%20Site%2C%20Motosu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0337%2C%20Japan!3m2!1d35.442776099999996!2d138.603815!4m5!1s0x601be7002eb095d1%3A0x230ed3acbf1e7ad3!2sLake%20Motosuko%20Parking%20Lot%20(North)%2C%20Motosu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0337%2C%20Japan!3m2!1d35.462963099999996!2d138.6029749!4m5!1s0x601bdae2e99682b9%3A0xf5427791c3135ca7!2sShiraito%20Falls%2C%20Kamiide%2C%20Fujinomiya%2C%20Shizuoka%20418-0103%2C%20Japan!3m2!1d35.312904599999996!2d138.5874375!4m5!1s0x601bddd2a5953fff%3A0x6cc6bee5a3c788d1!2z6YeR5bGx44OG44Op44K5LCBKYXBhbiwg44CSNDE4LTAxMDkgU2hpenVva2EsIEZ1amlub21peWEsIEZ1bW90bywgMTU1LTEz!3m2!1d35.4009438!2d138.5611528!4m5!1s0x60196fec8ed01c37%3A0xaea15f41d50a234a!2sHirano%20beach%2C%2013%20Hirano%2C%20Yamanakako%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0502%2C%20Japan!3m2!1d35.4247002!2d138.9008237!5e0!3m2!1sen!2ssg!4v1774790588279!5m2!1sen!2ssg\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
     },
     {
       "num": "8",
