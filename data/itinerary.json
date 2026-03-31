@@ -33,7 +33,7 @@
         },
         {
           "name": "Board Airport Limousine bus to Hotel",
-          "time": "Evenining 18:30",
+          "time": "Evening 18:30",
           "tags": "transit",
           "booked": false,
           "note": "Purchase Limousine Bus tickets from ticket counters on 1F Arrival Lobby (both South & North Wings).<br>Departing bus timings: 18:25, 18:55, 19:25<br>\nLimousine bus takes around 1.5hrs to 2hours, and brings us directly to our hotel.<br>\n<a href='https://www.limousinebus.co.jp/en'>More info on bus timings</a>",
@@ -95,7 +95,7 @@
       "city": "tokyo",
       "title": "Tokyo City",
       "desc": "Your first full day — get your bearings with green spaces and a gentle stroll through one of Tokyo's most atmospheric old neighbourhoods.",
-      "tip": "Keep Day 2 gentle",
+      "tip": "",
       "stops": [
         {
           "time": "Breakfast",
@@ -107,22 +107,35 @@
           "options": []
         },
         {
-          "name": "Tsukiji Outer Market",
+          "name": "Meiji Jingu",
           "time": "",
-          "tags": "food",
+          "tags": "nature",
           "booked": null,
-          "note": "Most stalls open around 5:00-6:00 AM and close by 14:00 - 15:00",
-          "maps_url": "https://share.google/scZHIM869f7q2qis7",
+          "note": "Free, serene forest walk. Arrive earlier to beat the crowds.\nThe forested shrine approach is serene and uncrowded before 9am. Budget about 1 hour. Free entry.",
+          "maps_url": "https://maps.app.goo.gl/S2AyyFEPgbhLnTMw6",
           "parking_url": "",
-          "img_url": "https://www.snowmonkeyresorts.com/wp-content/uploads/2024/05/2EF689DF-FCBB-4B36-9EEF-7A1408709F75-1024x599.jpeg",
+          "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR7cKFoS9w0OEDTcVgp8MlfTLjGN4YrEiBiw&s",
           "options": []
         },
         {
-          "time": "Lunch 12:00",
+          "name": "Takeshita Street, Harajuku",
+          "time": "",
+          "tags": "culture",
+          "booked": null,
+          "note": "The famous pedestrian street for quirky fashion, crepes, and people-watching. Just 10 min walk from Meiji Jingu. Fun even if you don't buy anything — best experienced before the afternoon crowds arrive.",
+          "maps_url": "",
+          "parking_url": "",
+          "img_url": "",
+          "options": []
+        },
+        {
           "name": "Google Japan - Shibuya Office",
+          "time": "Lunch 12:00",
           "tags": "food",
-          "note": "",
+          "booked": null,
+          "note": "10 min walk south from Harajuku",
           "maps_url": "https://share.google/jZJfWWUzgP27gXFyJ",
+          "parking_url": "",
           "img_url": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/isdsmjGkuacU/v0/-1x-1.webp",
           "options": []
         },
@@ -131,10 +144,43 @@
           "time": "",
           "tags": "nature",
           "booked": null,
-          "note": "Sumida Park stretches along both sides of the Sumida River and is particularly stunning in late April. Provides one of the best unobstructed photo spots of the Tokyo Skytree across the water.",
+          "note": "20 min from Shibuya. Moat walk along the Imperial Palace, rowboats available (~¥800/30 min). About 1 hour.\n\nSumida Park stretches along both sides of the Sumida River and is particularly stunning in late April. Provides one of the best unobstructed photo spots of the Tokyo Skytree across the water.",
           "maps_url": "",
           "parking_url": "",
           "img_url": "https://www.wowabouts.com/z-media/2018/10/Chidorigafuchi%20Park%202.jpg",
+          "options": []
+        },
+        {
+          "name": "Hamarikyu Gardens",
+          "time": "",
+          "tags": "nature",
+          "booked": null,
+          "note": "20 min east from Chidorigafuchi. Beautiful traditional garden on Tokyo Bay. ¥300 entry. Board the water bus here.",
+          "maps_url": "",
+          "parking_url": "",
+          "img_url": "",
+          "options": []
+        },
+        {
+          "name": "Water Bus: Hamarikyu → Asakusa",
+          "time": "",
+          "tags": "transit",
+          "booked": false,
+          "note": "40min cruise up the Sumida River past 12 bridges with Skytree appearing on the horizon as you arrive.",
+          "maps_url": "",
+          "parking_url": "",
+          "img_url": "",
+          "options": []
+        },
+        {
+          "name": "Sumida Park stroll",
+          "time": "",
+          "tags": "nature",
+          "booked": null,
+          "note": "Right off the water bus pier. Skytree views, the Asahi golden flame building, riverside walk.",
+          "maps_url": "",
+          "parking_url": "",
+          "img_url": "",
           "options": []
         },
         {
@@ -142,21 +188,10 @@
           "time": "",
           "tags": "culture",
           "booked": null,
-          "note": "Senso-ji is Tokyo’s oldest and most significant Buddhist temple, dedicated to Kannon, the Bodhisattva of Mercy. Entering through the massive Kaminarimon (Thunder Gate) is a quintessential Tokyo experience. The approach to the temple, known as Nakamise-dori, is a historic shopping street lined with dozens of stalls selling traditional snacks like age-manju (fried bean cakes) and authentic souvenirs.",
+          "note": "Senso-ji is Tokyo’s oldest and most significant Buddhist temple, dedicated to Kannon, the Bodhisattva of Mercy. Entering through the massive Kaminarimon (Thunder Gate) is a quintessential Tokyo experience. The approach to the temple, known as Nakamise-dori, is a historic shopping street lined with dozens of stalls selling traditional snacks like age-manju (fried bean cakes) and authentic souvenirs.\nKaminarimon gate and Nakamise street as the lanterns come on. The most atmospheric time to visit.",
           "maps_url": "",
           "parking_url": "",
           "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8vlTMevv6mZ1HdoHmGV_LixxBx2a1U6qKbw&s",
-          "options": []
-        },
-        {
-          "name": "XX",
-          "time": "",
-          "tags": "",
-          "booked": null,
-          "note": "",
-          "maps_url": "",
-          "parking_url": "",
-          "img_url": "",
           "options": []
         },
         {
@@ -260,34 +295,75 @@
           "options": []
         },
         {
-          "name": "Meiji Jingu",
+          "name": "Tsukiji Outer Market",
           "time": "",
-          "tags": "nature",
+          "tags": "food",
           "booked": null,
-          "note": "Free, serene forest walk. Arrive earlier to beat the crowds.",
-          "maps_url": "https://maps.app.goo.gl/S2AyyFEPgbhLnTMw6",
+          "note": "Arrive by 7–8am for peak freshness and full stall selection. Graze through fresh oysters, tamagoyaki, tuna sashimi, seafood skewers, strawberry daifuku. Most vendors wind down by noon so the early start is worth it.",
+          "maps_url": "https://share.google/scZHIM869f7q2qis7",
           "parking_url": "",
-          "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR7cKFoS9w0OEDTcVgp8MlfTLjGN4YrEiBiw&s",
+          "img_url": "https://www.snowmonkeyresorts.com/wp-content/uploads/2024/05/2EF689DF-FCBB-4B36-9EEF-7A1408709F75-1024x599.jpeg",
           "options": []
         },
         {
-          "name": "Harajuku / Takeshita Street",
+          "name": "Kiri Yanaka",
+          "time": "Lunch",
+          "tags": "food",
+          "booked": false,
+          "note": "30 min by train north to Yanaka. A traditional Japanese house hidden at the end of an alley behind a wooden gate, opening onto a quiet garden. Unagi (eel) set meals, tatami seating, very serene atmosphere. One of the most atmospheric lunch spots in this part of Tokyo. Opens 11:30am. Book ahead — it fills up.",
+          "maps_url": "",
+          "parking_url": "",
+          "img_url": "",
+          "options": [
+            {
+              "name": "TAYORI",
+              "note": "If Kiri Yanaka is unavailable, TAYORI on Yanaka Ginza is a great fallback — a charming deli-restaurant with weekly set meals for ¥1,550, hidden off a side alley. ⚠️ Closed Mon & Tue.",
+              "url": ""
+            }
+          ]
+        },
+        {
+          "name": "Nezu Shrine",
           "time": "",
           "tags": "culture",
           "booked": null,
-          "note": "Stroll through Harajuku for some quirky browsing.",
+          "note": "10 min walk. Start the afternoon here while it's quietest. The long tunnel of vermilion torii gates winds up a mossy hillside — intimate and unhurried compared to Fushimi Inari. Small pond garden and waterfall at the end of the path. Free, closes 5pm.",
           "maps_url": "",
           "parking_url": "",
           "img_url": "",
           "options": []
         },
         {
-          "time": "Lunch",
-          "name": "Udon Iroha",
+          "name": "SCAI The Bathhouse",
+          "time": "",
+          "tags": "culture",
+          "booked": null,
+          "note": "10 min walk. A 200-year-old public bathhouse converted into a world-class contemporary art gallery. Free entry, Tue–Sat 12–6pm. ⚠️ Check their website before the day to confirm an exhibition is on.",
+          "maps_url": "",
+          "parking_url": "",
+          "img_url": "",
+          "options": []
+        },
+        {
+          "name": "Yanaka Ginza",
+          "time": "",
+          "tags": "culture",
+          "booked": null,
+          "note": "5 min walk north. Walk down the \"Yuyake Dandan\" sunset steps into the retro shopping street. Pick up menchi katsu from one of the stalls — it's the neighbourhood's signature snack. Browse local crafts, pottery, cat-themed everything. Mostly cash only.",
+          "maps_url": "",
+          "parking_url": "",
+          "img_url": "",
+          "options": []
+        },
+        {
+          "name": "Yanakana Macha Stand",
+          "time": "",
           "tags": "food",
-          "note": "Udon restaurant along Takeshita street. 4.2 ★",
-          "maps_url": "https://maps.app.goo.gl/rYuEBixWz7F5HrL56",
-          "img_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/5e/4b/89/2010-open.jpg?w=700&h=400&s=1",
+          "booked": null,
+          "note": "Right on the street. Sit down for matcha latte, gelato or a crepe. Good rest stop before the train west.",
+          "maps_url": "",
+          "parking_url": "",
+          "img_url": "",
           "options": []
         },
         {
@@ -295,22 +371,38 @@
           "time": "",
           "tags": "nature",
           "booked": null,
-          "note": "By late April, the Yaezakura (double-flowered chery blossoms), which are late-blooming cherry blossoms, reach their peak.",
+          "note": "By late April, the Yaezakura (double-flowered chery blossoms), which are late-blooming cherry blossoms, reach their peak.\n25 min from Tsukiji by train. One of Tokyo's best parks — a huge formal garden with Japanese, French and English sections. ¥500 entry. Perfect for a relaxed late morning walk after the Tsukiji bustle. Budget 1.5–2 hours. ⚠️ Closed Mondays.\nExit from the Shinjuku Gate side to walk toward Zauo.",
           "maps_url": "https://maps.app.goo.gl/wGWsUeQU23j77Eee6",
           "parking_url": "",
           "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIBQqJxiKBVmMSegFCbblp3cn2Q_TgqcBJMg&s",
           "options": []
         },
         {
-          "name": "Zauo Fishing Restaurant",
-          "time": "Dinner",
+          "name": "Dinner",
+          "time": "",
           "tags": "food",
-          "booked": true,
-          "note": "Unique dinner right in the hotel — catch your own fish! Restaurant is right in the lobby of our hotel.<br>Reservation made for 5 pax at 7.30pm (Japan time).",
-          "maps_url": "https://maps.app.goo.gl/p1MgfuDgX6Zc1KiQA",
+          "booked": null,
+          "note": "",
+          "maps_url": "",
           "parking_url": "",
-          "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAxz_Oq0h6i45GgS-p1rn5IKc1yhiQR9nweg&s",
-          "options": []
+          "img_url": "",
+          "options": [
+            {
+              "name": "Gyoen Roan",
+              "note": "A robatayaki (charcoal grill) restaurant right by Shinjuku Gyoenmae Station. Specialises in grilled fish and vegetables cooked over charcoal in front of you — the chef at the open kitchen is part of the experience. Try the grilled fish collar, seasonal vegetables, and their sake selection. Cosy counter seating. Opens 5:30pm for dinner. Book ahead. ⚠️ Closed Sundays.",
+              "url": ""
+            },
+            {
+              "name": "Tempura Satoumisatoyama",
+              "note": "A short walk toward the Washington Hotel. Counter seating watching chefs fry tempura right in front of you. Excellent set menus covering shrimp, seasonal vegetables, fish — all cooked, nothing raw. Reviewers frequently go back multiple times in one trip. Opens 6pm for dinner. ⚠️ Closed Sundays.",
+              "url": ""
+            },
+            {
+              "name": "Gyoen Imai — Kappo cuisine",
+              "note": "A kappo (counter dining) restaurant near Shinjuku Gyoenmae. Set course menu at ¥9,500 covering grilled conger eel, shrimp dumplings, clay pot rice, and seasonal vegetables — all cooked. Elegant but not stuffy, and the clay pot rice at the end is a highlight. Opens 5pm. ⚠️ Closed Sundays.",
+              "url": ""
+            }
+          ]
         },
         {
           "name": "Pack bags — highway bus to Kawaguchiko tomorrow",
@@ -554,7 +646,7 @@
       "label": "Day 7: 28 Apr (Tue)",
       "city": "kawaguchiko",
       "title": "South & East",
-      "desc": "Motosuko + Fujinomiya + Yamanakako\n<a href='https://maps.app.goo.gl/6STFyqv2Vht7ae9BA'>Driving Route</a>",
+      "desc": "Motosuko + Fujinomiya + Yamanakako\n<a href='https://maps.app.goo.gl/XQx6Kmv1EH4SDVEE8'>Driving Route</a>",
       "tip": "",
       "stops": [
         {
@@ -564,17 +656,6 @@
           "note": "Opens at 8.30am. Serves pancakes, sandwiches and pastas.",
           "maps_url": "https://share.google/KZGA3E2Q8zIE77Sbp",
           "img_url": "",
-          "options": []
-        },
-        {
-          "name": "Fuji Shibazakura Festival",
-          "time": "",
-          "tags": "",
-          "booked": null,
-          "note": "From mid-April to late May every year, the nearby Fuji Motosuko Resort plays host to the stunning Fuji Shibazakura Festival. Witness sprawling fields of vibrant pink moss, all against the magnificent backdrop of Mt. Fuji.\nTour buses flood in after 11am. ¥1,000–1,300 entry + ¥500 parking. Walk the pink fields, soak your feet in the panoramic foot bath, grab food from the festival stalls.",
-          "maps_url": "https://maps.app.goo.gl/uHYk8iqKeYmiEP5K6",
-          "parking_url": "",
-          "img_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1728534570/bisxrc55vtvio7yohp6w.webp",
           "options": []
         },
         {
@@ -599,6 +680,17 @@
           "options": []
         },
         {
+          "name": "Makaino Farm Resort (Optional)",
+          "time": "",
+          "tags": "",
+          "booked": null,
+          "note": "Interactive farm with livestock, activities, play equipment, views of Mount Fuji & a restaurant.",
+          "maps_url": "https://maps.app.goo.gl/a1iYV6AjTxkZcu8PA",
+          "parking_url": "",
+          "img_url": "",
+          "options": []
+        },
+        {
           "name": "金山テラス (Kanayama Terrace)",
           "time": "Lunch",
           "tags": "food",
@@ -608,14 +700,14 @@
           "options": []
         },
         {
-          "name": "Hirano Beach, Lake Yamanakako",
+          "name": "Fuji Shibazakura Festival",
           "time": "",
-          "tags": "nature",
+          "tags": "",
           "booked": null,
-          "note": "Swans on the water, free parking, open Fuji views. Morning light is technically best here, but late afternoon before sunset is still lovely and far less busy. Don't linger too long — you have a dinner reservation to catch.",
-          "maps_url": "https://maps.app.goo.gl/aDBt4DcS4Ytx8vD1A",
-          "parking_url": "https://maps.app.goo.gl/FTJWjwJgGkw8mJ7XA",
-          "img_url": "https://res.klook.com/image/upload/c_crop,h_801,w_1281,x_0,y_10,z_0.6/w_750,h_469,c_fill,q_85/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/fapdd70g3kelvddqtxtw.jpg",
+          "note": "From mid-April to late May every year, the nearby Fuji Motosuko Resort plays host to the stunning Fuji Shibazakura Festival. Witness sprawling fields of vibrant pink moss, all against the magnificent backdrop of Mt. Fuji.\nTour buses flood in after 11am. ¥1,000–1,300 entry + ¥500 parking. Walk the pink fields, soak your feet in the panoramic foot bath, grab food from the festival stalls.",
+          "maps_url": "https://maps.app.goo.gl/uHYk8iqKeYmiEP5K6",
+          "parking_url": "",
+          "img_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1728534570/bisxrc55vtvio7yohp6w.webp",
           "options": []
         },
         {
@@ -628,7 +720,7 @@
           "options": []
         }
       ],
-      "route_url": "https://www.google.com/maps/embed?pb=!1m58!1m12!1m3!1d104072.6863495636!2d138.579573613211!3d35.3985215943492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m43!3e0!4m5!1s0x6019610066bb9b19%3A0xbac9cb210581c124!2sCOZY%20FUJI%20VIEW%20STAY%2C%20Japan%2C%20%E3%80%92401-0301%20Yamanashi%2C%20Fujikawaguchiko%2C%20Funatsu%2C%203571-5!3m2!1d35.4937897!2d138.7704896!4m5!1s0x60195f0e69acef3b%3A0x7748b4fa9ec63a21!2sCAFETINO%20MT.FUJI%2C%20Japan%2C%20%E3%80%92401-0302%20Yamanashi%2C%20Minamitsuru%20District%2C%20Fujikawaguchiko%2C%20Kodachi%2C%201167!3m2!1d35.508387899999995!2d138.7586991!4m5!1s0x601be77133534843%3A0xf2276f1961f4c8b8!2sFuji%20Shibazakura%20Festival%20Site%2C%20Motosu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0337%2C%20Japan!3m2!1d35.442776099999996!2d138.603815!4m5!1s0x601be7002eb095d1%3A0x230ed3acbf1e7ad3!2sLake%20Motosuko%20Parking%20Lot%20(North)%2C%20Motosu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0337%2C%20Japan!3m2!1d35.462963099999996!2d138.6029749!4m5!1s0x601bdae2e99682b9%3A0xf5427791c3135ca7!2sShiraito%20Falls%2C%20Kamiide%2C%20Fujinomiya%2C%20Shizuoka%20418-0103%2C%20Japan!3m2!1d35.312904599999996!2d138.5874375!4m5!1s0x601bddd2a5953fff%3A0x6cc6bee5a3c788d1!2z6YeR5bGx44OG44Op44K5LCBKYXBhbiwg44CSNDE4LTAxMDkgU2hpenVva2EsIEZ1amlub21peWEsIEZ1bW90bywgMTU1LTEz!3m2!1d35.4009438!2d138.5611528!4m5!1s0x60196fec8ed01c37%3A0xaea15f41d50a234a!2sHirano%20beach%2C%2013%20Hirano%2C%20Yamanakako%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0502%2C%20Japan!3m2!1d35.4247002!2d138.9008237!5e0!3m2!1sen!2ssg!4v1774790588279!5m2!1sen!2ssg",
+      "route_url": "https://www.google.com/maps/embed?pb=!1m52!1m12!1m3!1d104056.97130091328!2d138.58308749826003!3d35.41069456867295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m37!3e0!4m5!1s0x6019610066bb9b19%3A0xbac9cb210581c124!2sCOZY%20FUJI%20VIEW%20STAY%2C%20Japan%2C%20%E3%80%92401-0301%20Yamanashi%2C%20Fujikawaguchiko%2C%20Funatsu%2C%203571-5!3m2!1d35.4937897!2d138.7704896!4m5!1s0x60195f0e69acef3b%3A0x7748b4fa9ec63a21!2sCAFETINO%20MT.FUJI%2C%20Japan%2C%20%E3%80%92401-0302%20Yamanashi%2C%20Minamitsuru%20District%2C%20Fujikawaguchiko%2C%20Kodachi%2C%201167!3m2!1d35.508387899999995!2d138.7586991!4m5!1s0x601be7002eb095d1%3A0x230ed3acbf1e7ad3!2sLake%20Motosuko%20Parking%20Lot%20(North)%2C%20Motosu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0337%2C%20Japan!3m2!1d35.462963099999996!2d138.6029749!4m5!1s0x601bdae2e99682b9%3A0xf5427791c3135ca7!2sShiraito%20Falls%2C%20Kamiide%2C%20Fujinomiya%2C%20Shizuoka%20418-0103%2C%20Japan!3m2!1d35.312904599999996!2d138.5874375!4m5!1s0x601bddd2a5953fff%3A0x6cc6bee5a3c788d1!2z6YeR5bGx44OG44Op44K5LCBKYXBhbiwg44CSNDE4LTAxMDkgU2hpenVva2EsIEZ1amlub21peWEsIEZ1bW90bywgMTU1LTEz!3m2!1d35.4009438!2d138.5611528!4m5!1s0x601be77133534843%3A0xf2276f1961f4c8b8!2sFuji%20Shibazakura%20Festival%20Site%2C%20Motosu%2C%20Fujikawaguchiko%2C%20Minamitsuru%20District%2C%20Yamanashi%20401-0337%2C%20Japan!3m2!1d35.442776099999996!2d138.603815!5e0!3m2!1sen!2ssg!4v1774864839965!5m2!1sen!2ssg",
       "date": "2026-04-28"
     },
     {
@@ -640,21 +732,36 @@
       "tip": "",
       "stops": [
         {
-          "time": "Breakfast",
-          "name": "XX",
+          "name": "Breakfast",
+          "time": "Breakfast 7:30",
           "tags": "food",
+          "booked": null,
           "note": "",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
-          "options": []
+          "options": [
+            {
+              "name": "Haostay Coffee",
+              "note": "Opens 7am. The earliest option by far. Right near the station, cosy interiors, large windows, great coffee, waffles and peanut butter toast. Charging spots and wifi too. Perfect if you want to be out the door by 7:30am.",
+              "url": ""
+            },
+            {
+              "name": "enico.cafe & bar",
+              "note": "Opens 7am. Same neighbourhood as Haostay. The eggs benedict with onsen tamago-style eggs is a standout, excellent espresso (La Marzocco machine), minimalist cabin vibe. One of the best-reviewed breakfast spots in the area.",
+              "url": ""
+            }
+          ]
         },
         {
-          "time": "Lunch",
-          "name": "XX",
-          "tags": "food",
-          "note": "",
-          "maps_url": "",
-          "img_url": "",
+          "name": "Hirano Beach, Lake Yamanakako",
+          "time": "Morning 8:45",
+          "tags": "nature",
+          "booked": null,
+          "note": "45min drive. Morning is the best time here — clearest skies, calmest water, best chance of a Fuji reflection. Swans on the lake, wide open shoreline, free parking. It's peaceful and unhurried. Don't linger past 10am to keep the day on schedule.",
+          "maps_url": "https://maps.app.goo.gl/aDBt4DcS4Ytx8vD1A",
+          "parking_url": "https://maps.app.goo.gl/FTJWjwJgGkw8mJ7XA",
+          "img_url": "https://res.klook.com/image/upload/c_crop,h_801,w_1281,x_0,y_10,z_0.6/w_750,h_469,c_fill,q_85/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/fapdd70g3kelvddqtxtw.jpg",
           "options": []
         },
         {
@@ -663,6 +770,17 @@
           "tags": "",
           "note": "Save the receipt.",
           "maps_url": "",
+          "img_url": "",
+          "options": []
+        },
+        {
+          "name": "Japanese Dining Suzukiya",
+          "time": "Morning 11:30",
+          "tags": "food",
+          "booked": false,
+          "note": "The perfect send-off meal. Suzukiya does lunch Wed–Sun, 11:30am–1:30pm. A5 wagyu set, pressed sushi, unagi — the same quality as dinner at a fraction of the price point. Book in advance, it fills up. ⚠️ Closed Tuesdays, lunch only available Wed–Sun.",
+          "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         },
@@ -696,12 +814,14 @@
           "options": []
         },
         {
+          "name": "Zauo Fishing Restaurant",
           "time": "Dinner",
-          "name": "XX",
           "tags": "food",
-          "note": "",
-          "maps_url": "",
-          "img_url": "",
+          "booked": true,
+          "note": "Unique dinner right in the hotel — catch your own fish! Restaurant is right in the lobby of our hotel.<br>Reservation made for 5 pax at 7.30pm (Japan time).",
+          "maps_url": "https://maps.app.goo.gl/p1MgfuDgX6Zc1KiQA",
+          "parking_url": "",
+          "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAxz_Oq0h6i45GgS-p1rn5IKc1yhiQR9nweg&s",
           "options": []
         }
       ],
