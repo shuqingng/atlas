@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Japan Family Trip · April 2026</title>
-<link rel="icon" href="https://em-content.zobj.net/source/twitter/376/mount-fuji_26d4.png">
+<title>My Trips</title>
+<link rel="icon" href="https://em-content.zobj.net/source/twitter/376/world-map_1f5fa-fe0f.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -12,1552 +12,256 @@
     --ink: #1a1a18;
     --paper: #f5f0e8;
     --paper2: #ede7d9;
-    --red: #c0392b;
-    --red-light: #e8d5d2;
-    --green: #2d5a3d;
-    --green-light: #d4e4da;
-    --gold: #b8860b;
-    --gold-light: #f0e6c0;
-    --blue: #1a3a5c;
-    --blue-light: #d0dde8;
     --muted: #7a7060;
     --border: rgba(26,26,24,0.12);
     --shadow: 0 2px 20px rgba(26,26,24,0.08);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
-  a { color: var(--green); }
-  a:hover { color: var(--ink); }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; }
 
-  /* LOADING */
-  #loading-screen { position: fixed; inset: 0; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.6s ease; }
-  #loading-screen.fade-out { opacity: 0; pointer-events: none; }
-  .loading-kanji { font-family: 'Shippori Mincho', serif; font-size: 72px; color: rgba(255,255,255,0.08); margin-bottom: 24px; animation: pulse 2s ease-in-out infinite; }
-  .loading-text { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
-  .loading-dots { display: inline-flex; gap: 4px; margin-left: 8px; }
-  .loading-dots span { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.3); animation: dotBounce 1.2s ease-in-out infinite; }
-  .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-  .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-  /* ERROR */
-  #error-banner { display: none; background: #fdecea; border: 1px solid #f5c6c2; border-radius: 10px; padding: 16px 20px; margin: 24px 0; font-size: 14px; color: var(--red); line-height: 1.7; }
-  #error-banner strong { display: block; margin-bottom: 4px; font-size: 15px; }
-  #error-banner code { background: rgba(192,57,43,0.1); padding: 1px 5px; border-radius: 4px; font-family: monospace; }
-
-  /* HERO */
-  .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 24px; overflow: hidden; background: var(--ink); }
-  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(192,57,43,0.18) 0%, transparent 70%), radial-gradient(ellipse 60% 40% at 20% 20%, rgba(45,90,61,0.12) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 80% 10%, rgba(184,134,11,0.10) 0%, transparent 60%); }
-  .hero-mt-fuji { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 900px; max-width: 110vw; opacity: 0.06; }
-  .hero-kanji { font-family: 'Shippori Mincho', serif; font-size: clamp(64px,15vw,160px); color: rgba(255,255,255,0.04); position: absolute; right: 5%; top: 50%; transform: translateY(-50%); line-height: 1; writing-mode: vertical-rl; pointer-events: none; user-select: none; }
-  .hero-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s; }
-  .hero h1 { font-family: 'Shippori Mincho', serif; font-size: clamp(48px,10vw,110px); font-weight: 700; color: #fff; line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 8px; opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s; }
-  .hero h1 span { display: block; font-size: clamp(28px,5vw,56px); font-weight: 400; color: rgba(255,255,255,0.45); letter-spacing: 0.04em; margin-top: 12px; }
-  .hero-meta { display: flex; gap: 32px; margin-top: 40px; opacity: 0; animation: fadeUp 0.7s ease forwards 0.55s; flex-wrap: wrap; justify-content: center; }
-  .hero-meta-item { text-align: center; }
-  .hero-meta-item .num { font-family: 'Shippori Mincho', serif; font-size: 36px; color: #fff; line-height: 1; }
-  .hero-meta-item .lbl { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 4px; }
-  .hero-divider { width: 1px; height: 48px; background: rgba(255,255,255,0.15); align-self: center; }
-  .scroll-hint { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.3); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0; animation: fadeUp 0.6s ease forwards 1s; }
-  .scroll-arrow { width: 1px; height: 32px; background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent); animation: scrollPulse 1.8s ease-in-out infinite; }
-
-  /* NAV */
-  .nav-strip { position: sticky; top: 0; z-index: 100; background: rgba(245,240,232,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 0 24px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-  .nav-strip::-webkit-scrollbar { display: none; }
-  .nav-inner { display: flex; max-width: 1100px; margin: 0 auto; min-width: max-content; align-items: center; }
-  .nav-btn { padding: 14px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: var(--muted); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
-  .nav-btn:hover { color: var(--ink); }
-  .nav-btn.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
-  .nav-spacer { flex: 1; min-width: 16px; }
-  .edit-toggle-btn { display: flex; align-items: center; gap: 6px; padding: 7px 14px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--muted); background: var(--paper2); border: 1px solid var(--border); border-radius: 20px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; margin: 8px 0; }
-  .edit-toggle-btn:hover { color: var(--ink); border-color: rgba(26,26,24,0.3); }
-  .edit-toggle-btn.active { color: #fff; background: var(--ink); border-color: var(--ink); }
+  /* HEADER */
+  .site-header {
+    background: var(--ink);
+    padding: 64px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 20% 50%, rgba(192,57,43,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 80% 30%, rgba(45,90,61,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 60% 80%, rgba(184,134,11,0.10) 0%, transparent 60%);
+  }
+  .site-header-inner { position: relative; z-index: 1; }
+  .site-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); margin-bottom: 16px;
+  }
+  .site-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: 700; color: #fff; line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .site-sub {
+    margin-top: 14px; font-size: 14px; color: rgba(255,255,255,0.4); letter-spacing: 0.02em;
+  }
 
   /* MAIN */
-  .main { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+  .main { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
 
-  /* SECTIONS */
-  .page-section { display: none; padding-top: 60px; animation: sectionIn 0.4s ease; }
-  .page-section.active { display: block; }
-  .section-title { font-family: 'Shippori Mincho', serif; font-size: clamp(28px,4vw,40px); font-weight: 700; color: var(--ink); margin-bottom: 4px; }
-  .section-sub { font-size: 14px; color: var(--muted); line-height: 1.6; }
-
-  /* DATA SOURCE BADGE */
-  .source-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); background: var(--paper2); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; margin-top: 12px; }
-  .source-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #2d9a4e; flex-shrink: 0; animation: pulse 2s ease-in-out infinite; }
-  .source-badge.sheets .dot { background: #4285f4; }
-  .source-badge.local .dot { background: #2d9a4e; }
-
-  /* OVERVIEW */
-  .overview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 32px; }
-  .ov-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
-  .ov-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-  .ov-card.tokyo::before { background: var(--red); }
-  .ov-card.kawaguchiko::before { background: var(--green); }
-  .ov-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(26,26,24,0.12); }
-  .ov-badge { display: inline-flex; align-items: center; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; padding: 3px 8px; border-radius: 20px; margin-bottom: 12px; }
-  .ov-badge.tokyo { background: var(--red-light); color: var(--red); }
-  .ov-badge.kawaguchiko { background: var(--green-light); color: var(--green); }
-  .ov-day-num { font-size: 11px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px; }
-  .ov-title { font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 8px; line-height: 1.25; }
-  .ov-stops { font-size: 12px; color: var(--muted); line-height: 1.6; }
-
-  /* DAY */
-  .day-header { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 24px; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
-  .day-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-  .day-title { font-family: 'Shippori Mincho', serif; font-size: clamp(32px,5vw,52px); font-weight: 700; line-height: 1.1; color: var(--ink); }
-  .day-desc { font-size: 15px; color: var(--muted); line-height: 1.7; margin-top: 14px; max-width: 540px; }
-  .day-num-big { font-family: 'Shippori Mincho', serif; font-size: clamp(80px,12vw,140px); font-weight: 700; color: rgba(26,26,24,0.06); line-height: 1; text-align: right; user-select: none; flex-shrink: 0; }
-
-  /* TIMELINE */
-  .stop-row { display: grid; grid-template-columns: 90px 1px 1fr; gap: 0 24px; }
-  .stop-time-col { text-align: right; padding-top: 4px; padding-bottom: 32px; }
-  .stop-time { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-  .stop-line-col { display: flex; flex-direction: column; align-items: center; }
-  .stop-dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid; background: var(--paper); flex-shrink: 0; margin-top: 5px; }
-  .stop-connector { width: 1px; flex: 1; min-height: 20px; background: var(--border); margin: 4px 0; }
-  .stop-body { padding-bottom: 32px; }
-  .stop-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: row; align-items: stretch; position: relative; }
-  .stop-card:hover { transform: translateY(-2px); box-shadow: 0 6px 32px rgba(26,26,24,0.12); }
-  .stop-card-img { width: 140px; min-width: 140px; height: auto; object-fit: cover; display: block; background: var(--paper2); order: 2; }
-  .stop-card-img.errored { display: none; }
-  .stop-card-body { padding: 20px 24px; flex: 1; order: 1; }
-  @media (max-width: 600px) {
-    .stop-card { flex-direction: column; }
-    .stop-card-img { width: 100%; min-width: unset; max-height: 200px; object-fit: cover; order: 2; }
-    .stop-card-body { order: 1; }
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 28px;
   }
-  .stop-name { font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 8px; line-height: 1.3; }
-  .stop-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-  .tag { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
-  .tag-nature { background: var(--green-light); color: var(--green); }
-  .tag-mobility { background: var(--blue-light); color: var(--blue); }
-  .tag-culture { background: var(--gold-light); color: var(--gold); }
-  .tag-food { background: #fdecea; color: var(--red); }
-  .tag-transit { background: var(--paper2); color: var(--muted); }
-  .tag-flight { background: var(--paper2); color: var(--muted); }
-  .booked-badge { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
-  .booked-yes { background: var(--green-light); color: var(--green); }
-  .booked-no  { background: #fdecea; color: var(--red); }
-  .stop-note { font-size: 14px; color: var(--muted); line-height: 1.65; }
-  .maps-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; font-size: 12px; font-weight: 500; color: var(--green); text-decoration: none; background: var(--green-light); border: 1px solid var(--green-light); padding: 4px 10px; border-radius: 20px; transition: all 0.15s; margin-right: 6px; }
-  .maps-link:hover { background: var(--green); color: #fff; }
-  .maps-link-parking { color: var(--blue); background: var(--blue-light); border-color: var(--blue-light); }
-  .maps-link-parking:hover { background: var(--blue); color: #fff; }
-  .maps-link-ticket { color: var(--muted); background: var(--gold-light); border-color: var(--gold-light); }
-  .maps-link-ticket:hover { background: var(--muted); color: #fff; }
-  .maps-link-paper { color: var(--muted); background: var(--paper); border-color: var(--paper); }
-  .maps-link-paper:hover { background: var(--muted); color: var(--paper); border-color: var(--muted); }
-  .options-label { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin: 12px 0 7px; }
-  .options-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 4px; }
-  .option-row { display: flex; flex-direction: column; gap: 3px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
-  .option-row:last-child { border-bottom: none; }
-  .option-top { display: flex; align-items: center; gap: 8px; }
-  .option-or { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); background: var(--gold-light); padding: 2px 6px; border-radius: 6px; flex-shrink: 0; }
-  .option-name { font-size: 13px; font-weight: 500; color: var(--ink); flex: 1; }
-  .option-note { font-size: 12px; color: var(--muted); line-height: 1.5; }
-  .option-maps { font-size: 11px; font-weight: 500; color: var(--green); text-decoration: none; margin-top: 3px; display: inline-block; }
-  .option-maps:hover { text-decoration: underline; }
-
-  /* ACCOMS SECTION */
-  .accom-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 32px; }
-  .accom-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px; position: relative; }
-  .accom-dates { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-  .accom-name { font-family: 'Shippori Mincho', serif; font-size: 20px; font-weight: 700; color: var(--ink); line-height: 1.2; }
-  .accom-note { font-size: 13px; color: var(--muted); line-height: 1.6; }
-  .accom-edit-controls { display: none; position: absolute; top: 12px; right: 12px; gap: 4px; }
-  body.edit-mode .accom-edit-controls { display: flex; }
-  .accom-edit-controls button { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: #fff; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-  .accom-edit-controls button:hover { background: var(--paper2); }
-  .accom-edit-controls .btn-delete:hover { background: #fdecea; border-color: #f5c6c2; }
-  .add-accom-row { display: none; margin-top: 24px; }
-  body.edit-mode .add-accom-row { display: block; }
-  .btn-add-accom { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 13px; font-weight: 500; border-radius: 10px; border: 2px dashed var(--border); background: transparent; cursor: pointer; color: var(--muted); transition: all 0.2s; }
-  .btn-add-accom:hover { border-color: var(--ink); color: var(--ink); background: var(--paper2); }
-
-  /* DAY ACCOM BANNER */
-  .day-accom-banner { display: flex; align-items: center; gap: 16px; grid-column: 1 / -1; margin-top: 0; padding: 16px 20px; background: var(--paper2); border-radius: 12px; }
-  .day-accom-icon { font-size: 22px; flex-shrink: 0; }
-  .day-accom-info { flex: 1; }
-  .day-accom-label { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
-  .day-accom-name { font-family: 'Shippori Mincho', serif; font-size: 16px; font-weight: 700; color: var(--ink); }
-
-  /* DAY ROUTE MAP */
-  .day-route-map { margin-top: 40px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
-  .day-route-map iframe { display: block; width: 100%; height: 360px; border: none; }
-  @media (max-width: 600px) { .day-route-map iframe { height: 260px; } }
-
-  /* TIP */
-  .tip-box { margin-top: 40px; background: var(--ink); color: #fff; border-radius: 14px; padding: 24px 28px; display: flex; gap: 16px; align-items: flex-start; }
-  .tip-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; font-weight: 500; }
-  .tip-text { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.75); }
-
-  /* ESSENTIALS */
-  .essentials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 32px; }
-  .essential-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 24px; position: relative; }
-  .essential-card h3 { font-family: 'Shippori Mincho', serif; font-size: 16px; font-weight: 700; margin-bottom: 14px; color: var(--ink); }
-  .essential-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .essential-card li { font-size: 13px; color: var(--muted); padding-left: 16px; position: relative; line-height: 1.5; }
-  .essential-card li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
-  .essential-card li strong { color: var(--ink); font-weight: 500; }
-  .essential-card-edit-controls { display: none; position: absolute; top: 10px; right: 10px; gap: 4px; }
-  body.edit-mode .essential-card-edit-controls { display: flex; }
-  .essential-card-edit-controls button { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: #fff; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-  .essential-card-edit-controls button:hover { background: var(--paper2); }
-  .essential-card-edit-controls .btn-delete:hover { background: #fdecea; border-color: #f5c6c2; }
-  .add-essential-row { margin-top: 24px; display: none; }
-  body.edit-mode .add-essential-row { display: block; }
-  .btn-add-essential { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 13px; font-weight: 500; border-radius: 10px; border: 2px dashed var(--border); background: transparent; cursor: pointer; color: var(--muted); transition: all 0.2s; }
-  .btn-add-essential:hover { border-color: var(--ink); color: var(--ink); }
-  .essential-items-editor { display: flex; flex-direction: column; gap: 6px; }
-  .essential-item-row { display: flex; align-items: flex-start; gap: 6px; }
-  .essential-item-row textarea { flex: 1; }
-  .btn-remove-item { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: #fff; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; color: var(--muted); flex-shrink: 0; margin-top: 2px; transition: all 0.15s; }
-  .btn-remove-item:hover { background: #fdecea; border-color: #f5c6c2; }
-  .hero-edit-btn { position: absolute; top: 24px; right: 24px; z-index: 2; display: none; padding: 8px 16px; font-size: 12px; font-weight: 500; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
-  body.edit-mode .hero-edit-btn { display: block; }
-  .hero-edit-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
-
-  footer { background: var(--ink); color: rgba(255,255,255,0.4); text-align: center; padding: 32px 24px; font-size: 12px; letter-spacing: 0.05em; }
-
-  /* ── EDIT MODE ── */
-
-  /* Edit controls on stop cards */
-  .stop-edit-controls { display: none; position: absolute; top: 8px; right: 8px; z-index: 10; gap: 4px; }
-  body.edit-mode .stop-edit-controls { display: flex; }
-  .stop-edit-controls button { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: #fff; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-  .stop-edit-controls button:hover { background: var(--paper2); }
-  .stop-edit-controls .btn-delete:hover { background: #fdecea; border-color: #f5c6c2; }
-
-  /* Day section edit row */
-  .day-edit-row { display: none; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-  body.edit-mode .day-edit-row { display: flex; }
-  .day-edit-row button { display: flex; align-items: center; gap: 5px; padding: 6px 12px; font-size: 12px; font-weight: 500; border-radius: 8px; border: 1px solid var(--border); background: #fff; cursor: pointer; color: var(--muted); transition: all 0.15s; }
-  .day-edit-row button:hover { color: var(--ink); border-color: rgba(26,26,24,0.3); background: var(--paper2); }
-  .day-edit-row .btn-add-stop { color: var(--green); border-color: var(--green-light); background: var(--green-light); }
-  .day-edit-row .btn-add-stop:hover { background: var(--green); color: #fff; border-color: var(--green); }
-  .day-edit-row .btn-delete-day { color: var(--red); border-color: var(--red-light); }
-  .day-edit-row .btn-delete-day:hover { background: var(--red); color: #fff; border-color: var(--red); }
-
-  /* Add day button */
-  .add-day-row { display: none; margin-top: 60px; text-align: center; }
-  body.edit-mode .add-day-row { display: block; }
-  .btn-add-day { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; font-size: 14px; font-weight: 500; border-radius: 12px; border: 2px dashed var(--border); background: transparent; cursor: pointer; color: var(--muted); transition: all 0.2s; }
-  .btn-add-day:hover { border-color: var(--ink); color: var(--ink); background: var(--paper2); }
-
-  /* Stop reorder handles */
-  .stop-drag-handle { display: none; cursor: grab; color: var(--muted); font-size: 14px; padding: 2px 4px; margin-right: 4px; }
-  body.edit-mode .stop-drag-handle { display: inline; }
-
-  /* Drag-and-drop states */
-  .stop-row.dragging { opacity: 0.4; }
-  .stop-row.drag-over-above { border-top: 2px solid var(--green); }
-  .stop-row.drag-over-below { border-bottom: 2px solid var(--green); }
-
-  /* Edit floating action bar */
-  #edit-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: var(--ink); color: #fff; padding: 12px 24px; display: none; align-items: center; gap: 12px; flex-wrap: wrap; box-shadow: 0 -4px 24px rgba(0,0,0,0.18); }
-  body.edit-mode #edit-bar { display: flex; }
-  #edit-bar .bar-label { font-size: 13px; color: rgba(255,255,255,0.6); flex: 1; }
-  #edit-bar .bar-label strong { color: #fff; }
-  .bar-btn { padding: 8px 16px; font-size: 13px; font-weight: 500; border-radius: 8px; border: none; cursor: pointer; transition: all 0.15s; }
-  .bar-btn-export { background: var(--green); color: #fff; }
-  .bar-btn-export:hover { background: #245a32; }
-  .bar-btn-discard { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
-  .bar-btn-discard:hover { background: rgba(255,255,255,0.2); color: #fff; }
-  .bar-dirty-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex-shrink: 0; display: none; animation: pulse 2s ease-in-out infinite; }
-  body.has-changes #edit-bar .bar-dirty-dot { display: block; }
-  body.has-changes #edit-bar .bar-label::after { content: ' — unsaved changes'; color: var(--gold); }
-
-  /* MODAL */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,26,24,0.55); z-index: 500; align-items: center; justify-content: center; padding: 16px; }
-  .modal-overlay.open { display: flex; }
-  .modal { background: var(--paper); border-radius: 16px; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.25); }
-  .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 16px; border-bottom: 1px solid var(--border); }
-  .modal-title { font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 700; color: var(--ink); }
-  .modal-close { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: #fff; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: var(--muted); transition: all 0.15s; }
-  .modal-close:hover { background: var(--paper2); color: var(--ink); }
-  .modal-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; }
-  .form-group { display: flex; flex-direction: column; gap: 5px; }
-  .form-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-  .form-hint { font-size: 11px; color: var(--muted); margin-top: 2px; opacity: 0.7; }
-  .form-input, .form-textarea, .form-select { font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px; outline: none; transition: border-color 0.15s; width: 100%; }
-  .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--ink); }
-  .form-textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
-  .modal-footer { display: flex; gap: 8px; justify-content: flex-end; padding: 16px 24px; border-top: 1px solid var(--border); }
-  .modal-footer .btn-cancel { padding: 9px 18px; font-size: 13px; font-weight: 500; border-radius: 8px; border: 1px solid var(--border); background: #fff; cursor: pointer; color: var(--muted); transition: all 0.15s; }
-  .modal-footer .btn-cancel:hover { color: var(--ink); }
-  .modal-footer .btn-save { padding: 9px 18px; font-size: 13px; font-weight: 500; border-radius: 8px; border: none; background: var(--ink); color: #fff; cursor: pointer; transition: all 0.15s; }
-  .modal-footer .btn-save:hover { background: #2d2d2a; }
-
-  /* Migration banner */
-  #migration-banner { display: none; background: var(--gold-light); border: 1px solid var(--gold); border-radius: 10px; padding: 14px 18px; margin: 24px 0; font-size: 13px; color: var(--ink); line-height: 1.6; gap: 12px; align-items: flex-start; }
-  #migration-banner.show { display: flex; }
-  #migration-banner .mig-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-  #migration-banner .mig-text strong { display: block; font-size: 14px; margin-bottom: 4px; }
-  #migration-banner .mig-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-  .btn-mig-export { padding: 7px 14px; font-size: 12px; font-weight: 500; border-radius: 8px; border: none; background: var(--green); color: #fff; cursor: pointer; }
-  .btn-mig-dismiss { padding: 7px 14px; font-size: 12px; font-weight: 500; border-radius: 8px; border: 1px solid var(--border); background: #fff; cursor: pointer; color: var(--muted); }
-
-  /* Options editor (in modal) */
-  .options-editor { display: flex; flex-direction: column; gap: 8px; }
-  .option-editor-row { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px; position: relative; }
-  .option-editor-row-header { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
-  .option-editor-badge { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: var(--gold-light); color: var(--gold); padding: 2px 7px; border-radius: 6px; flex-shrink: 0; }
-  .option-editor-row .form-input, .option-editor-row .form-textarea { font-size: 13px; padding: 7px 10px; }
-  .option-editor-row .form-textarea { min-height: 52px; }
-  .btn-remove-option { margin-left: auto; width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--border); background: #fff; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; color: var(--muted); flex-shrink: 0; transition: all 0.15s; }
-  .btn-remove-option:hover { background: #fdecea; border-color: #f5c6c2; color: var(--red); }
-  .btn-add-option { display: flex; align-items: center; gap: 5px; padding: 8px 12px; font-size: 12px; font-weight: 500; border-radius: 8px; border: 1px dashed var(--border); background: transparent; cursor: pointer; color: var(--muted); transition: all 0.2s; width: 100%; justify-content: center; margin-top: 2px; }
-  .btn-add-option:hover { border-color: var(--ink); color: var(--ink); background: var(--paper2); }
-
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes sectionIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:0.7} }
-  @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
-  @keyframes dotBounce { 0%,80%,100%{transform:translateY(0);opacity:0.3} 40%{transform:translateY(-6px);opacity:1} }
-
-  @media (max-width: 600px) {
-    .stop-row { grid-template-columns: 64px 1px 1fr; gap: 0 12px; }
-    .day-header { grid-template-columns: 1fr; }
-    .day-num-big, .hero-kanji, .hero-divider { display: none; }
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted);
   }
+
+  /* TRIPS GRID */
+  .trips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  /* TRIP CARD */
+  .trip-card {
+    background: var(--ink);
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 24px rgba(26,26,24,0.15);
+    aspect-ratio: 3 / 2;
+  }
+  .trip-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,26,24,0.22); }
+
+  .trip-card-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+  }
+  /* Gradient overlay — always dark at bottom for readability */
+  .trip-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(26,26,24,0.25) 0%, rgba(26,26,24,0.75) 100%);
+  }
+
+  /* Mt Fuji SVG placeholder shown when no cover image */
+  .trip-card-fuji {
+    position: absolute; bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 120%; opacity: 0.12;
+  }
+
+  .trip-card-body {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 24px;
+  }
+  .trip-card-status {
+    position: absolute; top: 18px; left: 18px;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+    background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85);
+    padding: 4px 10px; border-radius: 20px; backdrop-filter: blur(4px);
+  }
+  .trip-card-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700; color: #fff; line-height: 1; letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .trip-card-subtitle {
+    font-size: 13px; color: rgba(255,255,255,0.6); letter-spacing: 0.03em;
+    margin-bottom: 16px;
+  }
+  .trip-card-meta {
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  }
+  .trip-card-chip {
+    font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px; padding: 4px 10px; backdrop-filter: blur(4px);
+  }
+
+  /* ADD TRIP CARD */
+  .trip-card-add {
+    background: transparent;
+    border: 2px dashed var(--border);
+    border-radius: 18px;
+    aspect-ratio: 3 / 2;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; color: var(--muted); cursor: default;
+    transition: all 0.2s;
+  }
+  .trip-card-add-icon { font-size: 28px; opacity: 0.4; }
+  .trip-card-add-label { font-size: 13px; font-weight: 500; }
+  .trip-card-add-hint { font-size: 11px; color: var(--muted); opacity: 0.6; text-align: center; max-width: 180px; line-height: 1.5; }
+
+  /* LOADING */
+  #loading { text-align: center; padding: 60px 0; color: var(--muted); font-size: 13px; letter-spacing: 0.1em; }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: rgba(255,255,255,0.25); text-align: center; padding: 28px 24px; font-size: 12px; letter-spacing: 0.05em; }
 </style>
 </head>
 <body>
 
-<div id="loading-screen">
-  <div class="loading-kanji">日本</div>
-  <div class="loading-text">Loading itinerary<span class="loading-dots"><span></span><span></span><span></span></span></div>
-</div>
-
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-kanji">日本</div>
-  <svg class="hero-mt-fuji" viewBox="0 0 900 300" fill="none">
-    <path d="M0 300 L200 300 L450 30 L700 300 L900 300Z" fill="white"/>
-    <path d="M380 80 L450 30 L520 80 L490 80 L450 55 L410 80Z" fill="white"/>
-  </svg>
-  <button class="hero-edit-btn" onclick="openTripModal()">✏️ Edit trip info</button>
-  <div style="position:relative;z-index:1">
-    <div class="hero-tag" id="hero-tag-text">Family Trip · 22 - 30 April 2026</div>
-    <h1 id="hero-title">Japan<span id="hero-subtitle">Tokyo & Kawaguchiko</span></h1>
-    <div class="hero-meta">
-      <div class="hero-meta-item"><div class="num" id="stat-days">8</div><div class="lbl">Days</div></div>
-      <div class="hero-divider"></div>
-      <div class="hero-meta-item"><div class="num" id="stat-people">5</div><div class="lbl">People</div></div>
-      <div class="hero-divider"></div>
-      <div class="hero-meta-item"><div class="num" id="stat-cities">2</div><div class="lbl">Cities</div></div>
-      <div class="hero-divider"></div>
-      <div class="hero-meta-item"><div class="num">∞</div><div class="lbl">Memories</div></div>
-    </div>
+<header class="site-header">
+  <div class="site-header-bg"></div>
+  <div class="site-header-inner">
+    <div class="site-eyebrow">Travel Journal</div>
+    <div class="site-title">My Trips</div>
+    <div class="site-sub">Every adventure, in one place</div>
   </div>
-  <div class="scroll-hint"><span>Scroll</span><div class="scroll-arrow"></div></div>
-</section>
-
-<nav class="nav-strip">
-  <div class="nav-inner" id="nav-inner">
-    <button class="nav-btn active" data-section="overview" onclick="showSection('overview')">Overview</button>
-    <button class="nav-btn" id="accoms-nav-btn" data-section="accoms" onclick="showSection('accoms')">Accoms</button>
-    <button class="nav-btn" id="essentials-nav-btn" data-section="essentials" onclick="showSection('essentials')">Essentials</button>
-    <div class="nav-spacer"></div>
-    <button class="edit-toggle-btn" id="edit-toggle" onclick="toggleEditMode()" title="Toggle edit mode">
-      <span>✏️</span> <span id="edit-toggle-label">Edit</span>
-    </button>
-  </div>
-</nav>
+</header>
 
 <main class="main">
-  <div id="error-banner"></div>
-
-  <div class="page-section active" id="sec-overview">
-    <div class="section-title">Your Journey</div>
-    <div id="source-badge-container"></div>
-    <div id="migration-banner">
-      <div class="mig-icon">📋</div>
-      <div class="mig-text">
-        <strong>Data loaded from Google Sheets</strong>
-        To store this itinerary in your git repo, export it as <code>data/itinerary.json</code> and commit the file.
-        <div class="mig-actions">
-          <button class="btn-mig-export" onclick="exportJSON()">⬇ Export itinerary.json</button>
-          <button class="btn-mig-dismiss" onclick="dismissMigration()">Dismiss</button>
-        </div>
-      </div>
-    </div>
-    <div class="overview-grid" id="overview-grid"></div>
+  <div class="section-header">
+    <div class="section-label" id="trips-count">Loading…</div>
   </div>
 
-  <div id="day-sections"></div>
-
-  <div class="add-day-row" id="add-day-row">
-    <button class="btn-add-day" onclick="openDayModal(null)">＋ Add Day</button>
-  </div>
-
-  <div class="page-section" id="sec-accoms">
-    <div class="section-title">Accommodations</div>
-    <p class="section-sub">Where you're staying each night.</p>
-    <div class="accom-grid" id="accom-grid"></div>
-    <div class="add-accom-row">
-      <button class="btn-add-accom" onclick="openAccomModal(null)">＋ Add accommodation</button>
-    </div>
-  </div>
-
-  <div class="page-section" id="sec-essentials">
-    <div class="section-title">Essentials & Tips</div>
-    <p class="section-sub">Everything the family needs to know before and during the trip.</p>
-    <div class="essentials-grid" id="essentials-grid"></div>
-    <div class="add-essential-row">
-      <button class="btn-add-essential" onclick="openEssentialModal(null)">＋ Add card</button>
-    </div>
-  </div>
+  <div id="loading">Loading trips…</div>
+  <div class="trips-grid" id="trips-grid" style="display:none"></div>
 </main>
 
-<footer>
-  <div id="footer-text">Japan Family Trip · April 2026</div>
-  <div style="margin-top:8px;font-size:11px;opacity:0.5">Made with love 🌸</div>
-</footer>
-
-<!-- Edit floating bar -->
-<div id="edit-bar">
-  <div class="bar-dirty-dot"></div>
-  <div class="bar-label"><strong>Edit Mode</strong></div>
-  <button class="bar-btn bar-btn-export" onclick="exportJSON()">⬇ Export itinerary.json</button>
-  <button class="bar-btn bar-btn-discard" onclick="discardChanges()">Discard changes</button>
-</div>
-
-<!-- Stop edit modal -->
-<div class="modal-overlay" id="stop-modal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="stop-modal-title">Edit Stop</div>
-      <button class="modal-close" onclick="closeModal('stop-modal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Stop Name</label>
-        <input class="form-input" id="f-stop-name" placeholder="e.g. Senso-ji Temple">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Time</label>
-        <input class="form-input" id="f-stop-time" placeholder="e.g. 09:00">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Tags</label>
-        <input class="form-input" id="f-stop-tags" placeholder="culture,nature (comma-separated)">
-        <div class="form-hint">Available: nature, mobility, culture, food, transit, flight</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Booking Status</label>
-        <select class="form-select" id="f-stop-booked">
-          <option value="">— not applicable —</option>
-          <option value="true">Booked</option>
-          <option value="false">Not booked</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Note</label>
-        <textarea class="form-textarea" id="f-stop-note" placeholder="Description or notes about this stop"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Google Maps URL</label>
-        <input class="form-input" id="f-stop-maps-url" type="url" placeholder="https://maps.google.com/...">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Parking Spot URL</label>
-        <input class="form-input" id="f-stop-parking-url" type="url" placeholder="https://maps.google.com/...">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Ticket URL</label>
-        <input class="form-input" id="f-stop-ticket-url" type="url" placeholder="https://...">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Image URL</label>
-        <input class="form-input" id="f-stop-image-url" type="url" placeholder="https://...">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Options / Alternatives</label>
-        <div class="options-editor" id="options-editor"></div>
-        <button type="button" class="btn-add-option" onclick="addOptionEditorRow()">＋ Add alternative</button>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal('stop-modal')">Cancel</button>
-      <button class="btn-save" onclick="saveStopModal()">Save Stop</button>
-    </div>
-  </div>
-</div>
-
-<!-- Accom edit modal -->
-<div class="modal-overlay" id="accom-modal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="accom-modal-title">Add Accommodation</div>
-      <button class="modal-close" onclick="closeModal('accom-modal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Name</label>
-        <input class="form-input" id="f-accom-name" placeholder="e.g. Shinjuku Washington Hotel">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Check-in Date</label>
-        <input class="form-input" id="f-accom-checkin" type="date">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Check-out Date</label>
-        <input class="form-input" id="f-accom-checkout" type="date">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Google Maps URL</label>
-        <input class="form-input" id="f-accom-maps-url" type="url" placeholder="https://maps.google.com/...">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Notes</label>
-        <textarea class="form-textarea" id="f-accom-note" placeholder="Room type, confirmation number, etc."></textarea>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal('accom-modal')">Cancel</button>
-      <button class="btn-save" onclick="saveAccomModal()">Save</button>
-    </div>
-  </div>
-</div>
-
-<!-- Day edit modal -->
-<div class="modal-overlay" id="day-modal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="day-modal-title">Edit Day</div>
-      <button class="modal-close" onclick="closeModal('day-modal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Day Label</label>
-        <input class="form-input" id="f-day-label" placeholder="e.g. Day 1 — Wednesday">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Date</label>
-        <input class="form-input" id="f-day-date" type="date">
-        <div class="form-hint">Used to automatically match tonight's accommodation.</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">City</label>
-        <select class="form-select" id="f-day-city">
-          <option value="tokyo">Tokyo</option>
-          <option value="kawaguchiko">Kawaguchiko</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Day Title</label>
-        <input class="form-input" id="f-day-title" placeholder="e.g. Arrival & First Steps">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Day Description</label>
-        <textarea class="form-textarea" id="f-day-desc" placeholder="Brief description of the day's theme or plan"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Planner's Tip</label>
-        <textarea class="form-textarea" id="f-day-tip" placeholder="Insider tip or logistic note for the day"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Route Map Embed URL</label>
-        <input class="form-input" id="f-day-route-url" type="text" placeholder="Embed URL or full &lt;iframe&gt; snippet from Google Maps">
-        <div class="form-hint">In Google Maps: Share → Embed a map — paste either the <code>src</code> URL only or the whole iframe HTML.</div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal('day-modal')">Cancel</button>
-      <button class="btn-save" onclick="saveDayModal()">Save Day</button>
-    </div>
-  </div>
-</div>
-
-<!-- Trip settings modal -->
-<div class="modal-overlay" id="trip-modal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Trip Settings</div>
-      <button class="modal-close" onclick="closeModal('trip-modal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Trip Type</label>
-        <input class="form-input" id="f-trip-type" placeholder="e.g. Family Trip">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Country / Destination</label>
-        <input class="form-input" id="f-trip-country" placeholder="e.g. Japan">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Subtitle (Cities)</label>
-        <input class="form-input" id="f-trip-subtitle" placeholder="e.g. Tokyo & Kawaguchiko">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Date Range</label>
-        <input class="form-input" id="f-trip-daterange" placeholder="e.g. 22 - 30 April 2026">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Number of People</label>
-        <input class="form-input" id="f-trip-people" type="number" min="1" placeholder="e.g. 5">
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal('trip-modal')">Cancel</button>
-      <button class="btn-save" onclick="saveTripModal()">Save</button>
-    </div>
-  </div>
-</div>
-
-<!-- Essential card modal -->
-<div class="modal-overlay" id="essential-modal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="essential-modal-title">Add Card</div>
-      <button class="modal-close" onclick="closeModal('essential-modal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Card Title</label>
-        <input class="form-input" id="f-essential-title" placeholder="e.g. 🌧️ Wet Weather Plan">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Items</label>
-        <div class="essential-items-editor" id="essential-items-editor"></div>
-        <button type="button" class="btn-add-option" onclick="addEssentialItemRow()" style="margin-top:6px">＋ Add item</button>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal('essential-modal')">Cancel</button>
-      <button class="btn-save" onclick="saveEssentialModal()">Save</button>
-    </div>
-  </div>
-</div>
+<footer>Made with love 🌸</footer>
 
 <script>
-// ════════════════════════════════════════════════════════════════════
-//  Config
-// ════════════════════════════════════════════════════════════════════
-const JSON_PATH = "data/itinerary.json";
-
-// Google Sheets fallback (used for migration if JSON file is empty)
-const SHEET_ID = "1G89SwoGeUxs-4qtoexkj0fIFfQ9Uj5_Ix4BhqW_sM10";
-const SHEET_TAB = "Itinerary (Raw)";
-
-const LS_KEY = "japan-trip-itinerary-v1";
-
-const TAG_LABELS = { nature:"🌿 Nature", mobility:"♿ Easy access", culture:"🎌 Culture", food:"🍜 Food", transit:"🚌 Transit", flight: "✈️ Flight" };
-const DOT_COLORS = { nature:"#2d5a3d", mobility:"#1a3a5c", culture:"#b8860b", food:"#c0392b", transit:"#7a7060", flight:"#7a7069" };
-
-const DEFAULT_TRIP_META = {
-  tripType: "Family Trip",
-  country: "Japan",
-  subtitle: "Tokyo & Kawaguchiko",
-  dateRange: "22 - 30 April 2026",
-  people: 5,
-};
-
-const DEFAULT_ESSENTIALS = [
-  { title: "🌧️ Kawaguchiko Wet Weather Plan", items: [
-    "<strong>Gotemba Premium Outlets</strong> — ~30–40 min from Kawaguchiko, with covered areas & cafes",
-    "<strong>Cafe Hopping</strong> — Cafe Troisieme Marche, Lake Bake Cafe, Shaw's Sushi Bar & Dining",
-    "<strong>Hakone</strong> — more indoor attractions and ropeways (eg Hakone Ropeway, Hakone Shrine, Hakone Yumoto Onsen)",
-    "<strong>Fuji Safari Park</strong> — if you have time, it's a fun day trip",
-  ]},
-  { title: "⚠️ Closed Days", items: [
-    "<strong>Shinjuku Gyoen</strong> — closed Mondays",
-    "<strong>Kubota Itchiku Art Museum</strong> — closed Tuesdays",
-    "<strong>Kawaguchiko Music Forest</strong> — closed Tuesdays & Wednesdays",
-    "Plan Kawaguchiko museum days on Thursday–Sunday to be safe",
-  ]},
-  { title: "🗻 Mt Fuji Visibility & Weather", items: [
-    "<strong>Visibility: </strong><a href='https://fuji-san.info/en/index.html'>SeeMtFuji</a>",
-    "<strong>Yamanashi Weather: </strong><a href='https://www.jma.go.jp/bosai/forecast/#area_type=class20s&area_code=1943000&lang=en'>Japan Meteorological Agency</a>",
-    "<strong>AccuWeather: </strong><a href='https://www.accuweather.com/en/jp/kawaguchiko-108/1314114/weather-forecast/1314114'>Kawaguchiko</a>",
-  ]},
-  { title: "🌸 Late April Weather", items: [
-    "<strong>Temperature:</strong> 15–22°C — bring a light layer",
-    "<strong>Rain:</strong> Light showers possible; pack a compact umbrella each",
-    "<strong>Fuji views:</strong> Clearest before 11am — prioritise morning viewpoints",
-    "<strong>Flowers:</strong> Wisteria peaks in late April; fresh green foliage everywhere",
-    "Post-cherry blossom = fewer tourists at most spots",
-  ]},
-  { title: "🚌 Getting Around", items: [
-    "<strong>IC Card:</strong> Get Suica or Pasmo at the airport",
-    "<strong>Water bus:</strong> Hamarikyu → Asakusa, 40 min, fully scenic",
-    "<strong>Kawaguchiko:</strong> Rental car is essential for flexibility",
-    "<strong>Highway bus:</strong> Shinjuku Bus Terminal → Kawaguchiko (~2 hrs)",
-  ]},
-  { title: "🍜 Food to Try", items: [
-    "<strong>Hōtō noodles</strong> — Yamanashi's thick miso noodle soup; essential in Kawaguchiko",
-    "<strong>Soba</strong> — especially at Oshino Hakkai's thatched-roof restaurants",
-    "<strong>Matcha & wagashi</strong> — at Hamarikyu's Nakajima Teahouse",
-    "<strong>Tempura</strong> — classic Tokyo dinner in Asakusa's backstreets",
-    "<strong>Lavender ice cream</strong> — at Oishi Park's lakeside café",
-  ]},
-];
-
-// ════════════════════════════════════════════════════════════════════
-//  App state
-// ════════════════════════════════════════════════════════════════════
-let state = {
-  days: [],          // array of day objects
-  accoms: [],        // array of accommodation objects
-  essentials: [],    // array of { title, items[] }
-  tripMeta: { ...DEFAULT_TRIP_META },
-  editMode: false,
-  dirty: false,
-  dataSource: null,  // 'json' | 'sheets' | 'localstorage'
-};
-
-// ════════════════════════════════════════════════════════════════════
-//  Data loading
-// ════════════════════════════════════════════════════════════════════
-async function loadData() {
-  // 1. Try localStorage first (draft changes)
-  const lsRaw = localStorage.getItem(LS_KEY);
-  if (lsRaw) {
-    try {
-      const parsed = JSON.parse(lsRaw);
-      if (parsed && Array.isArray(parsed.days) && parsed.days.length > 0) {
-        state.days = parsed.days;
-        state.accoms = parsed.accoms || [];
-        state.essentials = parsed.essentials || DEFAULT_ESSENTIALS;
-        state.tripMeta = parsed.tripMeta || { ...DEFAULT_TRIP_META };
-        normalizeAllOptions();
-        state.dataSource = 'localstorage';
-        state.dirty = true;
-        return;
-      }
-    } catch(e) { /* ignore */ }
-  }
-
-  // 2. Try local JSON file
+async function loadTrips() {
+  let trips = [];
   try {
-    const res = await fetch(JSON_PATH + "?t=" + Date.now());
-    if (res.ok) {
-      const data = await res.json();
-      if (data && Array.isArray(data.days) && data.days.length > 0) {
-        state.days = data.days;
-        state.accoms = data.accoms || [];
-        state.essentials = data.essentials || DEFAULT_ESSENTIALS;
-        state.tripMeta = data.tripMeta || { ...DEFAULT_TRIP_META };
-        normalizeAllOptions();
-        state.dataSource = 'json';
-        return;
-      }
+    const res = await fetch("trips.json?t=" + Date.now());
+    if (res.ok) trips = await res.json();
+  } catch(e) { /* ignore */ }
+  render(trips);
+}
+
+function statusLabel(status) {
+  const map = { upcoming: "Upcoming", past: "Past", planning: "Planning" };
+  return map[status] || status || "";
+}
+
+function buildPaletteGradient(palette) {
+  if (!palette || !palette.length) return "linear-gradient(135deg, #1a1a18 0%, #2d2d2a 100%)";
+  const c = palette;
+  return `radial-gradient(ellipse 80% 70% at 20% 80%, ${c[0]}55 0%, transparent 60%),
+          radial-gradient(ellipse 60% 60% at 80% 20%, ${c[1] || c[0]}44 0%, transparent 60%),
+          radial-gradient(ellipse 50% 50% at 50% 50%, ${c[2] || c[0]}33 0%, transparent 70%),
+          linear-gradient(135deg, #1a1a18 0%, #2a2a26 100%)`;
+}
+
+function render(trips) {
+  document.getElementById("loading").style.display = "none";
+  const grid = document.getElementById("trips-grid");
+  grid.style.display = "grid";
+  document.getElementById("trips-count").textContent =
+    trips.length === 1 ? "1 trip" : `${trips.length} trips`;
+
+  trips.forEach(t => {
+    const a = document.createElement("a");
+    a.className = "trip-card";
+    a.href = t.path;
+
+    const bg = document.createElement("div");
+    bg.className = "trip-card-bg";
+    if (t.coverImage) {
+      bg.style.backgroundImage = `url('${t.coverImage}')`;
+    } else {
+      bg.style.background = buildPaletteGradient(t.palette);
+      // Mt Fuji SVG for trips without a photo
+      const fuji = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      fuji.setAttribute("class", "trip-card-fuji");
+      fuji.setAttribute("viewBox", "0 0 900 300");
+      fuji.setAttribute("fill", "none");
+      fuji.innerHTML = `<path d="M0 300 L200 300 L450 30 L700 300 L900 300Z" fill="white"/>
+        <path d="M380 80 L450 30 L520 80 L490 80 L450 55 L410 80Z" fill="white"/>`;
+      bg.appendChild(fuji);
     }
-  } catch(e) { /* file not found or empty, fall through */ }
 
-  // 3. Fallback: fetch from Google Sheets
-  await loadFromSheets();
-}
+    const overlay = document.createElement("div");
+    overlay.className = "trip-card-overlay";
 
-async function loadFromSheets() {
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(SHEET_TAB)}`;
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const txt = await res.text();
-    const json = JSON.parse(txt.replace(/^[^(]*\(/, "").replace(/\);\s*$/, ""));
-    const rows = parseGviz(json);
-    state.days = groupByDay(rows);
-    state.essentials = DEFAULT_ESSENTIALS;
-    state.tripMeta = { ...DEFAULT_TRIP_META };
-    normalizeAllOptions();
-    state.dataSource = 'sheets';
-  } catch(e) {
-    showError(`<strong>⚠️ Could not load itinerary</strong>
-      The <code>data/itinerary.json</code> file is empty and the Google Sheets fallback failed.<br><br>
-      Please either:<br>
-      1. Populate <code>data/itinerary.json</code> with your itinerary data, or<br>
-      2. Check your Google Sheets connection (make sure the sheet is shared publicly).<br>
-      <small style="opacity:0.6">Error: ${e.message}</small>`);
-    hideLoading();
-  }
-}
+    const body = document.createElement("div");
+    body.className = "trip-card-body";
 
-function parseGviz(json) {
-  const cols = json.table.cols.map(c => c.label.trim().toLowerCase().replace(/\s+/g, "_"));
-  return json.table.rows
-    .filter(r => r && r.c && r.c[0] && r.c[0].v !== null)
-    .map(row => {
-      const obj = {};
-      row.c.forEach((cell, i) => { obj[cols[i]] = cell ? (cell.v !== null ? String(cell.v).trim() : "") : ""; });
-      return obj;
-    });
-}
+    const chips = [
+      t.dateRange && `<span class="trip-card-chip">${t.dateRange}</span>`,
+      t.people    && `<span class="trip-card-chip">${t.people} people</span>`,
+      t.tripType  && `<span class="trip-card-chip">${t.tripType}</span>`,
+    ].filter(Boolean).join("");
 
-function groupByDay(rows) {
-  const map = {};
-  rows.forEach(r => {
-    const n = r.day_number;
-    if (!map[n]) map[n] = {
-      num: n,
-      label: r.day_label || `Day ${n}`,
-      city: (r.city || "tokyo").toLowerCase(),
-      title: r.day_title || "",
-      desc: r.day_description || "",
-      tip: r.day_tip || "",
-      stops: []
-    };
-    if (r.stop_name) map[n].stops.push({
-      time: r.stop_time || "",
-      name: r.stop_name || "",
-      tags: r.stop_tags || "",
-      note: r.stop_note || "",
-      maps_url: r.stop_maps_url || "",
-      img_url: r.stop_image_url || "",
-      options: normalizeOptions(r.stop_options || "", r.stop_option_notes || "", r.stop_option_urls || ""),
-    });
+    body.innerHTML = `
+      ${t.status ? `<div class="trip-card-status">${statusLabel(t.status)}</div>` : ""}
+      <div class="trip-card-title">${t.title}</div>
+      ${t.subtitle ? `<div class="trip-card-subtitle">${t.subtitle}</div>` : ""}
+      ${chips ? `<div class="trip-card-meta">${chips}</div>` : ""}
+    `;
+
+    a.appendChild(bg);
+    a.appendChild(overlay);
+    a.appendChild(body);
+    grid.appendChild(a);
   });
-  return Object.values(map).sort((a, b) => Number(a.num) - Number(b.num));
+
+  // "Add trip" placeholder
+  const add = document.createElement("div");
+  add.className = "trip-card-add";
+  add.innerHTML = `
+    <div class="trip-card-add-icon">＋</div>
+    <div class="trip-card-add-label">Add a trip</div>
+    <div class="trip-card-add-hint">Create a new folder under trips/ and add it to trips.json</div>
+  `;
+  grid.appendChild(add);
 }
 
-// ════════════════════════════════════════════════════════════════════
-//  Persistence
-// ════════════════════════════════════════════════════════════════════
-function persistToLS() {
-  localStorage.setItem(LS_KEY, JSON.stringify({ days: state.days, accoms: state.accoms, essentials: state.essentials, tripMeta: state.tripMeta, ts: Date.now() }));
-  state.dirty = true;
-  document.body.classList.add("has-changes");
-}
-
-function clearLS() {
-  localStorage.removeItem(LS_KEY);
-  state.dirty = false;
-  document.body.classList.remove("has-changes");
-}
-
-// ════════════════════════════════════════════════════════════════════
-//  Export
-// ════════════════════════════════════════════════════════════════════
-function exportJSON() {
-  const payload = {
-    _comment: "Generated by the Japan Trip itinerary editor. Edit via the webpage or directly in this file.",
-    tripMeta: state.tripMeta,
-    days: state.days,
-    accoms: state.accoms,
-    essentials: state.essentials,
-  };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "itinerary.json";
-  a.click();
-  URL.revokeObjectURL(a.href);
-  // After export, offer to clear the LS draft
-  if (state.dirty) {
-    clearLS();
-    document.body.classList.remove("has-changes");
-  }
-  dismissMigration();
-}
-
-function discardChanges() {
-  if (!confirm("Discard all unsaved changes and reload from the saved file?")) return;
-  clearLS();
-  window.location.reload();
-}
-
-function dismissMigration() {
-  document.getElementById("migration-banner").classList.remove("show");
-}
-
-// ════════════════════════════════════════════════════════════════════
-//  Edit mode
-// ════════════════════════════════════════════════════════════════════
-function toggleEditMode() {
-  state.editMode = !state.editMode;
-  document.body.classList.toggle("edit-mode", state.editMode);
-  const btn = document.getElementById("edit-toggle");
-  const lbl = document.getElementById("edit-toggle-label");
-  btn.classList.toggle("active", state.editMode);
-  lbl.textContent = state.editMode ? "Done" : "Edit";
-}
-
-// ════════════════════════════════════════════════════════════════════
-//  Render
-// ════════════════════════════════════════════════════════════════════
-function dotColor(tags) {
-  const t = (tags || "").split(",")[0].trim();
-  return DOT_COLORS[t] || "#7a7060";
-}
-
-function renderAll() {
-  updateHeroStats();
-  renderHeroMeta();
-  renderSourceBadge();
-  renderNav();
-  renderOverview();
-  renderDays();
-  renderAccoms();
-  renderEssentials();
-  if (state.dataSource === 'sheets') {
-    document.getElementById("migration-banner").classList.add("show");
-  }
-  if (state.dirty) {
-    document.body.classList.add("has-changes");
-  }
-}
-
-function updateHeroStats() {
-  const days = state.days;
-  document.getElementById("stat-days").textContent = days.length;
-  const cities = new Set(days.map(d => d.city)).size;
-  document.getElementById("stat-cities").textContent = cities;
-}
-
-function renderHeroMeta() {
-  const m = state.tripMeta;
-  document.title = `${m.country} ${m.tripType} · ${m.dateRange}`;
-  document.getElementById("hero-tag-text").textContent = `${m.tripType} · ${m.dateRange}`;
-  const h1 = document.getElementById("hero-title");
-  h1.firstChild.textContent = m.country;
-  document.getElementById("hero-subtitle").textContent = m.subtitle;
-  document.getElementById("stat-people").textContent = m.people;
-  document.getElementById("footer-text").textContent = `${m.country} ${m.tripType} · ${m.dateRange}`;
-}
-
-function renderSourceBadge() {
-  const c = document.getElementById("source-badge-container");
-  const labels = {
-    json: '<span class="dot"></span> Stored in repo — edit the page or <code>data/itinerary.json</code>',
-    sheets: '<span class="dot"></span> Loaded from Google Sheets (migration mode)',
-    localstorage: '<span class="dot"></span> Unsaved local draft — export to save to repo',
-  };
-  const classes = { json: 'local', sheets: 'sheets', localstorage: 'local' };
-  const src = state.dataSource || 'json';
-  c.innerHTML = `<div class="source-badge ${classes[src]}">${labels[src] || ''}</div>`;
-}
-
-function renderNav() {
-  const nav = document.getElementById("nav-inner");
-  const essBtn = document.getElementById("essentials-nav-btn");
-  const editBtn = document.getElementById("edit-toggle");
-  // Remove previously added day nav buttons
-  nav.querySelectorAll(".day-nav-btn").forEach(b => b.remove());
-  state.days.forEach(d => {
-    const btn = document.createElement("button");
-    btn.className = "nav-btn day-nav-btn";
-    btn.textContent = d.label;
-    btn.dataset.section = `day${d.num}`;
-    btn.onclick = () => showSection(`day${d.num}`);
-    nav.insertBefore(btn, essBtn);
-  });
-}
-
-function renderOverview() {
-  const grid = document.getElementById("overview-grid");
-  grid.innerHTML = "";
-  state.days.forEach(d => {
-    const preview = d.stops.slice(0, 3).map(s => s.name).join(" · ");
-    const el = document.createElement("div");
-    el.className = `ov-card ${d.city}`;
-    el.onclick = () => showSection(`day${d.num}`);
-    el.innerHTML = `<div class="ov-badge ${d.city}">${d.city === "tokyo" ? "🗼 Tokyo" : "🗻 Kawaguchiko"}</div>
-      <div class="ov-day-num">${d.label}</div>
-      <div class="ov-title">${escHtml(d.title)}</div>
-      <div class="ov-stops">${escHtml(preview)}</div>`;
-    grid.appendChild(el);
-  });
-}
-
-function renderDays() {
-  const container = document.getElementById("day-sections");
-  container.innerHTML = "";
-  state.days.forEach((d, di) => {
-    const numStr = String(d.num).padStart(2, "0");
-    const stopsHtml = d.stops.map((s, si) => buildStopHtml(d, s, si, si === d.stops.length - 1)).join("");
-    const routeEmbed = normalizeGoogleMapsEmbedUrl(d.route_url);
-
-    const sec = document.createElement("div");
-    sec.className = "page-section";
-    sec.id = `sec-day${d.num}`;
-    const accomBannerHtml = (() => { const a = getAccomForDay(d.date); return a ? `<div class="day-accom-banner"><div class="day-accom-icon">🏡</div><div class="day-accom-info"><div class="day-accom-label">Tonight's stay</div><div class="day-accom-name">${escHtml(a.name)}</div></div>${a.maps_url ? `<a class="maps-link maps-link-paper" href="${escAttr(a.maps_url)}" target="_blank" rel="noopener" style="flex-shrink:0">Maps</a>` : ""}</div>` : ""; })();
-    sec.innerHTML = `
-      <div class="day-header">
-        <div>
-          <div class="day-eyebrow">${escHtml(d.label)} · ${d.city === "tokyo" ? "Tokyo" : "Kawaguchiko"}</div>
-          <div class="day-title">${escHtml(d.title)}</div>
-          <div class="day-desc">${renderNote(d.desc)}</div>
-          <div class="day-edit-row">
-            <button onclick="openDayModal(${di})">✏️ Edit day info</button>
-            <button class="btn-add-stop" onclick="openStopModal(${di}, null)">＋ Add stop</button>
-            <button class="btn-delete-day" onclick="deleteDay(${di})">🗑 Delete day</button>
-          </div>
-        </div>
-        <div class="day-num-big">${numStr}</div>
-        ${accomBannerHtml}
-      </div>
-      <div class="stops-grid" id="stops-${di}">${stopsHtml}</div>
-      ${routeEmbed ? `<div class="day-route-map"><iframe src="${escAttr(routeEmbed)}" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>` : ""}
-      ${d.tip ? `<div class="tip-box"><div style="font-size:20px;flex-shrink:0">✦</div><div><div class="tip-label">Planner's tip</div><div class="tip-text">${escHtml(d.tip)}</div></div></div>` : ""}`;
-    container.appendChild(sec);
-  });
-}
-
-function buildStopHtml(d, s, si, isLast) {
-  const di = state.days.indexOf(d);
-  const tagHtml = (s.tags || "").split(",").map(t => t.trim()).filter(Boolean)
-    .map(t => `<span class="tag tag-${t}">${TAG_LABELS[t] || t}</span>`).join("");
-  const dc = dotColor(s.tags);
-
-  const opts = Array.isArray(s.options) ? s.options : normalizeOptions(s.options || "", s.option_notes || "", s.option_urls || "");
-  let optionsHtml = "";
-  if (opts.length > 0) {
-    const rows = opts.map((opt, i) => `
-      <div class="option-row">
-        <div class="option-top">
-          ${i > 0 ? '<span class="option-or">or</span>' : ''}
-          <div class="option-name">${escHtml(opt.name)}</div>
-        </div>
-        ${opt.note ? `<div class="option-note">${renderNote(opt.note)}</div>` : ""}
-        ${opt.url  ? `<a class="option-maps" href="${escAttr(opt.url)}" target="_blank" rel="noopener">📍 Maps</a>` : ""}
-      </div>`).join("");
-    optionsHtml = `<div class="options-label">Options</div><div class="options-list">${rows}</div>`;
-  }
-
-  return `<div class="stop-row" id="stop-row-${di}-${si}" draggable="false"
-      ondragstart="stopDragStart(event,${di},${si})"
-      ondragover="stopDragOver(event,${di},${si})"
-      ondrop="stopDrop(event,${di},${si})"
-      ondragend="stopDragEnd(event)">
-    <div class="stop-time-col"><div class="stop-time">${escHtml(s.time)}</div></div>
-    <div class="stop-line-col">
-      <div class="stop-dot" style="border-color:${dc}"></div>
-      ${!isLast ? '<div class="stop-connector"></div>' : ""}
-    </div>
-    <div class="stop-body"><div class="stop-card">
-      <div class="stop-edit-controls">
-        <span class="stop-drag-handle" title="Drag to reorder" onmousedown="enableDrag(event)">⠿</span>
-        <button class="btn-edit" title="Edit stop" onclick="openStopModal(${di},${si})">✏️</button>
-        <button class="btn-delete" title="Delete stop" onclick="deleteStop(${di},${si})">🗑</button>
-      </div>
-      <div class="stop-card-body">
-        <div class="stop-name">${escHtml(s.name)}</div>
-        ${tagHtml || s.booked !== null && s.booked !== undefined ? `<div class="stop-tags">${tagHtml}${s.booked === true ? '<span class="booked-badge booked-yes">✓ Booked</span>' : s.booked === false ? '<span class="booked-badge booked-no">✗ Not booked</span>' : ''}</div>` : ""}
-        <div class="stop-note">${renderNote(s.note)}</div>
-        ${s.maps_url ? `<a class="maps-link" href="${escAttr(s.maps_url)}" target="_blank" rel="noopener">📍 Open in Maps</a>` : ""}
-        ${s.parking_url ? `<a class="maps-link maps-link-parking" href="${escAttr(s.parking_url)}" target="_blank" rel="noopener">🅿️ Parking</a>` : ""}
-        ${s.ticket_url ? `<a class="maps-link maps-link-ticket" href="${escAttr(s.ticket_url)}" target="_blank" rel="noopener">🎫 Tickets</a>` : ""}
-        ${optionsHtml}
-      </div>
-      ${s.img_url ? `<img class="stop-card-img" src="${escAttr(s.img_url)}" alt="${escAttr(s.name)}" loading="lazy" onerror="this.classList.add('errored')">` : ""}
-    </div></div>
-  </div>`;
-}
-
-function renderEssentials() {
-  const grid = document.getElementById("essentials-grid");
-  if (!grid) return;
-  const essentials = state.essentials || [];
-  if (essentials.length === 0) {
-    grid.innerHTML = `<p style="color:var(--muted);font-size:14px">No essential cards yet. Enter edit mode to add one.</p>`;
-    return;
-  }
-  grid.innerHTML = essentials.map((card, ei) => `
-    <div class="essential-card">
-      <div class="essential-card-edit-controls">
-        <button title="Move up" onclick="moveEssential(${ei}, -1)">↑</button>
-        <button title="Move down" onclick="moveEssential(${ei}, 1)">↓</button>
-        <button title="Edit" onclick="openEssentialModal(${ei})">✏️</button>
-        <button class="btn-delete" title="Delete" onclick="deleteEssential(${ei})">🗑</button>
-      </div>
-      <h3>${escHtml(card.title)}</h3>
-      <ul>${(card.items || []).map(item => `<li>${item}</li>`).join("")}</ul>
-    </div>`).join("");
-}
-
-// Re-render just the stops grid for a given day index
-function rerenderDayStops(di) {
-  const d = state.days[di];
-  const container = document.getElementById(`stops-${di}`);
-  if (!container) { renderAll(); return; } // fallback full re-render
-  container.innerHTML = d.stops.map((s, si) => buildStopHtml(d, s, si, si === d.stops.length - 1)).join("");
-  // Also refresh overview card
-  renderOverview();
-}
-
-// ════════════════════════════════════════════════════════════════════
-//  Navigation
-// ════════════════════════════════════════════════════════════════════
-function showSection(id) {
-  document.querySelectorAll(".page-section").forEach(s => s.classList.remove("active"));
-  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
-  const sec = document.getElementById(`sec-${id}`);
-  if (sec) sec.classList.add("active");
-  const btn = document.querySelector(`.nav-btn[data-section="${id}"]`);
-  if (btn) { btn.classList.add("active"); btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" }); }
-  window.scrollTo({ top: document.querySelector(".nav-strip").offsetTop, behavior: "smooth" });
-}
-
-// ════════════════════════════════════════════════════════════════════
-//  CRUD operations
-// ════════════════════════════════════════════════════════════════════
-
-// --- Stop modal ---
-let _stopCtx = null; // { di, si } or { di, si: null } for new
-
-function openStopModal(di, si) {
-  _stopCtx = { di, si };
-  const isNew = si === null;
-  document.getElementById("stop-modal-title").textContent = isNew ? "Add Stop" : "Edit Stop";
-  const s = isNew ? {} : state.days[di].stops[si];
-  document.getElementById("f-stop-name").value     = s.name     || "";
-  document.getElementById("f-stop-time").value     = s.time     || "";
-  document.getElementById("f-stop-tags").value     = s.tags     || "";
-  document.getElementById("f-stop-booked").value   = s.booked === true ? "true" : s.booked === false ? "false" : "";
-  document.getElementById("f-stop-note").value     = s.note     || "";
-  document.getElementById("f-stop-maps-url").value    = s.maps_url    || "";
-  document.getElementById("f-stop-parking-url").value = s.parking_url || "";
-  document.getElementById("f-stop-ticket-url").value  = s.ticket_url  || "";
-  document.getElementById("f-stop-image-url").value   = s.img_url     || "";
-  // Populate options editor
-  const opts = Array.isArray(s.options) ? s.options : normalizeOptions(s.options || "", s.option_notes || "", s.option_urls || "");
-  const editor = document.getElementById("options-editor");
-  editor.innerHTML = "";
-  opts.forEach(opt => addOptionEditorRow(opt));
-  openModal("stop-modal");
-}
-
-function saveStopModal() {
-  if (!_stopCtx) return;
-  const { di, si } = _stopCtx;
-  const stop = {
-    name:     document.getElementById("f-stop-name").value.trim(),
-    time:     document.getElementById("f-stop-time").value.trim(),
-    tags:     document.getElementById("f-stop-tags").value.trim(),
-    booked:   (() => { const v = document.getElementById("f-stop-booked").value; return v === "true" ? true : v === "false" ? false : null; })(),
-    note:     document.getElementById("f-stop-note").value.trim(),
-    maps_url:    document.getElementById("f-stop-maps-url").value.trim(),
-    parking_url: document.getElementById("f-stop-parking-url").value.trim(),
-    ticket_url:  document.getElementById("f-stop-ticket-url").value.trim(),
-    img_url:     document.getElementById("f-stop-image-url").value.trim(),
-    options:  getOptionsFromEditor(),
-  };
-  if (!stop.name) { alert("Stop name is required."); return; }
-  if (si === null) {
-    state.days[di].stops.push(stop);
-  } else {
-    state.days[di].stops[si] = stop;
-  }
-  persistToLS();
-  rerenderDayStops(di);
-  closeModal("stop-modal");
-}
-
-function deleteStop(di, si) {
-  if (!confirm(`Delete stop "${state.days[di].stops[si].name}"?`)) return;
-  state.days[di].stops.splice(si, 1);
-  persistToLS();
-  rerenderDayStops(di);
-}
-
-// --- Stop drag-and-drop reordering ---
-let _drag = null; // { di, si }
-
-function enableDrag(e) {
-  // Make the parent stop-row draggable on mousedown of the handle
-  const row = e.currentTarget.closest(".stop-row");
-  if (row) row.draggable = true;
-}
-
-function stopDragStart(e, di, si) {
-  if (!state.editMode) { e.preventDefault(); return; }
-  _drag = { di, si };
-  e.currentTarget.classList.add("dragging");
-  e.dataTransfer.effectAllowed = "move";
-}
-
-function stopDragOver(e, di, si) {
-  if (!_drag || (_drag.di === di && _drag.si === si)) return;
-  if (_drag.di !== di) return; // only reorder within same day
-  e.preventDefault();
-  e.dataTransfer.dropEffect = "move";
-  const row = e.currentTarget;
-  // Determine if cursor is in upper or lower half
-  const rect = row.getBoundingClientRect();
-  const mid = rect.top + rect.height / 2;
-  document.querySelectorAll(".stop-row").forEach(r => r.classList.remove("drag-over-above", "drag-over-below"));
-  row.classList.add(e.clientY < mid ? "drag-over-above" : "drag-over-below");
-}
-
-function stopDrop(e, di, si) {
-  if (!_drag || _drag.di !== di) return;
-  e.preventDefault();
-  const from = _drag.si;
-  const row = e.currentTarget;
-  const rect = row.getBoundingClientRect();
-  const mid = rect.top + rect.height / 2;
-  let to = e.clientY < mid ? si : si + 1;
-  // Adjust for removal offset
-  if (from < to) to--;
-  if (from === to) return;
-  const stops = state.days[di].stops;
-  const [moved] = stops.splice(from, 1);
-  stops.splice(to, 0, moved);
-  persistToLS();
-  rerenderDayStops(di);
-  _drag = null;
-}
-
-function stopDragEnd(e) {
-  document.querySelectorAll(".stop-row").forEach(r => {
-    r.classList.remove("dragging", "drag-over-above", "drag-over-below");
-    r.draggable = false;
-  });
-  _drag = null;
-}
-
-// --- Day modal ---
-let _dayCtx = null; // di or null for new
-
-function openDayModal(di) {
-  _dayCtx = di;
-  const isNew = di === null;
-  document.getElementById("day-modal-title").textContent = isNew ? "Add Day" : "Edit Day";
-  const d = isNew ? {} : state.days[di];
-  document.getElementById("f-day-label").value     = d.label     || "";
-  document.getElementById("f-day-date").value      = d.date      || "";
-  document.getElementById("f-day-city").value      = d.city      || "tokyo";
-  document.getElementById("f-day-title").value     = d.title     || "";
-  document.getElementById("f-day-desc").value      = d.desc      || "";
-  document.getElementById("f-day-tip").value       = d.tip       || "";
-  document.getElementById("f-day-route-url").value = normalizeGoogleMapsEmbedUrl(d.route_url || "") || (d.route_url || "");
-  openModal("day-modal");
-}
-
-function saveDayModal() {
-  const isNew = _dayCtx === null;
-  const di = _dayCtx;
-  const dayData = {
-    label:     document.getElementById("f-day-label").value.trim(),
-    date:      document.getElementById("f-day-date").value,
-    city:      document.getElementById("f-day-city").value,
-    title:     document.getElementById("f-day-title").value.trim(),
-    desc:      document.getElementById("f-day-desc").value.trim(),
-    tip:       document.getElementById("f-day-tip").value.trim(),
-    route_url: normalizeGoogleMapsEmbedUrl(document.getElementById("f-day-route-url").value),
-  };
-  if (!dayData.label) { alert("Day label is required."); return; }
-  if (isNew) {
-    const maxNum = state.days.reduce((m, d) => Math.max(m, Number(d.num)), 0);
-    state.days.push({ num: maxNum + 1, ...dayData, stops: [] });
-  } else {
-    Object.assign(state.days[di], dayData);
-  }
-  persistToLS();
-  // Full re-render needed for new days / nav updates
-  const currentSection = document.querySelector(".page-section.active")?.id?.replace("sec-", "") || "overview";
-  renderAll();
-  showSection(currentSection);
-  closeModal("day-modal");
-}
-
-function deleteDay(di) {
-  const d = state.days[di];
-  if (!confirm(`Delete entire day "${d.label}" and all its stops?`)) return;
-  state.days.splice(di, 1);
-  persistToLS();
-  renderAll();
-  showSection("overview");
-}
-
-// ════════════════════════════════════════════════════════════════════
-//  Accommodations
-// ════════════════════════════════════════════════════════════════════
-
-function getAccomForDay(date) {
-  if (!date) return null;
-  return (state.accoms || []).find(a => a.checkin && a.checkout && a.checkin <= date && date < a.checkout) || null;
-}
-
-function renderAccoms() {
-  const grid = document.getElementById("accom-grid");
-  if (!grid) return;
-  const accoms = state.accoms || [];
-  if (accoms.length === 0) {
-    grid.innerHTML = `<p style="color:var(--muted);font-size:14px">No accommodations added yet. Enter edit mode to add one.</p>`;
-    return;
-  }
-  grid.innerHTML = accoms.map((a, ai) => {
-    const dateRange = [a.checkin, a.checkout].filter(Boolean)
-      .map(d => { const [y,m,day] = d.split("-"); return `${day} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][Number(m)-1]}`; })
-      .join(" → ");
-    return `<div class="accom-card">
-      <div class="accom-edit-controls">
-        <button title="Edit" onclick="openAccomModal(${ai})">✏️</button>
-        <button class="btn-delete" title="Delete" onclick="deleteAccom(${ai})">🗑</button>
-      </div>
-      <div class="accom-dates">${escHtml(dateRange)}</div>
-      <div class="accom-name">${escHtml(a.name)}</div>
-      ${a.maps_url ? `<a class="maps-link" href="${escAttr(a.maps_url)}" target="_blank" rel="noopener">📍 Open in Maps</a>` : ""}
-      ${a.note ? `<div class="accom-note">${renderNote(a.note)}</div>` : ""}
-    </div>`;
-  }).join("");
-}
-
-let _accomCtx = null;
-
-function openAccomModal(ai) {
-  _accomCtx = ai;
-  const isNew = ai === null;
-  document.getElementById("accom-modal-title").textContent = isNew ? "Add Accommodation" : "Edit Accommodation";
-  const a = isNew ? {} : (state.accoms || [])[ai];
-  document.getElementById("f-accom-name").value     = a.name     || "";
-  document.getElementById("f-accom-checkin").value  = a.checkin  || "";
-  document.getElementById("f-accom-checkout").value = a.checkout || "";
-  document.getElementById("f-accom-maps-url").value = a.maps_url || "";
-  document.getElementById("f-accom-note").value     = a.note     || "";
-  openModal("accom-modal");
-}
-
-function saveAccomModal() {
-  const isNew = _accomCtx === null;
-  const name = document.getElementById("f-accom-name").value.trim();
-  if (!name) { alert("Name is required."); return; }
-  const accomData = {
-    name,
-    checkin:  document.getElementById("f-accom-checkin").value,
-    checkout: document.getElementById("f-accom-checkout").value,
-    maps_url: document.getElementById("f-accom-maps-url").value.trim(),
-    note:     document.getElementById("f-accom-note").value.trim(),
-  };
-  if (!state.accoms) state.accoms = [];
-  if (isNew) {
-    state.accoms.push(accomData);
-  } else {
-    Object.assign(state.accoms[_accomCtx], accomData);
-  }
-  persistToLS();
-  renderAccoms();
-  renderDays(); // refresh banners
-  closeModal("accom-modal");
-}
-
-function deleteAccom(ai) {
-  if (!confirm(`Delete "${state.accoms[ai].name}"?`)) return;
-  state.accoms.splice(ai, 1);
-  persistToLS();
-  renderAccoms();
-  renderDays();
-}
-
-// --- Trip settings modal ---
-function openTripModal() {
-  const m = state.tripMeta;
-  document.getElementById("f-trip-type").value      = m.tripType   || "";
-  document.getElementById("f-trip-country").value   = m.country    || "";
-  document.getElementById("f-trip-subtitle").value  = m.subtitle   || "";
-  document.getElementById("f-trip-daterange").value = m.dateRange  || "";
-  document.getElementById("f-trip-people").value    = m.people     || "";
-  openModal("trip-modal");
-}
-
-function saveTripModal() {
-  state.tripMeta = {
-    tripType:  document.getElementById("f-trip-type").value.trim(),
-    country:   document.getElementById("f-trip-country").value.trim(),
-    subtitle:  document.getElementById("f-trip-subtitle").value.trim(),
-    dateRange: document.getElementById("f-trip-daterange").value.trim(),
-    people:    document.getElementById("f-trip-people").value.trim(),
-  };
-  persistToLS();
-  renderHeroMeta();
-  closeModal("trip-modal");
-}
-
-// --- Essential card modal ---
-let _essentialCtx = null;
-
-function openEssentialModal(ei) {
-  _essentialCtx = ei;
-  const isNew = ei === null;
-  document.getElementById("essential-modal-title").textContent = isNew ? "Add Card" : "Edit Card";
-  const card = isNew ? { title: "", items: [] } : state.essentials[ei];
-  document.getElementById("f-essential-title").value = card.title || "";
-  const editor = document.getElementById("essential-items-editor");
-  editor.innerHTML = "";
-  (card.items || []).forEach(item => addEssentialItemRow(item));
-  openModal("essential-modal");
-}
-
-function saveEssentialModal() {
-  if (!state.essentials) state.essentials = [];
-  const title = document.getElementById("f-essential-title").value.trim();
-  if (!title) { alert("Card title is required."); return; }
-  const items = getEssentialItemsFromEditor();
-  const cardData = { title, items };
-  if (_essentialCtx === null) {
-    state.essentials.push(cardData);
-  } else {
-    state.essentials[_essentialCtx] = cardData;
-  }
-  persistToLS();
-  renderEssentials();
-  closeModal("essential-modal");
-}
-
-function deleteEssential(ei) {
-  if (!confirm(`Delete card "${state.essentials[ei].title}"?`)) return;
-  state.essentials.splice(ei, 1);
-  persistToLS();
-  renderEssentials();
-}
-
-function moveEssential(ei, dir) {
-  const arr = state.essentials;
-  const to = ei + dir;
-  if (to < 0 || to >= arr.length) return;
-  [arr[ei], arr[to]] = [arr[to], arr[ei]];
-  persistToLS();
-  renderEssentials();
-}
-
-function addEssentialItemRow(value = "") {
-  const editor = document.getElementById("essential-items-editor");
-  const row = document.createElement("div");
-  row.className = "essential-item-row";
-  row.innerHTML = `
-    <textarea class="form-textarea essential-item-text" rows="2" placeholder="Item text (HTML allowed, e.g. <strong>Label</strong> — detail)">${escHtml(value)}</textarea>
-    <button type="button" class="btn-remove-item" title="Remove" onclick="this.closest('.essential-item-row').remove()">✕</button>`;
-  editor.appendChild(row);
-}
-
-function getEssentialItemsFromEditor() {
-  return Array.from(document.querySelectorAll("#essential-items-editor .essential-item-text"))
-    .map(el => el.value.trim()).filter(Boolean);
-}
-
-// ════════════════════════════════════════════════════════════════════
-//  Modal helpers
-// ════════════════════════════════════════════════════════════════════
-function openModal(id) {
-  document.getElementById(id).classList.add("open");
-}
-function closeModal(id) {
-  document.getElementById(id).classList.remove("open");
-}
-// Close modal on overlay click
-document.querySelectorAll(".modal-overlay").forEach(el => {
-  el.addEventListener("click", e => { if (e.target === el) closeModal(el.id); });
-});
-// Close modals with Escape
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") document.querySelectorAll(".modal-overlay.open").forEach(el => el.classList.remove("open"));
-});
-
-// ════════════════════════════════════════════════════════════════════
-//  Options editor helpers
-// ════════════════════════════════════════════════════════════════════
-
-// Converts old pipe-format strings to new array format.
-// Also accepts an already-array value (passthrough).
-function normalizeOptions(optionsOrArray, optionNotes, optionUrls) {
-  if (Array.isArray(optionsOrArray)) return optionsOrArray;
-  const str = optionsOrArray || "";
-  if (!str.trim()) return [];
-  const names = str.split("|").map(x => x.trim()).filter(Boolean);
-  const notes = (optionNotes || "").split("|").map(x => x.trim());
-  const urls  = (optionUrls  || "").split("|").map(x => x.trim());
-  return names.map((name, i) => ({ name, note: notes[i] || "", url: urls[i] || "" }));
-}
-
-// Normalizes all stops in state.days to use the array options format.
-function normalizeAllOptions() {
-  state.days.forEach(d => d.stops.forEach(s => {
-    s.options = normalizeOptions(s.options || "", s.option_notes || "", s.option_urls || "");
-    delete s.option_notes;
-    delete s.option_urls;
-  }));
-}
-
-function addOptionEditorRow(opt = {}) {
-  const editor = document.getElementById("options-editor");
-  const idx = editor.children.length;
-  const row = document.createElement("div");
-  row.className = "option-editor-row";
-  row.innerHTML = `
-    <div class="option-editor-row-header">
-      <span class="option-editor-badge">${idx === 0 ? "Primary" : "Or"}</span>
-      <button type="button" class="btn-remove-option" title="Remove" onclick="this.closest('.option-editor-row').remove(); refreshOptionBadges()">✕</button>
-    </div>
-    <input class="form-input opt-name" placeholder="Option name" value="${escAttr(opt.name || '')}">
-    <textarea class="form-textarea opt-note" placeholder="Note (optional)">${escHtml(opt.note || '')}</textarea>
-    <input class="form-input opt-url" type="url" placeholder="Maps URL (optional)" value="${escAttr(opt.url || '')}">`;
-  editor.appendChild(row);
-}
-
-function refreshOptionBadges() {
-  document.querySelectorAll("#options-editor .option-editor-badge").forEach((badge, i) => {
-    badge.textContent = i === 0 ? "Primary" : "Or";
-  });
-}
-
-function getOptionsFromEditor() {
-  return Array.from(document.querySelectorAll("#options-editor .option-editor-row")).map(row => ({
-    name: row.querySelector(".opt-name").value.trim(),
-    note: row.querySelector(".opt-note").value.trim(),
-    url:  row.querySelector(".opt-url").value.trim(),
-  })).filter(opt => opt.name);
-}
-
-// ════════════════════════════════════════════════════════════════════
-//  Utilities
-// ════════════════════════════════════════════════════════════════════
-
-// Render a note string as HTML — allows <br>, <a>, <strong> etc.
-// Also converts plain newlines to <br> so the textarea UX is natural.
-function renderNote(note) {
-  return (note || "").replace(/\n/g, "<br>");
-}
-
-function escHtml(str) {
-  return (str || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-}
-function escAttr(str) {
-  return (str || "").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-}
-
-/** Accepts a bare maps embed URL or a full Google "Embed a map" iframe snippet; returns the embed URL only. */
-function normalizeGoogleMapsEmbedUrl(raw) {
-  const s = (raw || "").trim();
-  if (!s) return "";
-  const decodeSrc = (url) =>
-    url
-      .replace(/&amp;/gi, "&")
-      .replace(/&quot;/gi, '"')
-      .replace(/&#39;/g, "'")
-      .trim();
-  if (/<iframe/i.test(s)) {
-    let m = s.match(/\bsrc\s*=\s*"([^"]+)"/i);
-    if (m) return decodeSrc(m[1]);
-    m = s.match(/\bsrc\s*=\s*'([^']+)'/i);
-    if (m) return decodeSrc(m[1]);
-    m = s.match(/\bsrc\s*=\s*([^\s>]+)/i);
-    if (m && m[1]) return decodeSrc(m[1].replace(/^["']|["']$/g, ""));
-    return "";
-  }
-  return decodeSrc(s);
-}
-
-function showError(msg) { const el = document.getElementById("error-banner"); el.style.display = "block"; el.innerHTML = msg; showSection("overview"); }
-function hideLoading() { const el = document.getElementById("loading-screen"); el.classList.add("fade-out"); setTimeout(() => el.remove(), 700); }
-
-// ════════════════════════════════════════════════════════════════════
-//  Init
-// ════════════════════════════════════════════════════════════════════
-(async () => {
-  await loadData();
-  if (!state.days.length) {
-    // Show empty state — edit mode will let you add days
-    state.days = [];
-    state.dataSource = state.dataSource || 'json';
-  }
-  if (!state.essentials || !state.essentials.length) {
-    state.essentials = DEFAULT_ESSENTIALS;
-  }
-  renderAll();
-  hideLoading();
-})();
+loadTrips();
 </script>
 </body>
 </html>
