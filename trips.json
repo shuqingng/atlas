@@ -1,0 +1,14 @@
+[
+  {
+    "id": "japan-2026",
+    "title": "Japan",
+    "subtitle": "Tokyo & Kawaguchiko",
+    "dateRange": "22 – 30 April 2026",
+    "tripType": "Family Trip",
+    "people": 5,
+    "coverImage": null,
+    "path": "trips/japan-2026/",
+    "status": "upcoming",
+    "palette": ["#c0392b", "#2d5a3d", "#b8860b"]
+  }
+]
