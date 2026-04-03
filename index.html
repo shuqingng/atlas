@@ -143,6 +143,8 @@
   .maps-link:hover { background: var(--green); color: #fff; }
   .maps-link-parking { color: var(--blue); background: var(--blue-light); border-color: var(--blue-light); }
   .maps-link-parking:hover { background: var(--blue); color: #fff; }
+  .maps-link-ticket { color: var(--muted); background: var(--gold-light); border-color: var(--gold-light); }
+  .maps-link-ticket:hover { background: var(--muted); color: #fff; }
   .maps-link-paper { color: var(--muted); background: var(--paper); border-color: var(--paper); }
   .maps-link-paper:hover { background: var(--muted); color: var(--paper); border-color: var(--muted); }
   .options-label { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin: 12px 0 7px; }
@@ -480,6 +482,10 @@
       <div class="form-group">
         <label class="form-label">Parking Spot URL</label>
         <input class="form-input" id="f-stop-parking-url" type="url" placeholder="https://maps.google.com/...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ticket URL</label>
+        <input class="form-input" id="f-stop-ticket-url" type="url" placeholder="https://...">
       </div>
       <div class="form-group">
         <label class="form-label">Image URL</label>
@@ -918,6 +924,7 @@ function buildStopHtml(d, s, si, isLast) {
         <div class="stop-note">${renderNote(s.note)}</div>
         ${s.maps_url ? `<a class="maps-link" href="${escAttr(s.maps_url)}" target="_blank" rel="noopener">📍 Open in Maps</a>` : ""}
         ${s.parking_url ? `<a class="maps-link maps-link-parking" href="${escAttr(s.parking_url)}" target="_blank" rel="noopener">🅿️ Parking</a>` : ""}
+        ${s.ticket_url ? `<a class="maps-link maps-link-ticket" href="${escAttr(s.ticket_url)}" target="_blank" rel="noopener">🎫 Tickets</a>` : ""}
         ${optionsHtml}
       </div>
       ${s.img_url ? `<img class="stop-card-img" src="${escAttr(s.img_url)}" alt="${escAttr(s.name)}" loading="lazy" onerror="this.classList.add('errored')">` : ""}
@@ -967,6 +974,7 @@ function openStopModal(di, si) {
   document.getElementById("f-stop-note").value     = s.note     || "";
   document.getElementById("f-stop-maps-url").value    = s.maps_url    || "";
   document.getElementById("f-stop-parking-url").value = s.parking_url || "";
+  document.getElementById("f-stop-ticket-url").value  = s.ticket_url  || "";
   document.getElementById("f-stop-image-url").value   = s.img_url     || "";
   // Populate options editor
   const opts = Array.isArray(s.options) ? s.options : normalizeOptions(s.options || "", s.option_notes || "", s.option_urls || "");
@@ -987,6 +995,7 @@ function saveStopModal() {
     note:     document.getElementById("f-stop-note").value.trim(),
     maps_url:    document.getElementById("f-stop-maps-url").value.trim(),
     parking_url: document.getElementById("f-stop-parking-url").value.trim(),
+    ticket_url:  document.getElementById("f-stop-ticket-url").value.trim(),
     img_url:     document.getElementById("f-stop-image-url").value.trim(),
     options:  getOptionsFromEditor(),
   };

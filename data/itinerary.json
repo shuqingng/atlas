@@ -457,6 +457,7 @@
           "note": "Depart hotel by 9.30am - 10-15min walk to Busta Shinjuku.<br>Bus departs 10.45am from Busta Shinjuku. Fully reserved seats. Journey takes around 1h45min",
           "maps_url": "",
           "parking_url": "",
+          "ticket_url": "https://www.highwaybus.com/gp/payment/payWebTicketFromMail?0f02de10d27974eda9d5024db22c7b87&ticket_type=mobile",
           "img_url": "",
           "options": []
         },
@@ -719,9 +720,10 @@
           "time": "",
           "tags": "",
           "booked": null,
-          "note": "From mid-April to late May every year, the nearby Fuji Motosuko Resort plays host to the stunning Fuji Shibazakura Festival. Witness sprawling fields of vibrant pink moss, all against the magnificent backdrop of Mt. Fuji.\nTour buses flood in after 11am. ¥1,000–1,300 entry + ¥500 parking. Walk the pink fields, soak your feet in the panoramic foot bath, grab food from the festival stalls.",
+          "note": "From mid-April to late May every year, the nearby Fuji Motosuko Resort plays host to the stunning Fuji Shibazakura Festival. Witness sprawling fields of vibrant pink moss, all against the magnificent backdrop of Mt. Fuji.\nTour buses flood in after 11am. ¥1,000–1,300 entry + ¥500 parking. Walk the pink fields, soak your feet in the panoramic foot bath, grab food from the festival stalls. No need to book beforehand.\n<br>One of the best photo spots in from the <b>Observation Deck</b> at the back of the park. The raised platform allows you to get the best perspective of the rolling carpets of flowers with Mt Fuji in the background.",
           "maps_url": "https://maps.app.goo.gl/uHYk8iqKeYmiEP5K6",
           "parking_url": "",
+          "ticket_url": "",
           "img_url": "https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1728534570/bisxrc55vtvio7yohp6w.webp",
           "options": []
         },
@@ -815,9 +817,10 @@
           "time": "Afternoon 14:40",
           "tags": "transit",
           "booked": true,
-          "note": "Booked via highwaybus.com\nBus #1352 departs at 14:.40 from Kawaguchiko Station. Arrives at Shinjuku Busta at 16:25.\n<a href='https://www.highwaybus.com/gp/inbound/inbWebticketPrint?b62248919b7b259dbacb88eca0eabdfd&lang=EN&ticket_type=mobile'>Mobile Ticket</a>",
+          "note": "Booked via highwaybus.com\nBus #1352 departs at 14:.40 from Kawaguchiko Station. Arrives at Shinjuku Busta at 16:25.",
           "maps_url": "",
           "parking_url": "",
+          "ticket_url": "https://www.highwaybus.com/gp/inbound/inbWebticketPrint?b62248919b7b259dbacb88eca0eabdfd&lang=EN&ticket_type=mobile",
           "img_url": "",
           "options": []
         },
@@ -867,9 +870,10 @@
           "time": "Morning 11:40",
           "tags": "transit",
           "booked": true,
-          "note": "Check out from hotel at 11am. Board Airport Limousine. Journey is around 2 hours.\nBoard Airport Limousine Bus towards Narita International Terminal 1. Arrive at 14:10. Each passenger is allowed 2 luggages.\n<a href=\"data/20260430_shinjuku_narita.png\">Mobile Ticket</a>",
+          "note": "Check out from hotel at 11am. Board Airport Limousine. Journey is around 2 hours.\nBoard Airport Limousine Bus towards Narita International Terminal 1. Arrive at 14:10. Each passenger is allowed 2 luggages.",
           "maps_url": "",
           "parking_url": "",
+          "ticket_url": "https://webservice.limousinebus.co.jp/web/en/ReservationQR.aspx?RN=sjL2lbo8nKjqMHxJoNkZKrW0Ba%2f1rKiZJbWUFvdh%2fng%3d&lang=en",
           "img_url": "",
           "options": []
         },
