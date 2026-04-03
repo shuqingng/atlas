@@ -54,7 +54,7 @@
           "options": []
         },
         {
-          "name": "Dinner near the hotel",
+          "name": "Late dinner near the hotel",
           "time": "Dinner",
           "tags": "food",
           "booked": null,
@@ -213,6 +213,17 @@
               "url": "https://maps.app.goo.gl/zNNyv9ZJUreuwTSZ9"
             }
           ]
+        },
+        {
+          "name": "Buy breakfast from convenience store",
+          "time": "",
+          "tags": "food",
+          "booked": null,
+          "note": "Early start the next day, prepare some sandwiches or snacks.",
+          "maps_url": "",
+          "parking_url": "",
+          "img_url": "",
+          "options": []
         }
       ],
       "date": "2026-04-23",
@@ -265,11 +276,13 @@
           "options": []
         },
         {
-          "time": "Dinner",
           "name": "Dinner",
+          "time": "Dinner",
           "tags": "food",
-          "note": "",
+          "booked": null,
+          "note": "Expected return time: around 6pm, directly to hotel",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         }
@@ -408,8 +421,10 @@
           "name": "Pack bags — highway bus to Kawaguchiko tomorrow",
           "time": "Night",
           "tags": "",
-          "note": "",
+          "booked": null,
+          "note": "If possible, take only what you need. Leave the rest of the bags at the hotel.",
           "maps_url": "",
+          "parking_url": "",
           "img_url": "",
           "options": []
         }
@@ -450,7 +465,7 @@
           "time": "Afternoon 12:30",
           "tags": "transit",
           "booked": true,
-          "note": "Toyota Rent-a-car Kawaguchiko Branch\n500m (7 min walk) away from Kawaguchiko Station.\nSienta class vehicle with full insurance",
+          "note": "Toyota Rent-a-car Kawaguchiko Branch - 500m (7 min walk) away from Kawaguchiko Station. Mum & Koko to wait at the station with the luggages.\nSienta class vehicle with full insurance.",
           "maps_url": "https://maps.app.goo.gl/Yju5fdwCC7njEsg17",
           "parking_url": "",
           "img_url": "",
@@ -765,15 +780,6 @@
           "options": []
         },
         {
-          "name": "Top up petrol for rental car",
-          "time": "",
-          "tags": "",
-          "note": "Save the receipt.",
-          "maps_url": "",
-          "img_url": "",
-          "options": []
-        },
-        {
           "name": "Japanese Dining Suzukiya",
           "time": "Morning 11:30",
           "tags": "food",
@@ -785,20 +791,31 @@
           "options": []
         },
         {
-          "time": "Afternoon",
-          "name": "Return rental car",
-          "tags": "transit",
-          "note": "Return timing: 2pm",
+          "name": "Top up petrol for rental car",
+          "time": "",
+          "tags": "",
+          "note": "Save the receipt.",
           "maps_url": "",
           "img_url": "",
           "options": []
         },
         {
-          "name": "Highway bus: Kawaguchiko → Shinjuku",
-          "time": "Afternoon",
+          "name": "Return rental car",
+          "time": "Afternoon 14:00",
           "tags": "transit",
-          "booked": false,
-          "note": "Bus timings: 2pm, 2.10pm, 2.40pm, 3pm, 3.10pm, 3.40pm\n<a href=\"https://www.highwaybus.com/gp/inbound/inbTimeTbl?lineId=110&upDownKbn=1&action=update&year=2026&month=04&day=29&fromTime=00&toTime=24#direction\">More bus timings</a>",
+          "booked": null,
+          "note": "Return timing: 2pm",
+          "maps_url": "",
+          "parking_url": "",
+          "img_url": "",
+          "options": []
+        },
+        {
+          "name": "Highway bus: Kawaguchiko → Shinjuku",
+          "time": "Afternoon 14:40",
+          "tags": "transit",
+          "booked": true,
+          "note": "Booked via highwaybus.com\nBus #1352 departs at 14:.40 from Kawaguchiko Station. Arrives at Shinjuku Busta at 16:25.\n<a href='https://www.highwaybus.com/gp/inbound/inbWebticketPrint?b62248919b7b259dbacb88eca0eabdfd&lang=EN&ticket_type=mobile'>Mobile Ticket</a>",
           "maps_url": "",
           "parking_url": "",
           "img_url": "",
@@ -847,10 +864,10 @@
         },
         {
           "name": "Airport Limousine to Narita Airport",
-          "time": "Morning 11:30",
+          "time": "Morning 11:40",
           "tags": "transit",
-          "booked": false,
-          "note": "Check out from hotel at 11am. Board Airport Limousine. Journey is around 2 hours.\nBus departs every hour. Board the 11:40->14:10 bus.<br>\n<a href='https://www.limousinebus.co.jp/en/bus/result/?mode=route&date=2026-04-30&time=1018&fr=%E6%96%B0%E5%AE%BF%E3%83%AF%E3%82%B7%E3%83%B3%E3%83%88%E3%83%B3%E3%83%9B%E3%83%86%E3%83%AB&frId=ShinjukuWashingtonHotel&to=%E6%88%90%E7%94%B0%E7%A9%BA%E6%B8%AF%E7%AC%AC%EF%BC%91%E6%97%85%E5%AE%A2%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB&toId=NaritaAirportTerminal1&ft=1'>Make reservation</a>",
+          "booked": true,
+          "note": "Check out from hotel at 11am. Board Airport Limousine. Journey is around 2 hours.\nBoard Airport Limousine Bus towards Narita International Terminal 1. Arrive at 14:10. Each passenger is allowed 2 luggages.\n<a href=\"data/20260430_shinjuku_narita.png\">Mobile Ticket</a>",
           "maps_url": "",
           "parking_url": "",
           "img_url": "",
@@ -885,7 +902,7 @@
       "checkin": "2026-04-26",
       "checkout": "2026-04-29",
       "maps_url": "https://maps.app.goo.gl/J8wpb1U6d5HxRyvX7",
-      "note": "Booked on Airbnb"
+      "note": "Booked on Airbnb\n<a href='https://www.onestayapp.com/v2/checkin/booking?defaultShowQrcode=&checkinCode=20833474&pinCode=vgj5rdcrrj'>View check-in details</a>\nCheck-in time: 4pm (contact them at 12noon to enquire about early check-in from 1pm)\nCheck-out time: 10am"
     },
     {
       "name": "Shinjuku Washington Hotel",
