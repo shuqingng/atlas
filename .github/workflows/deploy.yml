@@ -25,18 +25,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Inject secrets
+      - name: Generate atlas-env.js
         env:
           APPS_SCRIPT_URL: ${{ secrets.APPS_SCRIPT_URL }}
           APPS_SCRIPT_TOKEN: ${{ secrets.APPS_SCRIPT_TOKEN }}
         run: |
-          # Inject into the trip template and the index page
-          for f in trips/trip.html index.html; do
-            sed -i \
-              -e "s|YOUR_APPS_SCRIPT_URL|${APPS_SCRIPT_URL}|g" \
-              -e "s/YOUR_APPS_SCRIPT_TOKEN/${APPS_SCRIPT_TOKEN}/g" \
-              "$f"
-          done
+          cat > atlas-env.js <<EOF
+          window.__ATLAS_ENV__ = {
+            APPS_SCRIPT_URL:   "${APPS_SCRIPT_URL}",
+            APPS_SCRIPT_TOKEN: "${APPS_SCRIPT_TOKEN}"
+          };
+          EOF
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
