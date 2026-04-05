@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/trips.js": {
+      "maxDuration": 30
+    }
+  }
+}
