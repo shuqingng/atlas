@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Japan Family Trip · April 2026</title>
+<title>Atlas · Trip</title>
 <link rel="icon" href="https://em-content.zobj.net/source/twitter/376/mount-fuji_26d4.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -82,10 +82,6 @@
   .section-sub { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
   /* DATA SOURCE BADGE */
-  .source-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); background: var(--paper2); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; margin-top: 12px; }
-  .source-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #2d9a4e; flex-shrink: 0; animation: pulse 2s ease-in-out infinite; }
-  .source-badge.sheets .dot { background: #4285f4; }
-  .source-badge.local .dot { background: #2d9a4e; }
 
   /* OVERVIEW */
   .overview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 32px; }
@@ -138,6 +134,9 @@
   .booked-yes { background: var(--green-light); color: var(--green); }
   .booked-no  { background: #fdecea; color: var(--red); }
   .stop-note { font-size: 14px; color: var(--muted); line-height: 1.65; }
+  .copy-chip { display: inline-flex; align-items: center; gap: 4px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; background: var(--paper2); border: 1px solid var(--border); border-radius: 5px; padding: 1px 7px; cursor: pointer; color: var(--ink); white-space: nowrap; transition: background 0.15s, color 0.15s; user-select: none; }
+  .copy-chip:hover { background: var(--ink); color: #fff; }
+  .copy-chip.copied { background: var(--green); border-color: var(--green); color: #fff; }
   .maps-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; font-size: 12px; font-weight: 500; color: var(--green); text-decoration: none; background: var(--green-light); border: 1px solid var(--green-light); padding: 4px 10px; border-radius: 20px; transition: all 0.15s; margin-right: 6px; }
   .maps-link:hover { background: var(--green); color: #fff; }
   .maps-link-parking { color: var(--blue); background: var(--blue-light); border-color: var(--blue-light); }
@@ -212,6 +211,8 @@
   .essential-item-row textarea { flex: 1; }
   .btn-remove-item { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: #fff; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; color: var(--muted); flex-shrink: 0; margin-top: 2px; transition: all 0.15s; }
   .btn-remove-item:hover { background: #fdecea; border-color: #f5c6c2; }
+  .hero-home-btn { position: absolute; top: 24px; left: 24px; z-index: 2; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.2s; }
+  .hero-home-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
   .hero-edit-btn { position: absolute; top: 24px; right: 24px; z-index: 2; display: none; padding: 8px 16px; font-size: 12px; font-weight: 500; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
   body.edit-mode .hero-edit-btn { display: block; }
   .hero-edit-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
@@ -320,22 +321,29 @@
     .day-num-big, .hero-kanji, .hero-divider { display: none; }
   }
 </style>
+<!-- Local dev env (gitignored). In production, GitHub Actions injects values directly. -->
+<script src="../atlas-env.js" onerror="window.__ATLAS_ENV__=window.__ATLAS_ENV__||{}"></script>
 </head>
 <body>
 
 <div id="loading-screen">
-  <div class="loading-kanji">日本</div>
+  <!-- <div class="loading-kanji" id="loading-kanji">日本</div> -->
   <div class="loading-text">Loading itinerary<span class="loading-dots"><span></span><span></span><span></span></span></div>
 </div>
 
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-kanji">日本</div>
+  <div class="hero-kanji" id="hero-kanji">日本</div>
   <svg class="hero-mt-fuji" viewBox="0 0 900 300" fill="none">
     <path d="M0 300 L200 300 L450 30 L700 300 L900 300Z" fill="white"/>
     <path d="M380 80 L450 30 L520 80 L490 80 L450 55 L410 80Z" fill="white"/>
   </svg>
-  <button class="hero-edit-btn" onclick="openTripModal()">✏️ Edit trip info</button>
+  <a class="hero-home-btn" href="../" title="Back to Atlas">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    </svg>
+  </a>
+  <button class="hero-edit-btn" onclick="window.location.href='../?edit='+TRIP_ID">✏️ Edit trip info</button>
   <div style="position:relative;z-index:1">
     <div class="hero-tag" id="hero-tag-text">Family Trip · 22 - 30 April 2026</div>
     <h1 id="hero-title">Japan<span id="hero-subtitle">Tokyo & Kawaguchiko</span></h1>
@@ -369,14 +377,13 @@
 
   <div class="page-section active" id="sec-overview">
     <div class="section-title">Your Journey</div>
-    <div id="source-badge-container"></div>
     <div id="migration-banner">
       <div class="mig-icon">📋</div>
       <div class="mig-text">
         <strong>Data loaded from Google Sheets</strong>
-        To store this itinerary in your git repo, export it as <code>data/itinerary.json</code> and commit the file.
+        Save it to Google Drive to persist it.
         <div class="mig-actions">
-          <button class="btn-mig-export" onclick="exportJSON()">⬇ Export itinerary.json</button>
+          <button class="btn-mig-export" onclick="saveToDrive()">☁ Save to Drive</button>
           <button class="btn-mig-dismiss" onclick="dismissMigration()">Dismiss</button>
         </div>
       </div>
@@ -418,7 +425,7 @@
 <div id="edit-bar">
   <div class="bar-dirty-dot"></div>
   <div class="bar-label"><strong>Edit Mode</strong></div>
-  <button class="bar-btn bar-btn-export" onclick="exportJSON()">⬇ Export itinerary.json</button>
+  <button class="bar-btn bar-btn-export" id="save-drive-btn" onclick="saveToDrive()">☁ Save to Drive</button>
   <button class="bar-btn bar-btn-discard" onclick="discardChanges()">Discard changes</button>
 </div>
 
@@ -498,7 +505,7 @@
       </div>
       <div class="form-group">
         <label class="form-label">Check-in Date</label>
-        <input class="form-input" id="f-accom-checkin" type="date">
+        <input class="form-input" id="f-accom-checkin" type="date" oninput="onAccomCheckinChange(this.value)">
       </div>
       <div class="form-group">
         <label class="form-label">Check-out Date</label>
@@ -562,48 +569,6 @@
   </div>
 </div>
 
-<!-- Trip settings modal -->
-<div class="modal-overlay" id="trip-modal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Trip Settings</div>
-      <button class="modal-close" onclick="closeModal('trip-modal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">Trip Type</label>
-        <input class="form-input" id="f-trip-type" placeholder="e.g. Family Trip">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Country / Destination</label>
-        <input class="form-input" id="f-trip-country" placeholder="e.g. Japan">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Subtitle (Cities)</label>
-        <input class="form-input" id="f-trip-subtitle" placeholder="e.g. Tokyo & Kawaguchiko">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Date Range</label>
-        <input class="form-input" id="f-trip-daterange" placeholder="e.g. 22 - 30 April 2026">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Number of People</label>
-        <input class="form-input" id="f-trip-people" type="number" min="1" placeholder="e.g. 5">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Cities</label>
-        <div id="f-trip-cities-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px"></div>
-        <button class="btn-add-row" onclick="addTripCityRow()" style="font-size:12px;padding:6px 12px;border:1px dashed var(--border);border-radius:8px;background:transparent;color:var(--muted);cursor:pointer">+ Add city</button>
-        <div class="form-hint">Each city gets its own colour in the day overview. The emoji and name appear as a badge.</div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="closeModal('trip-modal')">Cancel</button>
-      <button class="btn-save" onclick="saveTripModal()">Save</button>
-    </div>
-  </div>
-</div>
-
 <!-- Essential card modal -->
 <div class="modal-overlay" id="essential-modal">
   <div class="modal">
@@ -633,13 +598,17 @@
 // ════════════════════════════════════════════════════════════════════
 //  Config
 // ════════════════════════════════════════════════════════════════════
-const JSON_PATH = "data/itinerary.json";
+// Apps Script proxy (serves itinerary from private Google Drive)
+const APPS_SCRIPT_URL   = (window.__ATLAS_ENV__ || {}).APPS_SCRIPT_URL   || "YOUR_APPS_SCRIPT_URL";
+const APPS_SCRIPT_TOKEN = (window.__ATLAS_ENV__ || {}).APPS_SCRIPT_TOKEN || "YOUR_APPS_SCRIPT_TOKEN";
+// TRIP_ID is read from the URL: trips/trip.html?id=japan-2026
+const TRIP_ID = new URLSearchParams(window.location.search).get('id') || '';
 
-// Google Sheets fallback (used for migration if JSON file is empty)
+// Google Sheets fallback (used if Drive file is empty/missing)
 const SHEET_ID = "1G89SwoGeUxs-4qtoexkj0fIFfQ9Uj5_Ix4BhqW_sM10";
 const SHEET_TAB = "Itinerary (Raw)";
 
-const LS_KEY = "japan-trip-itinerary-v1";
+const LS_KEY = `atlas-trip-${TRIP_ID}-v1`;
 
 const TAG_LABELS = { nature:"🌿 Nature", mobility:"♿ Easy access", culture:"🎌 Culture", food:"🍜 Food", transit:"🚌 Transit", flight: "✈️ Flight" };
 const DOT_COLORS = { nature:"#2d5a3d", mobility:"#1a3a5c", culture:"#b8860b", food:"#c0392b", transit:"#7a7060", flight:"#7a7069" };
@@ -652,56 +621,16 @@ const CITY_PALETTE = [
 ];
 
 const DEFAULT_TRIP_META = {
-  tripType: "Family Trip",
-  country: "Japan",
-  subtitle: "Tokyo & Kawaguchiko",
-  dateRange: "22 - 30 April 2026",
-  people: 5,
-  cities: [
-    { id: "tokyo",       name: "Tokyo",       emoji: "🗼" },
-    { id: "kawaguchiko", name: "Kawaguchiko", emoji: "🗻" },
-  ],
+  tripType: "",
+  country: "",
+  subtitle: "",
+  dateRange: "",
+  people: 0,
+  cities: [],
+  kanji: "",
 };
 
-const DEFAULT_ESSENTIALS = [
-  { title: "🌧️ Kawaguchiko Wet Weather Plan", items: [
-    "<strong>Gotemba Premium Outlets</strong> — ~30–40 min from Kawaguchiko, with covered areas & cafes",
-    "<strong>Cafe Hopping</strong> — Cafe Troisieme Marche, Lake Bake Cafe, Shaw's Sushi Bar & Dining",
-    "<strong>Hakone</strong> — more indoor attractions and ropeways (eg Hakone Ropeway, Hakone Shrine, Hakone Yumoto Onsen)",
-    "<strong>Fuji Safari Park</strong> — if you have time, it's a fun day trip",
-  ]},
-  { title: "⚠️ Closed Days", items: [
-    "<strong>Shinjuku Gyoen</strong> — closed Mondays",
-    "<strong>Kubota Itchiku Art Museum</strong> — closed Tuesdays",
-    "<strong>Kawaguchiko Music Forest</strong> — closed Tuesdays & Wednesdays",
-    "Plan Kawaguchiko museum days on Thursday–Sunday to be safe",
-  ]},
-  { title: "🗻 Mt Fuji Visibility & Weather", items: [
-    "<strong>Visibility: </strong><a href='https://fuji-san.info/en/index.html'>SeeMtFuji</a>",
-    "<strong>Yamanashi Weather: </strong><a href='https://www.jma.go.jp/bosai/forecast/#area_type=class20s&area_code=1943000&lang=en'>Japan Meteorological Agency</a>",
-    "<strong>AccuWeather: </strong><a href='https://www.accuweather.com/en/jp/kawaguchiko-108/1314114/weather-forecast/1314114'>Kawaguchiko</a>",
-  ]},
-  { title: "🌸 Late April Weather", items: [
-    "<strong>Temperature:</strong> 15–22°C — bring a light layer",
-    "<strong>Rain:</strong> Light showers possible; pack a compact umbrella each",
-    "<strong>Fuji views:</strong> Clearest before 11am — prioritise morning viewpoints",
-    "<strong>Flowers:</strong> Wisteria peaks in late April; fresh green foliage everywhere",
-    "Post-cherry blossom = fewer tourists at most spots",
-  ]},
-  { title: "🚌 Getting Around", items: [
-    "<strong>IC Card:</strong> Get Suica or Pasmo at the airport",
-    "<strong>Water bus:</strong> Hamarikyu → Asakusa, 40 min, fully scenic",
-    "<strong>Kawaguchiko:</strong> Rental car is essential for flexibility",
-    "<strong>Highway bus:</strong> Shinjuku Bus Terminal → Kawaguchiko (~2 hrs)",
-  ]},
-  { title: "🍜 Food to Try", items: [
-    "<strong>Hōtō noodles</strong> — Yamanashi's thick miso noodle soup; essential in Kawaguchiko",
-    "<strong>Soba</strong> — especially at Oshino Hakkai's thatched-roof restaurants",
-    "<strong>Matcha & wagashi</strong> — at Hamarikyu's Nakajima Teahouse",
-    "<strong>Tempura</strong> — classic Tokyo dinner in Asakusa's backstreets",
-    "<strong>Lavender ice cream</strong> — at Oishi Park's lakeside café",
-  ]},
-];
+const DEFAULT_ESSENTIALS = [];
 
 // ════════════════════════════════════════════════════════════════════
 //  App state
@@ -711,6 +640,7 @@ let state = {
   accoms: [],        // array of accommodation objects
   essentials: [],    // array of { title, items[] }
   tripMeta: { ...DEFAULT_TRIP_META },
+  tripInfo: null,    // entry from _trips-list.json (authoritative source: title, subtitle, tripType, startDate, endDate)
   editMode: false,
   dirty: false,
   dataSource: null,  // 'json' | 'sheets' | 'localstorage'
@@ -738,22 +668,33 @@ async function loadData() {
     } catch(e) { /* ignore */ }
   }
 
-  // 2. Try local JSON file
+  // 2. Try Apps Script proxy (fetches from private Google Drive)
   try {
-    const res = await fetch(JSON_PATH + "?t=" + Date.now());
+    const proxyUrl = `${APPS_SCRIPT_URL}?tripId=${TRIP_ID}&token=${APPS_SCRIPT_TOKEN}`;
+    const res = await fetch(proxyUrl);
     if (res.ok) {
       const data = await res.json();
-      if (data && Array.isArray(data.days) && data.days.length > 0) {
-        state.days = data.days;
+      if (data && !data.error) {
+        // Use Drive data even if days is empty — tripMeta must always be loaded
+        state.days = Array.isArray(data.days) ? data.days : [];
         state.accoms = data.accoms || [];
         state.essentials = data.essentials || DEFAULT_ESSENTIALS;
         state.tripMeta = data.tripMeta || { ...DEFAULT_TRIP_META };
         normalizeAllOptions();
-        state.dataSource = 'json';
+        state.dataSource = state.days.length > 0 ? 'drive' : 'empty';
+        return;
+      }
+      // Drive responded but file doesn't exist yet → new empty trip, skip Sheets fallback
+      if (data && data.error && data.error.startsWith('Not found')) {
+        state.days = [];
+        state.accoms = [];
+        state.essentials = [];
+        state.tripMeta = { ...DEFAULT_TRIP_META };
+        state.dataSource = 'empty';
         return;
       }
     }
-  } catch(e) { /* file not found or empty, fall through */ }
+  } catch(e) { /* proxy fetch failed, fall through */ }
 
   // 3. Fallback: fetch from Google Sheets
   await loadFromSheets();
@@ -781,6 +722,19 @@ async function loadFromSheets() {
       <small style="opacity:0.6">Error: ${e.message}</small>`);
     hideLoading();
   }
+}
+
+// Fetch this trip's entry from _trips-list.json (same data source index.html manages)
+async function fetchTripInfo() {
+  if (APPS_SCRIPT_URL === "YOUR_APPS_SCRIPT_URL") return null;
+  try {
+    const res = await fetch(`${APPS_SCRIPT_URL}?tripId=_trips-list&token=${APPS_SCRIPT_TOKEN}`);
+    if (res.ok) {
+      const list = await res.json();
+      if (Array.isArray(list)) return list.find(t => t.id === TRIP_ID) || null;
+    }
+  } catch(e) {}
+  return null;
 }
 
 function parseGviz(json) {
@@ -836,28 +790,41 @@ function clearLS() {
 }
 
 // ════════════════════════════════════════════════════════════════════
-//  Export
+//  Save to Drive
 // ════════════════════════════════════════════════════════════════════
-function exportJSON() {
+async function saveToDrive() {
+  const btn = document.getElementById("save-drive-btn");
   const payload = {
-    _comment: "Generated by the Japan Trip itinerary editor. Edit via the webpage or directly in this file.",
+    _comment: "Generated by the Atlas itinerary editor.",
     tripMeta: state.tripMeta,
     days: state.days,
     accoms: state.accoms,
     essentials: state.essentials,
   };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "itinerary.json";
-  a.click();
-  URL.revokeObjectURL(a.href);
-  // After export, offer to clear the LS draft
-  if (state.dirty) {
+
+  btn.disabled = true;
+  btn.textContent = "Saving…";
+
+  try {
+    const url = `${APPS_SCRIPT_URL}?tripId=${TRIP_ID}&token=${APPS_SCRIPT_TOKEN}`;
+    // Apps Script POST redirects to a non-CORS URL, so we use no-cors
+    // (response is opaque but the write still happens — verified via GET)
+    await fetch(url, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload, null, 2),
+    });
     clearLS();
-    document.body.classList.remove("has-changes");
+    dismissMigration();
+    btn.textContent = "✓ Saved";
+    setTimeout(() => { btn.textContent = "☁ Save to Drive"; btn.disabled = false; }, 2000);
+  } catch (err) {
+    btn.textContent = "✗ Failed";
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = "☁ Save to Drive"; }, 2000);
+    console.error("Save to Drive failed:", err);
   }
-  dismissMigration();
 }
 
 function discardChanges() {
@@ -893,7 +860,6 @@ function dotColor(tags) {
 function renderAll() {
   updateHeroStats();
   renderHeroMeta();
-  renderSourceBadge();
   renderNav();
   renderOverview();
   renderDays();
@@ -920,9 +886,9 @@ function getCityInfo(cityId) {
   if (idx >= 0) {
     const c = cities[idx];
     const palette = CITY_PALETTE[idx % CITY_PALETTE.length];
-    return { name: c.name, emoji: c.emoji || "📍", bg: palette.bg, fg: palette.fg };
+    return { name: c.name, emoji: c.emoji || "🏙️", bg: palette.bg, fg: palette.fg };
   }
-  return { name: cityId || "—", emoji: "📍", bg: "var(--paper2)", fg: "var(--muted)" };
+  return { name: cityId || "—", emoji: "🏙️", bg: "var(--paper2)", fg: "var(--muted)" };
 }
 
 function computeDayLabel(zeroIndex, dateStr) {
@@ -935,27 +901,49 @@ function computeDayLabel(zeroIndex, dateStr) {
   return `Day ${n}: ${dd} ${mon} (${dow})`;
 }
 
-function renderHeroMeta() {
-  const m = state.tripMeta;
-  document.title = `${m.country} ${m.tripType} · ${m.dateRange}`;
-  document.getElementById("hero-tag-text").textContent = `${m.tripType} · ${m.dateRange}`;
-  const h1 = document.getElementById("hero-title");
-  h1.firstChild.textContent = m.country;
-  document.getElementById("hero-subtitle").textContent = m.subtitle;
-  document.getElementById("stat-people").textContent = m.people;
-  document.getElementById("footer-text").textContent = `${m.country} ${m.tripType} · ${m.dateRange}`;
+function deriveDateRange() {
+  const MONS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function fmt(startStr, endStr) {
+    const s = new Date(startStr + "T12:00:00");
+    const sd = `${s.getDate()} ${MONS[s.getMonth()]}`;
+    if (!endStr) return `${sd} ${s.getFullYear()}`;
+    const e = new Date(endStr + "T12:00:00");
+    const ed = `${e.getDate()} ${MONS[e.getMonth()]}`;
+    if (s.getFullYear() === e.getFullYear()) return `${sd} – ${ed} ${e.getFullYear()}`;
+    return `${sd} ${s.getFullYear()} – ${ed} ${e.getFullYear()}`;
+  }
+  // 1. Prefer actual day dates (most accurate)
+  const dates = state.days.map(d => d.date).filter(Boolean).sort();
+  if (dates.length) return fmt(dates[0], dates[dates.length - 1]);
+  // 2. Fall back to tripInfo startDate/endDate (from _trips-list.json)
+  const ti = state.tripInfo;
+  if (ti && ti.startDate) return fmt(ti.startDate, ti.endDate || null);
+  // 3. Legacy: stored dateRange freetext
+  return state.tripMeta.dateRange || "";
 }
 
-function renderSourceBadge() {
-  const c = document.getElementById("source-badge-container");
-  const labels = {
-    json: '<span class="dot"></span> Stored in repo — edit the page or <code>data/itinerary.json</code>',
-    sheets: '<span class="dot"></span> Loaded from Google Sheets (migration mode)',
-    localstorage: '<span class="dot"></span> Unsaved local draft — export to save to repo',
-  };
-  const classes = { json: 'local', sheets: 'sheets', localstorage: 'local' };
-  const src = state.dataSource || 'json';
-  c.innerHTML = `<div class="source-badge ${classes[src]}">${labels[src] || ''}</div>`;
+function renderHeroMeta() {
+  const m = state.tripMeta;
+  const ti = state.tripInfo || {};
+  // Prefer _trips-list.json (tripInfo) as the authoritative source for hero display fields
+  const country  = ti.title    || m.country  || "";
+  const subtitle = ti.subtitle || m.subtitle || "";
+  const tripType = ti.tripType || m.tripType || "";
+  // people/cities/kanji are only in tripMeta (not stored in the trips list)
+  const kanji    = m.kanji || "";
+  const dateRange = deriveDateRange();
+  document.title = [country, tripType, dateRange].filter(Boolean).join(" · ");
+  document.getElementById("hero-tag-text").textContent = [tripType, dateRange].filter(Boolean).join(" · ");
+  const h1 = document.getElementById("hero-title");
+  h1.firstChild.textContent = country;
+  document.getElementById("hero-subtitle").textContent = subtitle;
+  document.getElementById("stat-people").textContent = m.people || 0;
+  document.getElementById("footer-text").textContent = [country, tripType, dateRange].filter(Boolean).join(" · ");
+  // Decorative background text (kanji / country script)
+  const kanjiEl = document.getElementById("hero-kanji");
+  const loadingKanjiEl = document.getElementById("loading-kanji");
+  if (kanjiEl)       { kanjiEl.textContent = kanji; kanjiEl.style.display = kanji ? "" : "none"; }
+  if (loadingKanjiEl){ loadingKanjiEl.textContent = kanji; loadingKanjiEl.style.display = kanji ? "" : "none"; }
 }
 
 function renderNav() {
@@ -977,6 +965,14 @@ function renderNav() {
 function renderOverview() {
   const grid = document.getElementById("overview-grid");
   grid.innerHTML = "";
+  if (state.days.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:48px 0;text-align:center;color:var(--muted)">
+      <div style="font-size:32px;margin-bottom:12px">🗺️</div>
+      <div style="font-size:15px;font-weight:500;margin-bottom:6px">No itinerary yet</div>
+      <div style="font-size:13px">Click <strong>Edit</strong> to start planning your trip.</div>
+    </div>`;
+    return;
+  }
   state.days.forEach((d, di) => {
     const preview = d.stops.slice(0, 3).map(s => s.name).join(" · ");
     const ci = getCityInfo(d.city);
@@ -1005,7 +1001,7 @@ function renderDays() {
   const container = document.getElementById("day-sections");
   container.innerHTML = "";
   state.days.forEach((d, di) => {
-    const numStr = String(d.num).padStart(2, "0");
+    const numStr = String(di + 1).padStart(2, "0");
     const stopsHtml = d.stops.map((s, si) => buildStopHtml(d, s, si, si === d.stops.length - 1)).join("");
     const routeEmbed = normalizeGoogleMapsEmbedUrl(d.route_url);
 
@@ -1163,16 +1159,16 @@ function saveStopModal() {
   if (!_stopCtx) return;
   const { di, si } = _stopCtx;
   const stop = {
-    name:     document.getElementById("f-stop-name").value.trim(),
-    time:     document.getElementById("f-stop-time").value.trim(),
-    tags:     document.getElementById("f-stop-tags").value.trim(),
-    booked:   (() => { const v = document.getElementById("f-stop-booked").value; return v === "true" ? true : v === "false" ? false : null; })(),
-    note:     document.getElementById("f-stop-note").value.trim(),
-    maps_url:    document.getElementById("f-stop-maps-url").value.trim(),
-    parking_url: document.getElementById("f-stop-parking-url").value.trim(),
-    ticket_url:  document.getElementById("f-stop-ticket-url").value.trim(),
-    img_url:     document.getElementById("f-stop-image-url").value.trim(),
-    options:  getOptionsFromEditor(),
+    name:        sanitizeText(document.getElementById("f-stop-name").value, 200),
+    time:        sanitizeText(document.getElementById("f-stop-time").value, 20),
+    tags:        sanitizeTags(document.getElementById("f-stop-tags").value),
+    booked:      (() => { const v = document.getElementById("f-stop-booked").value; return v === "true" ? true : v === "false" ? false : null; })(),
+    note:        sanitizeText(document.getElementById("f-stop-note").value, 2000),
+    maps_url:    sanitizeUrl(document.getElementById("f-stop-maps-url").value),
+    parking_url: sanitizeUrl(document.getElementById("f-stop-parking-url").value),
+    ticket_url:  sanitizeUrl(document.getElementById("f-stop-ticket-url").value),
+    img_url:     sanitizeUrl(document.getElementById("f-stop-image-url").value),
+    options:     getOptionsFromEditor(),
   };
   if (!stop.name) { alert("Stop name is required."); return; }
   if (si === null) {
@@ -1301,7 +1297,16 @@ function openDayModal(di) {
   const isNew = di === null;
   document.getElementById("day-modal-title").textContent = isNew ? "Add Day" : "Edit Day";
   const d = isNew ? {} : state.days[di];
-  document.getElementById("f-day-date").value      = d.date      || "";
+  let defaultDate = d.date || "";
+  if (isNew) {
+    const dates = state.days.map(x => x.date).filter(Boolean).sort();
+    if (dates.length > 0) {
+      const last = new Date(dates[dates.length - 1] + "T12:00:00");
+      last.setDate(last.getDate() + 1);
+      defaultDate = last.toISOString().slice(0, 10);
+    }
+  }
+  document.getElementById("f-day-date").value      = defaultDate;
   populateCityDropdown(d.city || (state.tripMeta.cities && state.tripMeta.cities[0] && state.tripMeta.cities[0].id) || "");
   document.getElementById("f-day-title").value     = d.title     || "";
   document.getElementById("f-day-desc").value      = d.desc      || "";
@@ -1314,12 +1319,12 @@ function saveDayModal() {
   const isNew = _dayCtx === null;
   const di = _dayCtx;
   const dayData = {
-    date:      document.getElementById("f-day-date").value,
-    city:      document.getElementById("f-day-city").value,
-    title:     document.getElementById("f-day-title").value.trim(),
-    desc:      document.getElementById("f-day-desc").value.trim(),
-    tip:       document.getElementById("f-day-tip").value.trim(),
-    route_url: normalizeGoogleMapsEmbedUrl(document.getElementById("f-day-route-url").value),
+    date:      sanitizeDate(document.getElementById("f-day-date").value),
+    city:      sanitizeText(document.getElementById("f-day-city").value, 50),
+    title:     sanitizeText(document.getElementById("f-day-title").value, 200),
+    desc:      sanitizeText(document.getElementById("f-day-desc").value, 2000),
+    tip:       sanitizeText(document.getElementById("f-day-tip").value, 1000),
+    route_url: sanitizeGoogleMapsUrl(document.getElementById("f-day-route-url").value),
   };
   if (isNew) {
     const maxNum = state.days.reduce((m, d) => Math.max(m, Number(d.num)), 0);
@@ -1327,6 +1332,7 @@ function saveDayModal() {
   } else {
     Object.assign(state.days[di], dayData);
   }
+  sortAndRenumberDays();
   persistToLS();
   // Full re-render needed for new days / nav updates
   const currentSection = document.querySelector(".page-section.active")?.id?.replace("sec-", "") || "overview";
@@ -1339,9 +1345,20 @@ function deleteDay(di) {
   const d = state.days[di];
   if (!confirm(`Delete entire day "${computeDayLabel(di, d.date)}" and all its stops?`)) return;
   state.days.splice(di, 1);
+  sortAndRenumberDays();
   persistToLS();
   renderAll();
   showSection("overview");
+}
+
+function sortAndRenumberDays() {
+  state.days.sort((a, b) => {
+    if (!a.date && !b.date) return 0;
+    if (!a.date) return 1;
+    if (!b.date) return -1;
+    return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
+  });
+  state.days.forEach((d, i) => { d.num = i + 1; });
 }
 
 // ════════════════════════════════════════════════════════════════════
@@ -1386,11 +1403,32 @@ function openAccomModal(ai) {
   document.getElementById("accom-modal-title").textContent = isNew ? "Add Accommodation" : "Edit Accommodation";
   const a = isNew ? {} : (state.accoms || [])[ai];
   document.getElementById("f-accom-name").value     = a.name     || "";
-  document.getElementById("f-accom-checkin").value  = a.checkin  || "";
-  document.getElementById("f-accom-checkout").value = a.checkout || "";
+  let defaultCheckin = a.checkin || "";
+  let defaultCheckout = a.checkout || "";
+  if (isNew) {
+    const dates = state.days.map(d => d.date).filter(Boolean).sort();
+    defaultCheckin = dates.length > 0 ? dates[0] : "";
+    if (defaultCheckin) {
+      const d = new Date(defaultCheckin + "T12:00:00");
+      d.setDate(d.getDate() + 1);
+      defaultCheckout = d.toISOString().slice(0, 10);
+    }
+  }
+  document.getElementById("f-accom-checkin").value  = defaultCheckin;
+  document.getElementById("f-accom-checkout").value = defaultCheckout;
   document.getElementById("f-accom-maps-url").value = a.maps_url || "";
   document.getElementById("f-accom-note").value     = a.note     || "";
   openModal("accom-modal");
+}
+
+function onAccomCheckinChange(val) {
+  if (!val) return;
+  const checkoutEl = document.getElementById("f-accom-checkout");
+  if (!checkoutEl.value || checkoutEl.value <= val) {
+    const d = new Date(val + "T12:00:00");
+    d.setDate(d.getDate() + 1);
+    checkoutEl.value = d.toISOString().slice(0, 10);
+  }
 }
 
 function saveAccomModal() {
@@ -1398,11 +1436,11 @@ function saveAccomModal() {
   const name = document.getElementById("f-accom-name").value.trim();
   if (!name) { alert("Name is required."); return; }
   const accomData = {
-    name,
-    checkin:  document.getElementById("f-accom-checkin").value,
-    checkout: document.getElementById("f-accom-checkout").value,
-    maps_url: document.getElementById("f-accom-maps-url").value.trim(),
-    note:     document.getElementById("f-accom-note").value.trim(),
+    name:     sanitizeText(name, 200),
+    checkin:  sanitizeDate(document.getElementById("f-accom-checkin").value),
+    checkout: sanitizeDate(document.getElementById("f-accom-checkout").value),
+    maps_url: sanitizeUrl(document.getElementById("f-accom-maps-url").value),
+    note:     sanitizeText(document.getElementById("f-accom-note").value, 1000),
   };
   if (!state.accoms) state.accoms = [];
   if (isNew) {
@@ -1424,64 +1462,7 @@ function deleteAccom(ai) {
   renderDays();
 }
 
-// --- Trip settings modal ---
-let _editingCities = [];
-
-function renderTripCityRows() {
-  const container = document.getElementById("f-trip-cities-list");
-  container.innerHTML = _editingCities.map((c, i) => `
-    <div style="display:flex;gap:6px;align-items:center">
-      <input class="form-input" style="width:52px;text-align:center" value="${escHtml(c.emoji || "")}" placeholder="🗼"
-        oninput="_editingCities[${i}].emoji=this.value">
-      <input class="form-input" style="flex:1" value="${escHtml(c.name || "")}" placeholder="City name"
-        oninput="_editingCities[${i}].name=this.value;_editingCities[${i}].id=this.value.toLowerCase().replace(/\\s+/g,'-')">
-      <button onclick="removeTripCityRow(${i})" style="background:transparent;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:0 4px">✕</button>
-    </div>`).join("");
-}
-
-function addTripCityRow() {
-  _editingCities.push({ id: "", name: "", emoji: "" });
-  renderTripCityRows();
-}
-
-function removeTripCityRow(i) {
-  _editingCities.splice(i, 1);
-  renderTripCityRows();
-}
-
-function openTripModal() {
-  const m = state.tripMeta;
-  document.getElementById("f-trip-type").value      = m.tripType   || "";
-  document.getElementById("f-trip-country").value   = m.country    || "";
-  document.getElementById("f-trip-subtitle").value  = m.subtitle   || "";
-  document.getElementById("f-trip-daterange").value = m.dateRange  || "";
-  document.getElementById("f-trip-people").value    = m.people     || "";
-  _editingCities = JSON.parse(JSON.stringify(m.cities || []));
-  renderTripCityRows();
-  openModal("trip-modal");
-}
-
-function saveTripModal() {
-  state.tripMeta = {
-    tripType:  document.getElementById("f-trip-type").value.trim(),
-    country:   document.getElementById("f-trip-country").value.trim(),
-    subtitle:  document.getElementById("f-trip-subtitle").value.trim(),
-    dateRange: document.getElementById("f-trip-daterange").value.trim(),
-    people:    document.getElementById("f-trip-people").value.trim(),
-    cities: _editingCities
-      .filter(c => c.name.trim())
-      .map(c => ({
-        id:    c.id || c.name.trim().toLowerCase().replace(/\s+/g, "-"),
-        name:  c.name.trim(),
-        emoji: c.emoji.trim() || "📍",
-      })),
-  };
-  persistToLS();
-  renderHeroMeta();
-  renderOverview();
-  renderDays();
-  closeModal("trip-modal");
-}
+// Trip info is edited from the main Atlas page (index.html?edit=TRIP_ID)
 
 // --- Essential card modal ---
 let _essentialCtx = null;
@@ -1612,9 +1593,9 @@ function refreshOptionBadges() {
 
 function getOptionsFromEditor() {
   return Array.from(document.querySelectorAll("#options-editor .option-editor-row")).map(row => ({
-    name: row.querySelector(".opt-name").value.trim(),
-    note: row.querySelector(".opt-note").value.trim(),
-    url:  row.querySelector(".opt-url").value.trim(),
+    name: sanitizeText(row.querySelector(".opt-name").value, 200),
+    note: sanitizeText(row.querySelector(".opt-note").value, 500),
+    url:  sanitizeUrl(row.querySelector(".opt-url").value),
   })).filter(opt => opt.name);
 }
 
@@ -1622,10 +1603,66 @@ function getOptionsFromEditor() {
 //  Utilities
 // ════════════════════════════════════════════════════════════════════
 
+// ════════════════════════════════════════════════════════════════════
+//  Input sanitization (prevents write attacks into Google Drive JSON)
+// ════════════════════════════════════════════════════════════════════
+
+function sanitizeText(str, maxLen = 2000) {
+  return (str || "").trim().slice(0, maxLen);
+}
+
+function sanitizeUrl(str) {
+  const s = (str || "").trim();
+  if (!s) return "";
+  try {
+    const u = new URL(s);
+    if (u.protocol !== "http:" && u.protocol !== "https:") return "";
+  } catch(e) { return ""; }
+  return s.slice(0, 2000);
+}
+
+function sanitizeDate(str) {
+  const s = (str || "").trim();
+  return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : "";
+}
+
+function sanitizeTags(str) {
+  const allowed = new Set(["nature","mobility","culture","food","transit","flight"]);
+  return (str || "").split(",").map(t => t.trim().toLowerCase()).filter(t => allowed.has(t)).join(",");
+}
+
+function sanitizeGoogleMapsUrl(raw) {
+  const url = normalizeGoogleMapsEmbedUrl(raw);
+  if (!url) return "";
+  try {
+    const u = new URL(url);
+    if ((u.protocol === "https:" || u.protocol === "http:") &&
+        (u.hostname.endsWith("google.com") || u.hostname.endsWith("googleapis.com"))) {
+      return url;
+    }
+  } catch(e) {}
+  return "";
+}
+
 // Render a note string as HTML — allows <br>, <a>, <strong> etc.
 // Also converts plain newlines to <br> so the textarea UX is natural.
 function renderNote(note) {
-  return (note || "").replace(/\n/g, "<br>");
+  return (note || "")
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+    .replace(/`([^`]+)`/g, (_, txt) =>
+      `<span class="copy-chip" onclick="copyChip(this,'${txt.replace(/'/g,"&#39;")}')" title="Click to copy">` +
+      `<svg width="10" height="10" viewBox="0 0 16 16" fill="none" style="opacity:0.5"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5"/></svg>` +
+      `${txt}</span>`)
+    .replace(/\n/g, "<br>");
+}
+
+function copyChip(el, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    el.classList.add("copied");
+    const orig = el.innerHTML;
+    el.innerHTML = `<svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Copied!`;
+    setTimeout(() => { el.classList.remove("copied"); el.innerHTML = orig; }, 1800);
+  });
 }
 
 function escHtml(str) {
@@ -1664,14 +1701,13 @@ function hideLoading() { const el = document.getElementById("loading-screen"); e
 //  Init
 // ════════════════════════════════════════════════════════════════════
 (async () => {
-  await loadData();
+  const [, infoResult] = await Promise.allSettled([loadData(), fetchTripInfo()]);
+  state.tripInfo = (infoResult.status === 'fulfilled' ? infoResult.value : null) || null;
+  sortAndRenumberDays();
   if (!state.days.length) {
     // Show empty state — edit mode will let you add days
     state.days = [];
     state.dataSource = state.dataSource || 'json';
-  }
-  if (!state.essentials || !state.essentials.length) {
-    state.essentials = DEFAULT_ESSENTIALS;
   }
   renderAll();
   hideLoading();

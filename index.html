@@ -30,21 +30,19 @@
   .site-header-bg {
     position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse 80% 70% at 10% 40%, rgba(14,165,233,0.18) 0%, transparent 65%),
-      radial-gradient(ellipse 55% 60% at 88% 25%, rgba(99,102,241,0.15) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 55% at 50% 95%, rgba(20,184,166,0.12) 0%, transparent 60%);
+      radial-gradient(ellipse 80% 70% at 10% 40%, rgba(14,165,233,0.12) 0%, transparent 65%),
+      radial-gradient(ellipse 55% 60% at 88% 25%, rgba(99,102,241,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 55% at 50% 95%, rgba(20,184,166,0.08) 0%, transparent 60%);
   }
-  /* Subtle grid texture */
-  .site-header-grid {
-    position: absolute; inset: 0; opacity: 0.04;
-    background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
-    background-size: 40px 40px;
+  /* Map graticule + compass SVG overlay */
+  .site-header-map {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    pointer-events: none;
   }
   .site-header-inner { position: relative; z-index: 1; }
   .site-eyebrow {
-    font-size: 11px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase;
-    color: rgba(255,255,255,0.35); margin-bottom: 20px;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.4em; text-transform: uppercase;
+    color: rgba(255,255,255,0.28); margin-bottom: 20px;
   }
   .site-title {
     font-family: 'Playfair Display', serif;
@@ -53,7 +51,7 @@
     letter-spacing: -0.01em;
   }
   .site-sub {
-    margin-top: 16px; font-size: 14px; color: rgba(255,255,255,0.38); letter-spacing: 0.04em;
+    margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.32); letter-spacing: 0.06em;
   }
 
   /* MAIN */
@@ -111,8 +109,11 @@
     display: flex; flex-direction: column; justify-content: flex-end;
     padding: 24px;
   }
-  .trip-card-status {
+  .trip-card-badges {
     position: absolute; top: 18px; left: 18px;
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .trip-card-status {
     font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
     background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85);
     padding: 4px 10px; border-radius: 20px; backdrop-filter: blur(4px);
@@ -136,6 +137,41 @@
     border-radius: 20px; padding: 4px 10px; backdrop-filter: blur(4px);
   }
 
+  /* CARD ACTION BUTTONS (hover, top-right) */
+  .trip-card-actions {
+    position: absolute; top: 12px; right: 12px; z-index: 3;
+    display: flex; gap: 6px;
+    opacity: 0; transform: scale(0.85);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+  .trip-card:hover .trip-card-actions { opacity: 1; transform: scale(1); }
+  .trip-card-action-btn {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7); font-size: 13px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; backdrop-filter: blur(4px);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .trip-card-action-btn:hover { background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.4); }
+  .trip-card-action-btn.delete:hover { background: rgba(200,40,30,0.75); color: #fff; border-color: transparent; }
+
+  /* COVER IMAGE MODAL */
+  .cover-modal-preview {
+    width: 100%; height: 140px; border-radius: 10px; object-fit: cover;
+    background: var(--paper2); border: 1px solid var(--border);
+    display: none; margin-top: 8px;
+  }
+  .cover-modal-preview.visible { display: block; }
+  .cover-modal-preview-placeholder {
+    width: 100%; height: 140px; border-radius: 10px;
+    background: var(--paper2); border: 1px dashed var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 12px; margin-top: 8px;
+  }
+  .btn-modal-clear { padding: 9px 18px; border: 1px solid var(--border); border-radius: 20px; background: none; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.15s; margin-right: auto; }
+  .btn-modal-clear:hover { color: #c0392b; border-color: #c0392b; }
+
   /* ADD TRIP CARD */
   .trip-card-add {
     background: transparent;
@@ -143,12 +179,38 @@
     border-radius: 18px;
     aspect-ratio: 3 / 2;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 10px; color: var(--muted); cursor: default;
+    gap: 10px; color: var(--muted); cursor: pointer;
     transition: all 0.2s;
   }
+  .trip-card-add:hover { border-color: rgba(26,27,46,0.3); color: var(--ink); background: rgba(26,27,46,0.03); }
   .trip-card-add-icon { font-size: 28px; opacity: 0.4; }
   .trip-card-add-label { font-size: 13px; font-weight: 500; }
   .trip-card-add-hint { font-size: 11px; color: var(--muted); opacity: 0.6; text-align: center; max-width: 180px; line-height: 1.5; }
+
+  /* ADD TRIP MODAL */
+  .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+  .modal-backdrop.open { display: flex; }
+  .modal-box { background: #fff; border-radius: 18px; width: 100%; max-width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden; }
+  .modal-box-header { padding: 24px 24px 0; display: flex; align-items: center; justify-content: space-between; }
+  .modal-box-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--ink); }
+  .modal-box-close { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); background: none; cursor: pointer; font-size: 14px; color: var(--muted); display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .modal-box-close:hover { background: var(--paper2); color: var(--ink); }
+  .modal-box-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; max-height: 70vh; overflow-y: auto; }
+  .modal-box-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; }
+  .mf-group { display: flex; flex-direction: column; gap: 5px; }
+  .mf-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .mf-input, .mf-select { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); background: var(--paper); outline: none; transition: border-color 0.15s; }
+  .mf-input:focus, .mf-select:focus { border-color: var(--ink); background: #fff; }
+  .mf-hint { font-size: 11px; color: var(--muted); }
+  .mf-colors { display: flex; gap: 8px; flex-wrap: wrap; }
+  .mf-color-swatch { width: 28px; height: 28px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.15s; }
+  .mf-color-swatch:hover { transform: scale(1.15); }
+  .mf-color-swatch.selected { border-color: var(--ink); }
+  .btn-modal-cancel { padding: 9px 18px; border: 1px solid var(--border); border-radius: 20px; background: none; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+  .btn-modal-cancel:hover { color: var(--ink); border-color: rgba(26,27,46,0.3); }
+  .btn-modal-save { padding: 9px 20px; border: none; border-radius: 20px; background: var(--ink); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: opacity 0.15s; }
+  .btn-modal-save:hover { opacity: 0.85; }
+  .btn-modal-save:disabled { opacity: 0.5; cursor: default; }
 
   /* LOADING */
   #loading { text-align: center; padding: 60px 0; color: var(--muted); font-size: 13px; letter-spacing: 0.1em; }
@@ -161,10 +223,60 @@
 
 <header class="site-header">
   <div class="site-header-bg"></div>
-  <div class="site-header-grid"></div>
+  <!-- Map graticule, compass rose, and route decoration -->
+  <svg class="site-header-map" viewBox="0 0 1200 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Latitude lines -->
+    <line x1="0" y1="46"  x2="1200" y2="46"  stroke="white" stroke-width="0.5" opacity="0.07"/>
+    <line x1="0" y1="93"  x2="1200" y2="93"  stroke="white" stroke-width="0.5" opacity="0.07"/>
+    <line x1="0" y1="140" x2="1200" y2="140" stroke="white" stroke-width="0.75" opacity="0.12"/>
+    <line x1="0" y1="187" x2="1200" y2="187" stroke="white" stroke-width="0.5" opacity="0.07"/>
+    <line x1="0" y1="234" x2="1200" y2="234" stroke="white" stroke-width="0.5" opacity="0.07"/>
+    <!-- Longitude lines -->
+    <line x1="150"  y1="0" x2="150"  y2="280" stroke="white" stroke-width="0.5" opacity="0.07"/>
+    <line x1="300"  y1="0" x2="300"  y2="280" stroke="white" stroke-width="0.5" opacity="0.07"/>
+    <line x1="450"  y1="0" x2="450"  y2="280" stroke="white" stroke-width="0.5" opacity="0.07"/>
+    <line x1="600"  y1="0" x2="600"  y2="280" stroke="white" stroke-width="0.75" opacity="0.12"/>
+    <line x1="750"  y1="0" x2="750"  y2="280" stroke="white" stroke-width="0.5" opacity="0.07"/>
+    <line x1="900"  y1="0" x2="900"  y2="280" stroke="white" stroke-width="0.5" opacity="0.07"/>
+    <line x1="1050" y1="0" x2="1050" y2="280" stroke="white" stroke-width="0.5" opacity="0.07"/>
+    <!-- Graticule labels (left edge) -->
+    <text x="8" y="44"  font-size="8" fill="white" opacity="0.18" font-family="Georgia,serif" letter-spacing="0.05em">45°N</text>
+    <text x="8" y="91"  font-size="8" fill="white" opacity="0.18" font-family="Georgia,serif" letter-spacing="0.05em">30°N</text>
+    <text x="8" y="144" font-size="8" fill="white" opacity="0.22" font-family="Georgia,serif" letter-spacing="0.05em">EQ</text>
+    <text x="8" y="191" font-size="8" fill="white" opacity="0.18" font-family="Georgia,serif" letter-spacing="0.05em">30°S</text>
+    <!-- Dotted travel route (decorative) -->
+    <path d="M 60 220 Q 200 60 400 155 Q 580 240 780 90 Q 920 30 1100 110"
+          fill="none" stroke="white" stroke-width="1.25" stroke-dasharray="5,7" opacity="0.1" stroke-linecap="round"/>
+    <!-- Route waypoints -->
+    <circle cx="400"  cy="155" r="3" fill="white" opacity="0.14"/>
+    <circle cx="780"  cy="90"  r="3" fill="white" opacity="0.14"/>
+    <circle cx="1100" cy="110" r="3" fill="white" opacity="0.14"/>
+    <!-- Compass rose (right side) -->
+    <g transform="translate(1090,148)" opacity="0.22">
+      <circle r="54" fill="none" stroke="white" stroke-width="0.75"/>
+      <circle r="28" fill="none" stroke="white" stroke-width="0.5" stroke-dasharray="2.5,3.5"/>
+      <circle r="5"  fill="none" stroke="white" stroke-width="0.75"/>
+      <!-- N point (bold) -->
+      <polygon points="0,-54 -6,-26 6,-26" fill="white"/>
+      <!-- S point -->
+      <polygon points="0,54 -5,26 5,26" fill="white" opacity="0.55"/>
+      <!-- E point -->
+      <polygon points="54,0 26,-5 26,5" fill="white" opacity="0.55"/>
+      <!-- W point -->
+      <polygon points="-54,0 -26,-5 -26,5" fill="white" opacity="0.55"/>
+      <!-- Diagonal spokes -->
+      <line x1="-38" y1="-38" x2="38"  y2="38"  stroke="white" stroke-width="0.5" opacity="0.4"/>
+      <line x1="38"  y1="-38" x2="-38" y2="38"  stroke="white" stroke-width="0.5" opacity="0.4"/>
+      <!-- Cardinal labels -->
+      <text y="-64" text-anchor="middle" fill="white" font-size="11" font-family="Georgia,serif" font-style="italic">N</text>
+      <text y="75"  text-anchor="middle" fill="white" font-size="9"  font-family="Georgia,serif" font-style="italic" opacity="0.6">S</text>
+      <text x="66"  y="4" text-anchor="middle" fill="white" font-size="9"  font-family="Georgia,serif" font-style="italic" opacity="0.6">E</text>
+      <text x="-66" y="4" text-anchor="middle" fill="white" font-size="9"  font-family="Georgia,serif" font-style="italic" opacity="0.6">W</text>
+    </g>
+  </svg>
   <div class="site-header-inner">
-    <div class="site-eyebrow">Travel Journal</div>
-    <div class="site-title">My Trips</div>
+    <div class="site-eyebrow">&#8212; Travel Journal &#8212;</div>
+    <div class="site-title">atlas</div>
     <div class="site-sub">Every adventure, in one place</div>
   </div>
 </header>
@@ -180,19 +292,171 @@
 
 <!-- <footer>Made with love 🌸</footer> -->
 
+<!-- Add Trip Modal -->
+<div class="modal-backdrop" id="add-trip-modal">
+  <div class="modal-box">
+    <div class="modal-box-header">
+      <div class="modal-box-title">Add a Trip</div>
+      <button class="modal-box-close" onclick="closeAddTripModal()">✕</button>
+    </div>
+    <div class="modal-box-body">
+      <div class="mf-group">
+        <label class="mf-label">Trip ID <span style="color:var(--ink)">*</span></label>
+        <input class="mf-input" id="mf-id" placeholder="e.g. paris-2027" oninput="slugifyId(this)">
+        <div class="mf-hint">Lowercase, hyphens only. This becomes the URL: trips/trip.html?id=paris-2027</div>
+      </div>
+      <div class="mf-group">
+        <label class="mf-label">Title <span style="color:var(--ink)">*</span></label>
+        <input class="mf-input" id="mf-title" placeholder="e.g. Paris">
+      </div>
+      <div class="mf-group">
+        <label class="mf-label">Subtitle</label>
+        <input class="mf-input" id="mf-subtitle" placeholder="e.g. Montmartre & Marais">
+      </div>
+      <div class="mf-group">
+        <label class="mf-label">Trip Type</label>
+        <input class="mf-input" id="mf-triptype" placeholder="e.g. Family Trip">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="mf-group">
+          <label class="mf-label">Start Date</label>
+          <input class="mf-input" id="mf-startdate" type="date">
+        </div>
+        <div class="mf-group">
+          <label class="mf-label">End Date</label>
+          <input class="mf-input" id="mf-enddate" type="date">
+        </div>
+      </div>
+      <div class="mf-group">
+        <label class="mf-label" style="display:flex;align-items:center;gap:10px;cursor:pointer">
+          <input type="checkbox" id="mf-confirmed" style="width:16px;height:16px;accent-color:var(--ink);cursor:pointer">
+          Confirmed trip
+        </label>
+        <div class="mf-hint">Unconfirmed trips show a "Draft" badge and sort separately.</div>
+      </div>
+      <div class="mf-group">
+        <label class="mf-label">Decorative text</label>
+        <input class="mf-input" id="mf-kanji" placeholder="e.g. 日本, FRANCE, ITALIA">
+        <div class="mf-hint">Shown as large background text on the trip hero. Leave blank to hide.</div>
+      </div>
+      <div class="mf-group">
+        <label class="mf-label">Cover Image URL</label>
+        <input class="mf-input" id="mf-cover" type="url" placeholder="https://…" oninput="previewAddCover(this.value)">
+        <img id="mf-cover-preview" class="cover-modal-preview" alt="Cover preview">
+        <div class="cover-modal-preview-placeholder" id="mf-cover-placeholder">No image — palette gradient will be used</div>
+      </div>
+      <div class="mf-group">
+        <label class="mf-label">Card Colour Palette</label>
+        <div class="mf-colors" id="mf-palette-swatches"></div>
+        <div class="mf-hint">Used as background when no cover image is set.</div>
+      </div>
+      <div class="mf-group">
+        <label class="mf-label">Number of People</label>
+        <input class="mf-input" id="mf-people" type="number" min="1" placeholder="e.g. 5">
+      </div>
+      <div class="mf-group">
+        <label class="mf-label">Cities</label>
+        <div id="mf-cities-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px"></div>
+        <button type="button" onclick="addModalCityRow()" style="width:100%;padding:7px;font-size:12px;border:1px dashed var(--border);border-radius:8px;background:transparent;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">+ Add city</button>
+        <div class="mf-hint">Each city gets its own colour on the day overview in the trip page.</div>
+      </div>
+    </div>
+    <div class="modal-box-footer">
+      <button class="btn-modal-cancel" onclick="closeAddTripModal()">Cancel</button>
+      <button class="btn-modal-save" id="btn-add-trip-save" onclick="submitTripModal()">Create Trip</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cover Image Modal -->
+<div class="modal-backdrop" id="cover-image-modal">
+  <div class="modal-box">
+    <div class="modal-box-header">
+      <div class="modal-box-title">Cover Image</div>
+      <button class="modal-box-close" onclick="closeCoverImageModal()">✕</button>
+    </div>
+    <div class="modal-box-body">
+      <div class="mf-group">
+        <label class="mf-label">Image URL</label>
+        <input class="mf-input" id="ci-url" type="url" placeholder="https://…" oninput="previewCoverImage(this.value)">
+        <img id="ci-preview" class="cover-modal-preview" alt="Preview">
+        <div class="cover-modal-preview-placeholder" id="ci-placeholder">Paste a URL to preview</div>
+      </div>
+    </div>
+    <div class="modal-box-footer">
+      <button class="btn-modal-clear" id="ci-clear-btn" onclick="saveCoverImage(null)">Remove image</button>
+      <button class="btn-modal-cancel" onclick="closeCoverImageModal()">Cancel</button>
+      <button class="btn-modal-save" onclick="saveCoverImage(document.getElementById('ci-url').value.trim() || null)">Save</button>
+    </div>
+  </div>
+</div>
+
 <script>
+// Local dev env (gitignored). In production, GitHub Actions injects values directly.
+</script>
+<script src="atlas-env.js" onerror="window.__ATLAS_ENV__=window.__ATLAS_ENV__||{}"></script>
+
+<script>
+const APPS_SCRIPT_URL   = (window.__ATLAS_ENV__ || {}).APPS_SCRIPT_URL   || "YOUR_APPS_SCRIPT_URL";
+const APPS_SCRIPT_TOKEN = (window.__ATLAS_ENV__ || {}).APPS_SCRIPT_TOKEN || "YOUR_APPS_SCRIPT_TOKEN";
+
+// In-memory trip list (kept in sync with Drive)
+let _trips = [];
+
 async function loadTrips() {
-  let trips = [];
+  // 1. Try Drive-backed trip list
+  if (APPS_SCRIPT_URL !== "YOUR_APPS_SCRIPT_URL") {
+    try {
+      const res = await fetch(`${APPS_SCRIPT_URL}?tripId=_trips-list&token=${APPS_SCRIPT_TOKEN}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          _trips = data;
+          render(_trips);
+          return;
+        }
+      }
+    } catch(e) { /* fall through */ }
+  }
+
+  // 2. Fall back to static trips.json
   try {
     const res = await fetch("trips.json?t=" + Date.now());
-    if (res.ok) trips = await res.json();
+    if (res.ok) _trips = await res.json();
   } catch(e) { /* ignore */ }
-  render(trips);
+  render(_trips);
 }
 
-function statusLabel(status) {
-  const map = { upcoming: "Upcoming", past: "Past", planning: "Planning" };
-  return map[status] || status || "";
+function computeTripStatus(t) {
+  const today = new Date().toISOString().slice(0, 10);
+  if (t.startDate && t.endDate) {
+    if (today < t.startDate) return "upcoming";
+    if (today > t.endDate)   return "past";
+    return "ongoing";
+  }
+  if (t.startDate) return today < t.startDate ? "upcoming" : "past";
+  return null;
+}
+
+const STATUS_LABELS = { upcoming: "Upcoming", ongoing: "Ongoing", past: "Past" };
+const STATUS_STYLES = {
+  upcoming: "background:rgba(45,90,61,0.75);color:#d4e4da",
+  ongoing:  "background:rgba(184,134,11,0.75);color:#f0e6c0",
+  past:     "background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.85)",
+};
+
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function formatTripDateRange(startDate, endDate) {
+  if (!startDate) return "";
+  const s = new Date(startDate + "T12:00:00");
+  const sd = `${s.getDate()} ${MONTHS[s.getMonth()]}`;
+  if (!endDate) return `${sd} ${s.getFullYear()}`;
+  const e = new Date(endDate + "T12:00:00");
+  const ed = `${e.getDate()} ${MONTHS[e.getMonth()]}`;
+  // Same year: "22 Apr – 30 Apr 2026"; different years: "28 Dec 2026 – 4 Jan 2027"
+  if (s.getFullYear() === e.getFullYear()) return `${sd} – ${ed} ${e.getFullYear()}`;
+  return `${sd} ${s.getFullYear()} – ${ed} ${e.getFullYear()}`;
 }
 
 function buildPaletteGradient(palette) {
@@ -211,10 +475,25 @@ function render(trips) {
   document.getElementById("trips-count").textContent =
     trips.length === 1 ? "1 trip" : `${trips.length} trips`;
 
-  trips.forEach(t => {
+  // Sort: upcoming first (soonest first), then ongoing, then past (most recent first), undated last
+  const today = new Date().toISOString().slice(0, 10);
+  const sorted = [...trips].sort((a, b) => {
+    const sa = computeTripStatus(a), sb = computeTripStatus(b);
+    const order = { upcoming: 0, ongoing: 1, past: 2, null: 3 };
+    const oa = order[sa] ?? 3, ob = order[sb] ?? 3;
+    if (oa !== ob) return oa - ob;
+    const da = a.startDate || "", db = b.startDate || "";
+    if (!da && !db) return 0;
+    if (!da) return 1;
+    if (!db) return -1;
+    // upcoming: soonest first; past: most recent first
+    return sa === "past" ? db.localeCompare(da) : da.localeCompare(db);
+  });
+
+  sorted.forEach(t => {
     const a = document.createElement("a");
     a.className = "trip-card";
-    a.href = t.path;
+    a.href = "trips/trip.html?id=" + t.id;
 
     const bg = document.createElement("div");
     bg.className = "trip-card-bg";
@@ -241,36 +520,433 @@ function render(trips) {
     body.className = "trip-card-body";
 
     const chips = [
-      t.dateRange && `<span class="trip-card-chip">${t.dateRange}</span>`,
-      t.people    && `<span class="trip-card-chip">${t.people} people</span>`,
-      t.tripType  && `<span class="trip-card-chip">${t.tripType}</span>`,
+      formatTripDateRange(t.startDate, t.endDate) && `<span class="trip-card-chip">${formatTripDateRange(t.startDate, t.endDate)}</span>`,
+      t.tripType && `<span class="trip-card-chip">${t.tripType}</span>`,
     ].filter(Boolean).join("");
 
+    const computedStatus = computeTripStatus(t);
+    const statusHtml = (() => {
+      const badges = [];
+      if (!t.confirmed) badges.push(`<div class="trip-card-status" style="background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.2)">Draft</div>`);
+      if (computedStatus) badges.push(`<div class="trip-card-status" style="${STATUS_STYLES[computedStatus]}">${STATUS_LABELS[computedStatus]}</div>`);
+      return badges.length ? `<div class="trip-card-badges">${badges.join("")}</div>` : "";
+    })();
     body.innerHTML = `
-      ${t.status ? `<div class="trip-card-status">${statusLabel(t.status)}</div>` : ""}
+      ${statusHtml}
       <div class="trip-card-title">${t.title}</div>
       ${t.subtitle ? `<div class="trip-card-subtitle">${t.subtitle}</div>` : ""}
       ${chips ? `<div class="trip-card-meta">${chips}</div>` : ""}
     `;
 
+    // Hover action buttons (top-right)
+    const actions = document.createElement("div");
+    actions.className = "trip-card-actions";
+
+    const editBtn = document.createElement("button");
+    editBtn.className = "trip-card-action-btn";
+    editBtn.title = "Edit trip info";
+    editBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
+    editBtn.addEventListener("click", e => {
+      e.preventDefault();
+      e.stopPropagation();
+      openEditTripModal(t.id);
+    });
+
+    const del = document.createElement("button");
+    del.className = "trip-card-action-btn delete";
+    del.title = "Delete trip";
+    del.innerHTML = "✕";
+    del.addEventListener("click", e => {
+      e.preventDefault();
+      e.stopPropagation();
+      deleteTrip(t.id, t.title);
+    });
+
+    actions.appendChild(editBtn);
+    actions.appendChild(del);
     a.appendChild(bg);
     a.appendChild(overlay);
     a.appendChild(body);
+    a.appendChild(actions);
     grid.appendChild(a);
   });
 
-  // // "Add trip" placeholder
-  // const add = document.createElement("div");
-  // add.className = "trip-card-add";
-  // add.innerHTML = `
-  //   <div class="trip-card-add-icon">＋</div>
-  //   <div class="trip-card-add-label">Add a trip</div>
-  //   <div class="trip-card-add-hint">Create a new folder under trips/ and add it to trips.json</div>
-  // `;
-  // grid.appendChild(add);
+  // "Add trip" card
+  const add = document.createElement("div");
+  add.className = "trip-card-add";
+  add.setAttribute("role", "button");
+  add.setAttribute("tabindex", "0");
+  add.onclick = openAddTripModal;
+  add.onkeydown = e => { if (e.key === "Enter" || e.key === " ") openAddTripModal(); };
+  add.innerHTML = `
+    <div class="trip-card-add-icon">＋</div>
+    <div class="trip-card-add-label">Add a trip</div>
+    <div class="trip-card-add-hint">Fill in the details and it'll appear here instantly.</div>
+  `;
+  grid.appendChild(add);
+}
+
+// ─── Delete Trip ─────────────────────────────────────────────────
+async function deleteTrip(id, title) {
+  if (!confirm(`Delete "${title}"?\n\nThis removes the trip from your list. The itinerary data in Google Drive is not deleted.`)) return;
+
+  const updatedTrips = _trips.filter(t => t.id !== id);
+
+  // Save updated list to Drive
+  if (APPS_SCRIPT_URL !== "YOUR_APPS_SCRIPT_URL") {
+    try {
+      await fetch(`${APPS_SCRIPT_URL}?tripId=_trips-list&token=${APPS_SCRIPT_TOKEN}`, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify(updatedTrips, null, 2),
+      });
+    } catch(e) { /* assume success */ }
+  }
+
+  _trips = updatedTrips;
+  const grid = document.getElementById("trips-grid");
+  grid.innerHTML = "";
+  render(_trips);
+}
+
+// ─── Add / Edit Trip Modal ────────────────────────────────────────
+const PALETTE_PRESETS = [
+  { label: "Crimson",   colors: ["#c0392b", "#8e1c13", "#e8d5d2"] },
+  { label: "Emerald",   colors: ["#2d5a3d", "#1a3a28", "#d4e4da"] },
+  { label: "Indigo",    colors: ["#3730a3", "#1e1b6b", "#c7d2fe"] },
+  { label: "Amber",     colors: ["#b45309", "#7c3c0d", "#fef3c7"] },
+  { label: "Teal",      colors: ["#0f766e", "#064e44", "#ccfbf1"] },
+  { label: "Rose",      colors: ["#be185d", "#7c1042", "#fce7f3"] },
+  { label: "Slate",     colors: ["#475569", "#1e293b", "#f1f5f9"] },
+  { label: "Violet",    colors: ["#7c3aed", "#4c1d95", "#ede9fe"] },
+];
+let _selectedPalette = PALETTE_PRESETS[0];
+let _tripModalMode = "add"; // "add" | "edit"
+let _editingTripId = null;
+let _modalCities = [];
+
+function _resetModalFields() {
+  document.getElementById("mf-title").value = "";
+  document.getElementById("mf-subtitle").value = "";
+  document.getElementById("mf-triptype").value = "";
+  document.getElementById("mf-startdate").value = "";
+  document.getElementById("mf-enddate").value = "";
+  document.getElementById("mf-confirmed").checked = false;
+  document.getElementById("mf-kanji").value = "";
+  document.getElementById("mf-cover").value = "";
+  document.getElementById("mf-people").value = "";
+  previewAddCover("");
+  _selectedPalette = PALETTE_PRESETS[0];
+  _modalCities = [];
+  renderPaletteSwatches();
+  renderModalCityRows();
+}
+
+function openAddTripModal() {
+  _tripModalMode = "add";
+  _editingTripId = null;
+  document.getElementById("mf-id").value = "";
+  document.getElementById("mf-id").removeAttribute("readonly");
+  document.getElementById("mf-id").style.opacity = "";
+  document.querySelector(".modal-box-title").textContent = "Add a Trip";
+  document.getElementById("btn-add-trip-save").textContent = "Create Trip";
+  _resetModalFields();
+  document.getElementById("add-trip-modal").classList.add("open");
+  document.getElementById("mf-id").focus();
+}
+
+async function openEditTripModal(id) {
+  _tripModalMode = "edit";
+  _editingTripId = id;
+  const t = _trips.find(t => t.id === id);
+  if (!t) return;
+
+  document.querySelector(".modal-box-title").textContent = "Edit Trip";
+  document.getElementById("btn-add-trip-save").textContent = "Save Changes";
+
+  // Pre-fill from _trips entry
+  document.getElementById("mf-id").value = id;
+  document.getElementById("mf-id").setAttribute("readonly", true);
+  document.getElementById("mf-id").style.opacity = "0.5";
+  document.getElementById("mf-title").value     = t.title     || "";
+  document.getElementById("mf-subtitle").value  = t.subtitle  || "";
+  document.getElementById("mf-triptype").value  = t.tripType  || "";
+  document.getElementById("mf-startdate").value = t.startDate || "";
+  document.getElementById("mf-enddate").value   = t.endDate   || "";
+  document.getElementById("mf-confirmed").checked = !!t.confirmed;
+  document.getElementById("mf-cover").value     = t.coverImage || "";
+  previewAddCover(t.coverImage || "");
+
+  // Match palette
+  const matchedPreset = PALETTE_PRESETS.find(p =>
+    t.palette && p.colors[0] === t.palette[0]
+  ) || PALETTE_PRESETS[0];
+  _selectedPalette = matchedPreset;
+  renderPaletteSwatches();
+
+  // Fetch people + cities from the trip's Drive JSON
+  document.getElementById("mf-people").value = "";
+  _modalCities = [];
+  renderModalCityRows();
+  document.getElementById("add-trip-modal").classList.add("open");
+
+  if (APPS_SCRIPT_URL !== "YOUR_APPS_SCRIPT_URL") {
+    try {
+      const res = await fetch(`${APPS_SCRIPT_URL}?tripId=${id}&token=${APPS_SCRIPT_TOKEN}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.tripMeta) {
+          document.getElementById("mf-people").value = data.tripMeta.people || "";
+          document.getElementById("mf-kanji").value  = data.tripMeta.kanji  || "";
+          _modalCities = JSON.parse(JSON.stringify(data.tripMeta.cities || []));
+          renderModalCityRows();
+        }
+      }
+    } catch(e) { /* best-effort */ }
+  }
+}
+
+// Cities editor
+function renderModalCityRows() {
+  const el = document.getElementById("mf-cities-list");
+  el.innerHTML = _modalCities.map((c, i) => `
+    <div style="display:flex;gap:6px;align-items:center">
+      <input class="mf-input" style="width:52px;text-align:center;padding:7px 4px" value="${escHtml(c.emoji||'')}" placeholder="🗼"
+        oninput="_modalCities[${i}].emoji=this.value">
+      <input class="mf-input" style="flex:1" value="${escHtml(c.name||'')}" placeholder="City name"
+        oninput="_modalCities[${i}].name=this.value;_modalCities[${i}].id=this.value.toLowerCase().replace(/\\s+/g,'-')">
+      <button onclick="_modalCities.splice(${i},1);renderModalCityRows()" style="background:transparent;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:0 4px;line-height:1">✕</button>
+    </div>`).join("");
+}
+
+function addModalCityRow() {
+  _modalCities.push({ id: "", name: "", emoji: "" });
+  renderModalCityRows();
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function previewAddCover(url) {
+  const img = document.getElementById("mf-cover-preview");
+  const ph  = document.getElementById("mf-cover-placeholder");
+  if (url) {
+    img.src = url;
+    img.classList.add("visible");
+    ph.style.display = "none";
+  } else {
+    img.classList.remove("visible");
+    img.src = "";
+    ph.style.display = "flex";
+  }
+}
+
+function closeAddTripModal() {
+  document.getElementById("add-trip-modal").classList.remove("open");
+}
+
+function renderPaletteSwatches() {
+  const el = document.getElementById("mf-palette-swatches");
+  el.innerHTML = PALETTE_PRESETS.map((p, i) => `
+    <div class="mf-color-swatch ${_selectedPalette === p ? "selected" : ""}"
+         style="background:${p.colors[0]}"
+         title="${p.label}"
+         onclick="selectPalette(${i})"></div>
+  `).join("");
+}
+
+function selectPalette(i) {
+  _selectedPalette = PALETTE_PRESETS[i];
+  renderPaletteSwatches();
+}
+
+function slugifyId(input) {
+  input.value = input.value.toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-");
+}
+
+async function submitTripModal() {
+  const id        = document.getElementById("mf-id").value.trim();
+  const title     = document.getElementById("mf-title").value.trim();
+  const subtitle  = document.getElementById("mf-subtitle").value.trim();
+  const tripType   = document.getElementById("mf-triptype").value.trim();
+  const startDate  = document.getElementById("mf-startdate").value || null;
+  const endDate    = document.getElementById("mf-enddate").value   || null;
+  const confirmed  = document.getElementById("mf-confirmed").checked;
+  const kanji      = document.getElementById("mf-kanji").value.trim();
+  const coverImage = document.getElementById("mf-cover").value.trim() || null;
+  const people     = document.getElementById("mf-people").value.trim();
+  const cities    = _modalCities.filter(c => c.name.trim()).map(c => ({
+    id:    c.id || c.name.trim().toLowerCase().replace(/\s+/g, "-"),
+    name:  c.name.trim(),
+    emoji: c.emoji.trim() || "📍",
+  }));
+
+  if (!id)    { document.getElementById("mf-id").focus();    return; }
+  if (!title) { document.getElementById("mf-title").focus(); return; }
+
+  const btn = document.getElementById("btn-add-trip-save");
+  btn.disabled = true;
+  btn.textContent = "Saving…";
+
+  const postOpts = { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" } };
+  const newMeta = { tripType, country: title, subtitle, people, cities, kanji };
+
+  if (_tripModalMode === "add") {
+    if (_trips.some(t => t.id === id)) {
+      alert(`A trip with id "${id}" already exists.`);
+      btn.disabled = false;
+      btn.textContent = "Create Trip";
+      return;
+    }
+    const newTrip = { id, title, subtitle, tripType, startDate, endDate, confirmed, coverImage, palette: _selectedPalette.colors };
+    const updatedTrips = [..._trips, newTrip];
+
+    if (APPS_SCRIPT_URL !== "YOUR_APPS_SCRIPT_URL") {
+      try { await fetch(`${APPS_SCRIPT_URL}?tripId=_trips-list&token=${APPS_SCRIPT_TOKEN}`, { ...postOpts, body: JSON.stringify(updatedTrips, null, 2) }); } catch(e) {}
+      const seedData = { _comment: "Generated by Atlas itinerary editor.", tripMeta: newMeta, days: [], accoms: [], essentials: [] };
+      try { await fetch(`${APPS_SCRIPT_URL}?tripId=${id}&token=${APPS_SCRIPT_TOKEN}`, { ...postOpts, body: JSON.stringify(seedData, null, 2) }); } catch(e) {}
+    }
+
+    _trips = updatedTrips;
+    closeAddTripModal();
+    render(_trips);
+    btn.disabled = false;
+    btn.textContent = "Create Trip";
+    window.location.href = `trips/trip.html?id=${id}`;
+
+  } else {
+    // Edit mode: update _trips-list entry and patch trip's JSON in Drive
+    const updatedTrips = _trips.map(t => t.id !== id ? t : {
+      ...t, title, subtitle, tripType, startDate, endDate, confirmed, coverImage, palette: _selectedPalette.colors,
+    });
+
+    if (APPS_SCRIPT_URL !== "YOUR_APPS_SCRIPT_URL") {
+      // Save updated trips list
+      try { await fetch(`${APPS_SCRIPT_URL}?tripId=_trips-list&token=${APPS_SCRIPT_TOKEN}`, { ...postOpts, body: JSON.stringify(updatedTrips, null, 2) }); } catch(e) {}
+      // Patch tripMeta in the trip's JSON: GET → merge → POST
+      try {
+        const res = await fetch(`${APPS_SCRIPT_URL}?tripId=${id}&token=${APPS_SCRIPT_TOKEN}`);
+        if (res.ok) {
+          const existing = await res.json();
+          if (existing && !existing.error) {
+            const patched = { ...existing, tripMeta: { ...(existing.tripMeta || {}), ...newMeta } };
+            await fetch(`${APPS_SCRIPT_URL}?tripId=${id}&token=${APPS_SCRIPT_TOKEN}`, { ...postOpts, body: JSON.stringify(patched, null, 2) });
+          }
+        }
+      } catch(e) {}
+    }
+
+    _trips = updatedTrips;
+    closeAddTripModal();
+    const grid = document.getElementById("trips-grid");
+    grid.innerHTML = "";
+    render(_trips);
+    btn.disabled = false;
+    btn.textContent = "Save Changes";
+  }
+}
+
+// Close modal on backdrop click
+document.getElementById("add-trip-modal").addEventListener("click", function(e) {
+  if (e.target === this) closeAddTripModal();
+});
+document.getElementById("cover-image-modal").addEventListener("click", function(e) {
+  if (e.target === this) closeCoverImageModal();
+});
+
+// ─── Cover Image Modal ────────────────────────────────────────────
+let _coverImageTripId = null;
+
+function openCoverImageModal(id, title, currentUrl) {
+  _coverImageTripId = id;
+  const input = document.getElementById("ci-url");
+  input.value = currentUrl || "";
+  previewCoverImage(currentUrl || "");
+  document.getElementById("cover-image-modal").classList.add("open");
+  input.focus();
+}
+
+function closeCoverImageModal() {
+  document.getElementById("cover-image-modal").classList.remove("open");
+  _coverImageTripId = null;
+}
+
+function previewCoverImage(url) {
+  const img = document.getElementById("ci-preview");
+  const ph  = document.getElementById("ci-placeholder");
+  if (url) {
+    img.src = url;
+    img.classList.add("visible");
+    ph.style.display = "none";
+  } else {
+    img.classList.remove("visible");
+    img.src = "";
+    ph.style.display = "flex";
+  }
+}
+
+async function saveCoverImage(url) {
+  if (!_coverImageTripId) return;
+  const updatedTrips = _trips.map(t =>
+    t.id !== _coverImageTripId ? t : { ...t, coverImage: url || null }
+  );
+
+  if (APPS_SCRIPT_URL !== "YOUR_APPS_SCRIPT_URL") {
+    try {
+      await fetch(`${APPS_SCRIPT_URL}?tripId=_trips-list&token=${APPS_SCRIPT_TOKEN}`, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify(updatedTrips, null, 2),
+      });
+    } catch(e) { /* assume success */ }
+  }
+
+  _trips = updatedTrips;
+  closeCoverImageModal();
+  const grid = document.getElementById("trips-grid");
+  grid.innerHTML = "";
+  render(_trips);
 }
 
 loadTrips();
+
+// Auto-open edit modal if redirected from a trip page (?edit=trip-id)
+// Runs after loadTrips() populates _trips.
+(function checkEditParam() {
+  const editId = new URLSearchParams(window.location.search).get("edit");
+  if (!editId) return;
+  history.replaceState({}, "", window.location.pathname);
+  // Wait until _trips is populated (loadTrips is async)
+  function tryOpen() {
+    if (_trips.length > 0 || APPS_SCRIPT_URL === "YOUR_APPS_SCRIPT_URL") {
+      openEditTripModal(editId);
+    } else {
+      setTimeout(tryOpen, 100);
+    }
+  }
+  tryOpen();
+})();
+
+
+function copyText(event) {
+  // 1. Prevent the link from actually navigating
+  event.preventDefault();
+  
+  // 2. Get the text
+  const text = document.getElementById("textToCopy").innerText;
+  
+  // 3. Use the Clipboard API to copy
+  navigator.clipboard.writeText(text).then(() => {
+    alert("Text copied: " + text); // Optional feedback
+  }).catch(err => {
+    console.error('Failed to copy: ', err);
+  });
+}
+
+
 </script>
 </body>
 </html>

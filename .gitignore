@@ -1,0 +1,8 @@
+# Environment — NEVER commit credentials
+.env.local
+.env.*.local
+.env
+atlas-env.js
+
+# macOS
+.DS_Store
