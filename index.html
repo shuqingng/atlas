@@ -415,11 +415,10 @@ let _idToken   = null;
 let _userEmail = null;
 let _isOwner   = false;
 
+// GET is public — token is sent only when already signed in (server uses it to set role header)
 async function _apiGet(tripId) {
-  const r = await fetch(`/api/trips?tripId=${encodeURIComponent(tripId)}`, {
-    headers: { 'Authorization': `Bearer ${_idToken}` },
-  });
-  if (r.status === 401) { _signOut(); throw new Error('session-expired'); }
+  const headers = _idToken ? { 'Authorization': `Bearer ${_idToken}` } : {};
+  const r = await fetch(`/api/trips?tripId=${encodeURIComponent(tripId)}`, { headers });
   if (r.headers.get('X-Atlas-Role') === 'owner') _isOwner = true;
   return r.json();
 }
@@ -439,38 +438,25 @@ function _onSignedIn(credential) {
   try {
     const payload = JSON.parse(atob(credential.split('.')[1]));
     _userEmail = payload.email;
-    // Refresh ~5 min before the token expires (tokens last 1 h)
     const refreshIn = Math.max(payload.exp * 1000 - Date.now() - 5 * 60 * 1000, 10000);
     setTimeout(() => google.accounts.id.prompt(), refreshIn);
   } catch(e) {}
   document.getElementById('sign-in-section').style.display = 'none';
-  const us = document.getElementById('user-section');
-  us.style.display = 'flex';
+  document.getElementById('user-section').style.display = 'flex';
   document.getElementById('user-email').textContent = _userEmail;
+  // Re-fetch with token so the server can confirm owner role, then re-render with edit controls
   loadTrips();
-  // Auto-open edit modal if redirected from a trip page (?edit=trip-id)
-  const editId = new URLSearchParams(window.location.search).get('edit');
-  if (editId) {
-    history.replaceState({}, '', window.location.pathname);
-    function tryOpen() {
-      if (_trips.length > 0) openEditTripModal(editId);
-      else setTimeout(tryOpen, 100);
-    }
-    tryOpen();
-  }
 }
 
 function _signOut() {
   _idToken = null; _userEmail = null; _isOwner = false;
   google.accounts.id.disableAutoSelect();
   document.getElementById('sign-in-section').style.display = '';
-  document.getElementById('user-section').style.display   = 'none';
-  document.getElementById('loading').textContent = 'Sign in above to view your trips.';
-  document.getElementById('loading').style.display = 'block';
-  document.getElementById('trips-grid').style.display = 'none';
-  document.getElementById('trips-grid').innerHTML = '';
-  document.getElementById('trips-count').textContent = '';
-  _trips = [];
+  document.getElementById('user-section').style.display = 'none';
+  // Re-render without edit controls; trips remain visible
+  const grid = document.getElementById('trips-grid');
+  grid.innerHTML = '';
+  render(_trips);
 }
 
 async function _initAuth() {
@@ -492,16 +478,13 @@ async function _initAuth() {
     document.getElementById('sign-in-btn'),
     { theme: 'outline', size: 'large', text: 'sign_in_with', shape: 'pill' }
   );
-  google.accounts.id.prompt(n => {
-    if (n.isNotDisplayed() || n.isSkippedMoment()) {
-      document.getElementById('loading').textContent = 'Sign in above to view your trips.';
-    }
-  });
+  // Try silent sign-in; if suppressed, the sign-in button remains available in the header
+  google.accounts.id.prompt();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('loading').textContent = 'Loading trips…';
-  _initAuth();
+  loadTrips();   // public — no auth needed
+  _initAuth();   // background — silently signs in if possible; enables edit controls if owner
 });
 
 // In-memory trip list (kept in sync with Drive)
@@ -511,9 +494,7 @@ async function loadTrips() {
   try {
     const data = await _apiGet('_trips-list');
     if (Array.isArray(data)) _trips = data;
-  } catch(e) {
-    if (e.message === 'session-expired') return;
-  }
+  } catch(e) { /* network error — show whatever we have */ }
   render(_trips);
 }
 

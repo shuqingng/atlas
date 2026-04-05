@@ -330,11 +330,7 @@
 
 <div id="loading-screen">
   <!-- <div class="loading-kanji" id="loading-kanji">日本</div> -->
-  <div id="loading-text" class="loading-text">Loading itinerary<span class="loading-dots"><span></span><span></span><span></span></span></div>
-  <div id="loading-sign-in" style="display:none;flex-direction:column;align-items:center;gap:16px">
-    <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35)">Sign in to view this trip</div>
-    <div id="sign-in-btn"></div>
-  </div>
+  <div class="loading-text">Loading itinerary<span class="loading-dots"><span></span><span></span><span></span></span></div>
 </div>
 
 <section class="hero">
@@ -375,6 +371,7 @@
     <button class="edit-toggle-btn" id="edit-toggle" onclick="toggleEditMode()" title="Toggle edit mode" style="display:none">
       <span>✏️</span> <span id="edit-toggle-label">Edit</span>
     </button>
+    <div id="sign-in-btn" style="flex-shrink:0;margin:8px 0 8px 8px"></div>
     <div class="nav-user" id="nav-user" style="display:none">
       <span class="nav-user-email" id="user-email"></span>
       <button class="nav-sign-out" onclick="_signOut()">Sign out</button>
@@ -608,15 +605,14 @@
 // ════════════════════════════════════════════════════════════════════
 //  Auth & API
 // ════════════════════════════════════════════════════════════════════
-let _idToken  = null;
-let _isOwner  = false;
+let _idToken       = null;
+let _isOwner       = false;
+let _pendingEdit   = false;  // true if user clicked Edit before signing in
 
+// GET is public — token sent only when already signed in
 async function _apiGet(tripId) {
-  const r = await fetch(`/api/trips?tripId=${encodeURIComponent(tripId)}`, {
-    headers: { 'Authorization': `Bearer ${_idToken}` },
-  });
-  if (r.status === 401) { _signOut(); throw new Error('session-expired'); }
-  if (r.status === 403) throw new Error('access-denied');
+  const headers = _idToken ? { 'Authorization': `Bearer ${_idToken}` } : {};
+  const r = await fetch(`/api/trips?tripId=${encodeURIComponent(tripId)}`, { headers });
   if (r.headers.get('X-Atlas-Role') === 'owner') _isOwner = true;
   return r.json();
 }
@@ -635,22 +631,45 @@ function _onSignedIn(credential) {
   _idToken = credential;
   try {
     const payload = JSON.parse(atob(credential.split('.')[1]));
-    const email = payload.email;
-    document.getElementById('user-email').textContent = email;
+    document.getElementById('user-email').textContent = payload.email;
     document.getElementById('nav-user').style.display = 'flex';
     const refreshIn = Math.max(payload.exp * 1000 - Date.now() - 5 * 60 * 1000, 10000);
     setTimeout(() => google.accounts.id.prompt(), refreshIn);
   } catch(e) {}
-  // Hide sign-in prompt, show loading text, then load data
-  document.getElementById('loading-sign-in').style.display = 'none';
-  document.getElementById('loading-text').style.display = '';
-  _initTrip();
+  // Re-fetch with token so server sets X-Atlas-Role → reveals edit controls if owner
+  _refreshRoleAndUI();
+  if (_pendingEdit) { _pendingEdit = false; _activateEditIfOwner(); }
+}
+
+async function _refreshRoleAndUI() {
+  // A lightweight GET to get the role header; response updates state.tripInfo as a bonus
+  try {
+    const list = await _apiGet('_trips-list');
+    if (_isOwner) {
+      document.getElementById('edit-toggle').style.display = '';
+      document.getElementById('save-drive-btn').style.display = '';
+    }
+  } catch(e) {}
+}
+
+function _activateEditIfOwner() {
+  if (_isOwner) {
+    _doToggleEditMode();
+  } else {
+    const lbl = document.getElementById('edit-toggle-label');
+    const orig = lbl.textContent;
+    lbl.textContent = 'No access';
+    setTimeout(() => { lbl.textContent = orig; }, 2000);
+  }
 }
 
 function _signOut() {
   _idToken = null; _isOwner = false;
   google.accounts.id.disableAutoSelect();
-  window.location.reload();
+  document.getElementById('edit-toggle').style.display = 'none';
+  document.getElementById('save-drive-btn').style.display = 'none';
+  document.getElementById('nav-user').style.display = 'none';
+  if (state.editMode) _doToggleEditMode(); // exit edit mode
 }
 
 async function _initAuth() {
@@ -668,19 +687,19 @@ async function _initAuth() {
     callback: r => _onSignedIn(r.credential),
     auto_select: true,
   });
+  // Render a sign-in button in the nav (hidden until needed)
   google.accounts.id.renderButton(
     document.getElementById('sign-in-btn'),
-    { theme: 'outline', size: 'large', text: 'sign_in_with', shape: 'pill' }
+    { theme: 'outline', size: 'medium', text: 'sign_in_with', shape: 'pill' }
   );
-  google.accounts.id.prompt(n => {
-    if (n.isNotDisplayed() || n.isSkippedMoment()) {
-      document.getElementById('loading-text').style.display    = 'none';
-      document.getElementById('loading-sign-in').style.display = 'flex';
-    }
-  });
+  // Try silent auto-sign-in; if not possible, a sign-in button is available in nav
+  google.accounts.id.prompt();
 }
 
-window.addEventListener('DOMContentLoaded', () => _initAuth());
+window.addEventListener('DOMContentLoaded', () => {
+  _initTrip();   // public — load trip data immediately, no auth needed
+  _initAuth();   // background — silently signs in if possible; enables edit if owner
+});
 // TRIP_ID is read from the URL: trips/trip.html?id=japan-2026
 const TRIP_ID = new URLSearchParams(window.location.search).get('id') || '';
 
@@ -903,6 +922,17 @@ function dismissMigration() {
 //  Edit mode
 // ════════════════════════════════════════════════════════════════════
 function toggleEditMode() {
+  if (!_idToken) {
+    // Not signed in — prompt Google Sign-In; _onSignedIn will activate edit if owner
+    _pendingEdit = true;
+    google.accounts.id.prompt();
+    return;
+  }
+  if (!_isOwner) { _activateEditIfOwner(); return; }
+  _doToggleEditMode();
+}
+
+function _doToggleEditMode() {
   state.editMode = !state.editMode;
   document.body.classList.toggle("edit-mode", state.editMode);
   const btn = document.getElementById("edit-toggle");
@@ -1760,7 +1790,7 @@ function showError(msg) { const el = document.getElementById("error-banner"); el
 function hideLoading() { const el = document.getElementById("loading-screen"); el.classList.add("fade-out"); setTimeout(() => el.remove(), 700); }
 
 // ════════════════════════════════════════════════════════════════════
-//  Init — called by _onSignedIn() after Google authentication
+//  Init — called immediately on DOMContentLoaded (no auth required)
 // ════════════════════════════════════════════════════════════════════
 async function _initTrip() {
   const [, infoResult] = await Promise.allSettled([loadData(), fetchTripInfo()]);
@@ -1770,13 +1800,10 @@ async function _initTrip() {
     state.days = [];
     state.dataSource = state.dataSource || 'json';
   }
-  // Show edit controls only for the owner
-  if (_isOwner) {
-    document.getElementById('edit-toggle').style.display = '';
-    document.getElementById('save-drive-btn').style.display = '';
-  }
   renderAll();
   hideLoading();
+  // Edit toggle is always visible; it prompts sign-in when clicked if not authenticated
+  document.getElementById('edit-toggle').style.display = '';
 }
 </script>
 </body>

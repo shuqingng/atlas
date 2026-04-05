@@ -1,12 +1,10 @@
 {
-  "_readme": "Per-trip access control. Owner email is set via the OWNER_EMAIL environment variable (never committed here). Add trip IDs with the emails allowed to read or write each trip. read grants view-only; write grants save-to-Drive access.",
+  "_readme": "All trips are publicly readable — no login required. Only write access is enforced here. Add emails to a trip's 'write' array to allow that person to save changes to Drive. Owner (OWNER_EMAIL env var) always has full write access.",
   "trips": {
     "japan-2026": {
-      "read":  ["rayner_ng1997@live.com"],
       "write": []
     },
     "siguniang-2026": {
-      "read":  ["mingmataaaa@gmail.com"],
       "write": []
     }
   }
