@@ -8,6 +8,7 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin',  req.headers.origin || '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+  res.setHeader('Access-Control-Expose-Headers', 'X-Atlas-Role');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'GET' && req.method !== 'POST') {
@@ -25,7 +26,11 @@ module.exports = async function handler(req, res) {
     if (role) res.setHeader('X-Atlas-Role', role);
 
     const data = await proxyGet(tripId);
-    if (tripId === '_trips-list' && !Array.isArray(data)) return res.status(200).json([]);
+    // For _trips-list, wrap response to include role in body (more reliable than header-only)
+    if (tripId === '_trips-list') {
+      const trips = Array.isArray(data) ? data : [];
+      return res.status(200).json({ trips, role: role || null });
+    }
     return res.status(200).json(data);
   }
 

@@ -493,7 +493,11 @@ let _trips = [];
 async function loadTrips() {
   try {
     const data = await _apiGet('_trips-list');
-    if (Array.isArray(data)) _trips = data;
+    // API returns { trips: [...], role: 'owner'|'guest'|null }
+    if (data && Array.isArray(data.trips)) {
+      _trips = data.trips;
+      if (data.role === 'owner') _isOwner = true;
+    }
   } catch(e) { /* network error — show whatever we have */ }
   render(_trips);
 }

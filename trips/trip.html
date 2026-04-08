@@ -643,9 +643,10 @@ function _onSignedIn(credential) {
 }
 
 async function _refreshRoleAndUI() {
-  // A lightweight GET to get the role header; response updates state.tripInfo as a bonus
   try {
-    const list = await _apiGet('_trips-list');
+    const data = await _apiGet('_trips-list');
+    // API returns { trips: [...], role: 'owner'|'guest'|null }
+    if (data && data.role === 'owner') _isOwner = true;
     if (_isOwner) {
       document.getElementById('save-drive-btn').style.display = '';
     }
