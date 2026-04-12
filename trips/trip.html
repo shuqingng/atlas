@@ -68,6 +68,8 @@
   .nav-btn:hover { color: var(--ink); }
   .nav-btn.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
   .nav-spacer { flex: 1; min-width: 16px; }
+  .md-download-btn { display: flex; align-items: center; padding: 7px 14px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--muted); background: var(--paper2); border: 1px solid var(--border); border-radius: 20px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; margin: 8px 8px 8px 0; }
+  .md-download-btn:hover { color: var(--ink); border-color: rgba(26,26,24,0.3); }
   .edit-toggle-btn { display: flex; align-items: center; gap: 6px; padding: 7px 14px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--muted); background: var(--paper2); border: 1px solid var(--border); border-radius: 20px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; margin: 8px 0; }
   .edit-toggle-btn:hover { color: var(--ink); border-color: rgba(26,26,24,0.3); }
   .edit-toggle-btn.active { color: #fff; background: var(--ink); border-color: var(--ink); }
@@ -371,6 +373,7 @@
     <button class="nav-btn" id="accoms-nav-btn" data-section="accoms" onclick="showSection('accoms')">Accoms</button>
     <button class="nav-btn" id="essentials-nav-btn" data-section="essentials" onclick="showSection('essentials')">Essentials</button>
     <div class="nav-spacer"></div>
+    <button class="md-download-btn" onclick="downloadItinerary()" title="Download itinerary as Markdown">↓ .md</button>
     <button class="edit-toggle-btn" id="edit-toggle" onclick="toggleEditMode()" title="Toggle edit mode">
       <span>✏️</span> <span id="edit-toggle-label">Edit</span>
     </button>
@@ -881,6 +884,90 @@ function clearLS() {
   localStorage.removeItem(LS_KEY);
   state.dirty = false;
   document.body.classList.remove("has-changes");
+}
+
+// ════════════════════════════════════════════════════════════════════
+//  Download itinerary as Markdown
+// ════════════════════════════════════════════════════════════════════
+function downloadItinerary() {
+  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  function stripHtml(str) {
+    return (str || "")
+      .replace(/<a [^>]*href="([^"]*)"[^>]*>([^<]*)<\/a>/gi, "$2 ($1)")
+      .replace(/<[^>]+>/g, "")
+      .replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&quot;/g,'"').replace(/&#39;/g,"'")
+      .trim();
+  }
+
+  function fmtDate(dateStr) {
+    if (!dateStr) return "";
+    const d = new Date(dateStr + "T12:00:00");
+    const dow = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][d.getDay()];
+    return `${d.getDate()} ${MONTHS[d.getMonth()]} (${dow})`;
+  }
+
+  const meta = state.tripMeta || {};
+  const info = state.tripInfo || {};
+  const title = info.title || meta.title || "Trip Itinerary";
+  const dateRange = (() => {
+    const dates = state.days.map(d => d.date).filter(Boolean).sort();
+    if (!dates.length) return "";
+    const s = new Date(dates[0] + "T12:00:00");
+    const e = new Date(dates[dates.length - 1] + "T12:00:00");
+    return `${s.getDate()} ${MONTHS[s.getMonth()]} – ${e.getDate()} ${MONTHS[e.getMonth()]} ${e.getFullYear()}`;
+  })();
+
+  const lines = [];
+  lines.push(`# ${title}`);
+  if (dateRange) lines.push(`*${dateRange}*`);
+  lines.push("");
+
+  state.days.forEach((d, di) => {
+    const ci = getCityInfo(d.city);
+    const label = computeDayLabel(di, d.date);
+    lines.push("---");
+    lines.push("");
+    lines.push(`## ${label} · ${ci.emoji} ${ci.name}`);
+    if (d.title) lines.push(`### ${d.title}`);
+    if (d.desc) lines.push(stripHtml(d.desc));
+    lines.push("");
+
+    (d.stops || []).forEach(s => {
+      const time = s.time ? `**${s.time}**  ` : "";
+      const tags = (s.tags || "").split(",").map(t => t.trim()).filter(Boolean)
+        .map(t => TAG_LABELS[t] ? TAG_LABELS[t].replace(/^\S+\s/, "") : t).join(", ");
+      const booked = s.booked === true ? " ✓" : s.booked === false ? " ✗" : "";
+      const tagStr = tags ? ` _(${tags})_` : "";
+      lines.push(`- ${time}${s.name}${tagStr}${booked}`);
+      if (s.note) lines.push(`  ${stripHtml(s.note)}`);
+      if (s.maps_url) lines.push(`  [📍 Maps](${s.maps_url})`);
+      const opts = Array.isArray(s.options) ? s.options : [];
+      opts.forEach((opt, oi) => {
+        const orStr = oi > 0 ? "  or " : "  · ";
+        lines.push(`${orStr}${opt.name}${opt.note ? " — " + stripHtml(opt.note) : ""}${opt.url ? ` [Maps](${opt.url})` : ""}`);
+      });
+    });
+
+    const accom = getAccomForDay(d.date);
+    if (accom) {
+      lines.push("");
+      lines.push(`🏡 **Tonight:** ${accom.name}${accom.note ? " — " + stripHtml(accom.note) : ""}`);
+    }
+    if (d.tip) {
+      lines.push("");
+      lines.push(`> ✦ ${d.tip}`);
+    }
+    lines.push("");
+  });
+
+  const blob = new Blob([lines.join("\n")], { type: "text/markdown;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${title.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-itinerary.md`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 // ════════════════════════════════════════════════════════════════════
