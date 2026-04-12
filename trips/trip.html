@@ -1476,7 +1476,8 @@ function renderAccoms() {
     grid.innerHTML = `<p style="color:var(--muted);font-size:14px">No accommodations added yet. Enter edit mode to add one.</p>`;
     return;
   }
-  grid.innerHTML = accoms.map((a, ai) => {
+  const sorted = accoms.map((a, i) => ({ a, ai: i })).sort((x, y) => (x.a.checkin || "").localeCompare(y.a.checkin || ""));
+  grid.innerHTML = sorted.map(({ a, ai }) => {
     const dateRange = [a.checkin, a.checkout].filter(Boolean)
       .map(d => { const [y,m,day] = d.split("-"); return `${day} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][Number(m)-1]}`; })
       .join(" → ");
