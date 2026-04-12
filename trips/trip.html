@@ -1077,7 +1077,15 @@ function getCityInfo(cityId) {
 }
 
 function computeDayLabel(zeroIndex, dateStr) {
-  const n = zeroIndex + 1;
+  let n = zeroIndex + 1;
+  if (dateStr) {
+    const allDates = state.days.map(d => d.date).filter(Boolean).sort();
+    if (allDates.length) {
+      const origin = new Date(allDates[0] + "T12:00:00");
+      const current = new Date(dateStr + "T12:00:00");
+      n = Math.round((current - origin) / 86400000) + 1;
+    }
+  }
   if (!dateStr) return `Day ${n}`;
   const d = new Date(dateStr + "T12:00:00");
   const dd  = d.getDate();
