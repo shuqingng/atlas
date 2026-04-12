@@ -171,6 +171,9 @@
   .accom-edit-controls button { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: #fff; cursor: pointer; font-size: 13px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
   .accom-edit-controls button:hover { background: var(--paper2); }
   .accom-edit-controls .btn-delete:hover { background: #fdecea; border-color: #f5c6c2; }
+  body.edit-mode .accom-card { cursor: grab; }
+  .accom-card.accom-dragging { opacity: 0.35; }
+  .accom-card.accom-drag-over { outline: 2px dashed var(--green); outline-offset: 3px; }
   .add-accom-row { display: none; margin-top: 24px; }
   body.edit-mode .add-accom-row { display: block; }
   .btn-add-accom { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 13px; font-weight: 500; border-radius: 10px; border: 2px dashed var(--border); background: transparent; cursor: pointer; color: var(--muted); transition: all 0.2s; }
@@ -340,7 +343,7 @@
     <path d="M0 300 L200 300 L450 30 L700 300 L900 300Z" fill="white"/>
     <path d="M380 80 L450 30 L520 80 L490 80 L450 55 L410 80Z" fill="white"/>
   </svg>
-  <a class="hero-home-btn" href="../" title="Back to Atlas">
+  <a class="hero-home-btn" href="../" title="Back to Atlas" id="hero-home-btn" style="display:none">
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
     </svg>
@@ -649,6 +652,7 @@ async function _refreshRoleAndUI() {
     if (data && data.role === 'owner') _isOwner = true;
     if (_isOwner) {
       document.getElementById('save-drive-btn').style.display = '';
+      document.getElementById('hero-home-btn').style.display = '';
     }
   } catch(e) {}
 }
@@ -668,6 +672,7 @@ function _signOut() {
   _idToken = null; _isOwner = false;
   google.accounts.id.disableAutoSelect();
   document.getElementById('save-drive-btn').style.display = 'none';
+  document.getElementById('hero-home-btn').style.display = 'none';
   document.getElementById('nav-user').style.display = 'none';
   if (state.editMode) _doToggleEditMode(); // exit edit mode
 }
@@ -1475,7 +1480,10 @@ function renderAccoms() {
     const dateRange = [a.checkin, a.checkout].filter(Boolean)
       .map(d => { const [y,m,day] = d.split("-"); return `${day} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][Number(m)-1]}`; })
       .join(" → ");
-    return `<div class="accom-card">
+    const dragAttrs = state.editMode
+      ? ` draggable="true" data-ai="${ai}" ondragstart="accomDragStart(event,${ai})" ondragover="accomDragOver(event,${ai})" ondrop="accomDrop(event,${ai})" ondragend="accomDragEnd()"`
+      : "";
+    return `<div class="accom-card"${dragAttrs}>
       <div class="accom-edit-controls">
         <button title="Edit" onclick="openAccomModal(${ai})">✏️</button>
         <button class="btn-delete" title="Delete" onclick="deleteAccom(${ai})">🗑</button>
@@ -1553,6 +1561,41 @@ function deleteAccom(ai) {
   persistToLS();
   renderAccoms();
   renderDays();
+}
+
+// --- Accommodation drag-and-drop reordering ---
+let _accomDragSrc = null;
+
+function accomDragStart(e, ai) {
+  if (!state.editMode) { e.preventDefault(); return; }
+  _accomDragSrc = ai;
+  e.currentTarget.classList.add("accom-dragging");
+  e.dataTransfer.effectAllowed = "move";
+}
+
+function accomDragOver(e, ai) {
+  if (_accomDragSrc === null || _accomDragSrc === ai) return;
+  e.preventDefault();
+  e.dataTransfer.dropEffect = "move";
+  document.querySelectorAll(".accom-card").forEach(c => c.classList.remove("accom-drag-over"));
+  e.currentTarget.classList.add("accom-drag-over");
+}
+
+function accomDrop(e, ai) {
+  if (_accomDragSrc === null || _accomDragSrc === ai) return;
+  e.preventDefault();
+  const from = _accomDragSrc;
+  const to = ai;
+  const [moved] = state.accoms.splice(from, 1);
+  state.accoms.splice(to, 0, moved);
+  persistToLS();
+  renderAccoms();
+  _accomDragSrc = null;
+}
+
+function accomDragEnd() {
+  document.querySelectorAll(".accom-card").forEach(c => c.classList.remove("accom-dragging", "accom-drag-over"));
+  _accomDragSrc = null;
 }
 
 // Trip info is edited from the main Atlas page (index.html?edit=TRIP_ID)
