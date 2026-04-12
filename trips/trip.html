@@ -527,7 +527,7 @@
       </div>
       <div class="form-group">
         <label class="form-label">Notes</label>
-        <textarea class="form-textarea" id="f-accom-note" placeholder="Room type, confirmation number, etc."></textarea>
+        <textarea class="form-textarea" id="f-accom-note" placeholder="Room type, confirmation number, etc. HTML allowed, e.g. &lt;strong&gt;Confirmation:&lt;/strong&gt; ABC123 or &lt;a href=&quot;...&quot;&gt;Booking link&lt;/a&gt;"></textarea>
       </div>
     </div>
     <div class="modal-footer">
@@ -1492,7 +1492,7 @@ function renderAccoms() {
       <div class="accom-dates">${escHtml(dateRange)}</div>
       <div class="accom-name">${escHtml(a.name)}</div>
       ${a.maps_url ? `<a class="maps-link" href="${escAttr(a.maps_url)}" target="_blank" rel="noopener">📍 Open in Maps</a>` : ""}
-      ${a.note ? `<div class="accom-note">${renderNote(a.note)}</div>` : ""}
+      ${a.note ? `<div class="accom-note">${a.note}</div>` : ""}
     </div>`;
   }).join("");
 }
