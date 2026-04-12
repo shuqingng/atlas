@@ -527,7 +527,7 @@
       </div>
       <div class="form-group">
         <label class="form-label">Notes</label>
-        <textarea class="form-textarea" id="f-accom-note" placeholder="Room type, confirmation number, etc. HTML allowed, e.g. &lt;strong&gt;Confirmation:&lt;/strong&gt; ABC123 or &lt;a href=&quot;...&quot;&gt;Booking link&lt;/a&gt;"></textarea>
+        <textarea class="form-textarea" id="f-accom-note" placeholder="Notes — HTML allowed, e.g. &lt;strong&gt;Conf:&lt;/strong&gt; ABC123 · &lt;a href=&quot;...&quot;&gt;Booking&lt;/a&gt; · use `text` to copy"></textarea>
       </div>
     </div>
     <div class="modal-footer">
@@ -1492,7 +1492,7 @@ function renderAccoms() {
       <div class="accom-dates">${escHtml(dateRange)}</div>
       <div class="accom-name">${escHtml(a.name)}</div>
       ${a.maps_url ? `<a class="maps-link" href="${escAttr(a.maps_url)}" target="_blank" rel="noopener">📍 Open in Maps</a>` : ""}
-      ${a.note ? `<div class="accom-note">${a.note}</div>` : ""}
+      ${a.note ? `<div class="accom-note">${renderNoteHtml(a.note)}</div>` : ""}
     </div>`;
   }).join("");
 }
@@ -1787,6 +1787,16 @@ function renderNote(note) {
   return (note || "")
     .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")
     .replace(/`([^`]+)`/g, (_, txt) =>
+      `<span class="copy-chip" onclick="copyChip(this,'${txt.replace(/'/g,"&#39;")}')" title="Click to copy">` +
+      `<svg width="10" height="10" viewBox="0 0 16 16" fill="none" style="opacity:0.5"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5"/></svg>` +
+      `${txt}</span>`)
+    .replace(/\n/g, "<br>");
+}
+
+// Like renderNote but passes HTML tags through (for bold, links, etc.)
+function renderNoteHtml(note) {
+  return (note || "")
+    .replace(/`([^`]*)`/g, (_, txt) =>
       `<span class="copy-chip" onclick="copyChip(this,'${txt.replace(/'/g,"&#39;")}')" title="Click to copy">` +
       `<svg width="10" height="10" viewBox="0 0 16 16" fill="none" style="opacity:0.5"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5"/></svg>` +
       `${txt}</span>`)
