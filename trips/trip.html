@@ -965,7 +965,12 @@ function downloadItinerary() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `${title.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-itinerary.md`;
+  // Use stable trip id for filenames (more useful than title alone).
+  const tripSlug = String(TRIP_ID || "")
+    .replace(/[^a-z0-9]+/gi, "-")
+    .replace(/^-+|-+$/g, "")
+    .toLowerCase();
+  a.download = `${tripSlug || title.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-itinerary.md`;
   a.click();
   URL.revokeObjectURL(url);
 }
