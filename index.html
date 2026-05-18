@@ -306,6 +306,13 @@
 
   <div id="loading">Loading trips…</div>
   <div class="trips-grid" id="trips-grid" style="display:none"></div>
+
+  <div id="past-trips-section" style="display:none">
+    <div class="section-header" style="margin-top:56px">
+      <div class="section-label" id="past-trips-count"></div>
+    </div>
+    <div class="trips-grid" id="past-trips-grid"></div>
+  </div>
 </main>
 
 <!-- <footer>Made with love 🌸</footer> -->
@@ -543,111 +550,123 @@ function buildPaletteGradient(palette) {
           linear-gradient(135deg, #1a1a18 0%, #2a2a26 100%)`;
 }
 
+function buildTripCard(t) {
+  const a = document.createElement("a");
+  a.className = "trip-card";
+  a.href = "trips/trip.html?id=" + t.id;
+
+  const bg = document.createElement("div");
+  bg.className = "trip-card-bg";
+  if (t.coverImage) {
+    bg.style.backgroundImage = `url('${t.coverImage}')`;
+  } else {
+    bg.style.background = buildPaletteGradient(t.palette);
+    const horizon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    horizon.setAttribute("class", "trip-card-horizon");
+    horizon.setAttribute("viewBox", "0 0 900 200");
+    horizon.setAttribute("fill", "none");
+    horizon.setAttribute("preserveAspectRatio", "none");
+    horizon.innerHTML = `
+      <path d="M0 200 L0 130 Q80 80 180 110 Q280 140 380 70 Q480 0 580 50 Q680 100 780 60 Q860 30 900 50 L900 200Z" fill="white"/>
+      <path d="M0 200 L0 160 Q120 130 240 150 Q360 170 480 130 Q600 90 720 120 Q820 145 900 125 L900 200Z" fill="white" opacity="0.5"/>`;
+    bg.appendChild(horizon);
+  }
+
+  const overlay = document.createElement("div");
+  overlay.className = "trip-card-overlay";
+
+  const body = document.createElement("div");
+  body.className = "trip-card-body";
+
+  const chips = [
+    formatTripDateRange(t.startDate, t.endDate) && `<span class="trip-card-chip">${formatTripDateRange(t.startDate, t.endDate)}</span>`,
+    t.tripType && `<span class="trip-card-chip">${t.tripType}</span>`,
+  ].filter(Boolean).join("");
+
+  const computedStatus = computeTripStatus(t);
+  const statusHtml = (() => {
+    const badges = [];
+    if (!t.confirmed) badges.push(`<div class="trip-card-status" style="background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.2)">Draft</div>`);
+    if (computedStatus) badges.push(`<div class="trip-card-status" style="${STATUS_STYLES[computedStatus]}">${STATUS_LABELS[computedStatus]}</div>`);
+    return badges.length ? `<div class="trip-card-badges">${badges.join("")}</div>` : "";
+  })();
+  body.innerHTML = `
+    ${statusHtml}
+    <div class="trip-card-title">${t.title}</div>
+    ${t.subtitle ? `<div class="trip-card-subtitle">${t.subtitle}</div>` : ""}
+    ${chips ? `<div class="trip-card-meta">${chips}</div>` : ""}
+  `;
+
+  const actions = document.createElement("div");
+  actions.className = "trip-card-actions";
+
+  const editBtn = document.createElement("button");
+  editBtn.className = "trip-card-action-btn";
+  editBtn.title = "Edit trip info";
+  editBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
+  editBtn.addEventListener("click", e => {
+    e.preventDefault();
+    e.stopPropagation();
+    openEditTripModal(t.id);
+  });
+
+  const del = document.createElement("button");
+  del.className = "trip-card-action-btn delete";
+  del.title = "Delete trip";
+  del.innerHTML = "✕";
+  del.addEventListener("click", e => {
+    e.preventDefault();
+    e.stopPropagation();
+    deleteTrip(t.id, t.title);
+  });
+
+  if (_isOwner) {
+    actions.appendChild(editBtn);
+    actions.appendChild(del);
+  }
+  a.appendChild(bg);
+  a.appendChild(overlay);
+  a.appendChild(body);
+  if (_isOwner) a.appendChild(actions);
+  return a;
+}
+
 function render(trips) {
   document.getElementById("loading").style.display = "none";
   const grid = document.getElementById("trips-grid");
+  const pastGrid = document.getElementById("past-trips-grid");
+  const pastSection = document.getElementById("past-trips-section");
   grid.innerHTML = '';
+  pastGrid.innerHTML = '';
   grid.style.display = "grid";
-  document.getElementById("trips-count").textContent =
-    trips.length === 1 ? "1 trip" : `${trips.length} trips`;
 
-  // Sort: upcoming first (soonest first), then ongoing, then past (most recent first), undated last
-  const today = new Date().toISOString().slice(0, 10);
-  const sorted = [...trips].sort((a, b) => {
+  const activeTrips = trips.filter(t => computeTripStatus(t) !== "past");
+  const pastTrips   = trips.filter(t => computeTripStatus(t) === "past");
+
+  document.getElementById("trips-count").textContent =
+    activeTrips.length === 1 ? "1 trip" : `${activeTrips.length} trips`;
+
+  const sortedActive = [...activeTrips].sort((a, b) => {
     const sa = computeTripStatus(a), sb = computeTripStatus(b);
-    const order = { upcoming: 0, ongoing: 1, past: 2, null: 3 };
-    const oa = order[sa] ?? 3, ob = order[sb] ?? 3;
+    const order = { upcoming: 0, ongoing: 1, null: 2 };
+    const oa = order[sa] ?? 2, ob = order[sb] ?? 2;
     if (oa !== ob) return oa - ob;
     const da = a.startDate || "", db = b.startDate || "";
     if (!da && !db) return 0;
     if (!da) return 1;
     if (!db) return -1;
-    // upcoming: soonest first; past: most recent first
-    return sa === "past" ? db.localeCompare(da) : da.localeCompare(db);
+    return da.localeCompare(db);
   });
 
-  sorted.forEach(t => {
-    const a = document.createElement("a");
-    a.className = "trip-card";
-    a.href = "trips/trip.html?id=" + t.id;
-
-    const bg = document.createElement("div");
-    bg.className = "trip-card-bg";
-    if (t.coverImage) {
-      bg.style.backgroundImage = `url('${t.coverImage}')`;
-    } else {
-      bg.style.background = buildPaletteGradient(t.palette);
-      // Horizon SVG for trips without a cover photo
-      const horizon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      horizon.setAttribute("class", "trip-card-horizon");
-      horizon.setAttribute("viewBox", "0 0 900 200");
-      horizon.setAttribute("fill", "none");
-      horizon.setAttribute("preserveAspectRatio", "none");
-      horizon.innerHTML = `
-        <path d="M0 200 L0 130 Q80 80 180 110 Q280 140 380 70 Q480 0 580 50 Q680 100 780 60 Q860 30 900 50 L900 200Z" fill="white"/>
-        <path d="M0 200 L0 160 Q120 130 240 150 Q360 170 480 130 Q600 90 720 120 Q820 145 900 125 L900 200Z" fill="white" opacity="0.5"/>`;
-      bg.appendChild(horizon);
-    }
-
-    const overlay = document.createElement("div");
-    overlay.className = "trip-card-overlay";
-
-    const body = document.createElement("div");
-    body.className = "trip-card-body";
-
-    const chips = [
-      formatTripDateRange(t.startDate, t.endDate) && `<span class="trip-card-chip">${formatTripDateRange(t.startDate, t.endDate)}</span>`,
-      t.tripType && `<span class="trip-card-chip">${t.tripType}</span>`,
-    ].filter(Boolean).join("");
-
-    const computedStatus = computeTripStatus(t);
-    const statusHtml = (() => {
-      const badges = [];
-      if (!t.confirmed) badges.push(`<div class="trip-card-status" style="background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.2)">Draft</div>`);
-      if (computedStatus) badges.push(`<div class="trip-card-status" style="${STATUS_STYLES[computedStatus]}">${STATUS_LABELS[computedStatus]}</div>`);
-      return badges.length ? `<div class="trip-card-badges">${badges.join("")}</div>` : "";
-    })();
-    body.innerHTML = `
-      ${statusHtml}
-      <div class="trip-card-title">${t.title}</div>
-      ${t.subtitle ? `<div class="trip-card-subtitle">${t.subtitle}</div>` : ""}
-      ${chips ? `<div class="trip-card-meta">${chips}</div>` : ""}
-    `;
-
-    // Hover action buttons (top-right)
-    const actions = document.createElement("div");
-    actions.className = "trip-card-actions";
-
-    const editBtn = document.createElement("button");
-    editBtn.className = "trip-card-action-btn";
-    editBtn.title = "Edit trip info";
-    editBtn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
-    editBtn.addEventListener("click", e => {
-      e.preventDefault();
-      e.stopPropagation();
-      openEditTripModal(t.id);
-    });
-
-    const del = document.createElement("button");
-    del.className = "trip-card-action-btn delete";
-    del.title = "Delete trip";
-    del.innerHTML = "✕";
-    del.addEventListener("click", e => {
-      e.preventDefault();
-      e.stopPropagation();
-      deleteTrip(t.id, t.title);
-    });
-
-    if (_isOwner) {
-      actions.appendChild(editBtn);
-      actions.appendChild(del);
-    }
-    a.appendChild(bg);
-    a.appendChild(overlay);
-    a.appendChild(body);
-    if (_isOwner) a.appendChild(actions);
-    grid.appendChild(a);
+  const sortedPast = [...pastTrips].sort((a, b) => {
+    const da = a.startDate || "", db = b.startDate || "";
+    if (!da && !db) return 0;
+    if (!da) return 1;
+    if (!db) return -1;
+    return db.localeCompare(da);
   });
+
+  sortedActive.forEach(t => grid.appendChild(buildTripCard(t)));
 
   // "Add trip" card — owner only
   if (_isOwner) {
@@ -663,6 +682,15 @@ function render(trips) {
       <div class="trip-card-add-hint">Fill in the details and it'll appear here instantly.</div>
     `;
     grid.appendChild(add);
+  }
+
+  if (pastTrips.length > 0) {
+    document.getElementById("past-trips-count").textContent =
+      pastTrips.length === 1 ? "1 past trip" : `${pastTrips.length} past trips`;
+    sortedPast.forEach(t => pastGrid.appendChild(buildTripCard(t)));
+    pastSection.style.display = "block";
+  } else {
+    pastSection.style.display = "none";
   }
 }
 
