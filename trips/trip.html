@@ -188,6 +188,11 @@
   .day-accom-label { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
   .day-accom-name { font-family: 'Shippori Mincho', serif; font-size: 16px; font-weight: 700; color: var(--ink); }
 
+  /* GAP INDICATOR */
+  .gap-indicator { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin: 2px 0; }
+  .gap-indicator .gap-line { flex: 1; height: 0; border-top: 2px dashed var(--red-light); }
+  .gap-indicator .gap-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); background: var(--red-light); padding: 4px 12px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+
   /* DAY ROUTE MAP */
   .day-route-map { margin-top: 40px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
   .day-route-map iframe { display: block; width: 100%; height: 360px; border: none; }
@@ -1099,6 +1104,16 @@ function computeDayLabel(zeroIndex, dateStr) {
   return `Day ${n}: ${dd} ${mon} (${dow})`;
 }
 
+function daysBetween(dateStr1, dateStr2) {
+  const a = new Date(dateStr1 + "T12:00:00");
+  const b = new Date(dateStr2 + "T12:00:00");
+  return Math.round((b - a) / 86400000);
+}
+
+function gapIndicatorHtml(label) {
+  return `<div class="gap-indicator"><span class="gap-line"></span><span class="gap-label">${escHtml(label)}</span><span class="gap-line"></span></div>`;
+}
+
 function deriveDateRange() {
   const MONS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   function fmt(startStr, endStr) {
@@ -1192,6 +1207,15 @@ function renderOverview() {
       <div class="ov-title">${escHtml(d.title)}</div>
       <div class="ov-stops">${escHtml(preview)}</div>`;
     grid.appendChild(el);
+
+    const next = state.days[di + 1];
+    if (next && d.date && next.date) {
+      const gap = daysBetween(d.date, next.date) - 1;
+      if (gap > 0) {
+        const label = `${gap} day${gap === 1 ? "" : "s"} unplanned`;
+        grid.insertAdjacentHTML("beforeend", gapIndicatorHtml(label));
+      }
+    }
   });
 }
 
@@ -1577,14 +1601,14 @@ function renderAccoms() {
     return;
   }
   const sorted = accoms.map((a, i) => ({ a, ai: i })).sort((x, y) => (x.a.checkin || "").localeCompare(y.a.checkin || ""));
-  grid.innerHTML = sorted.map(({ a, ai }) => {
+  grid.innerHTML = sorted.map(({ a, ai }, idx) => {
     const dateRange = [a.checkin, a.checkout].filter(Boolean)
       .map(d => { const [y,m,day] = d.split("-"); return `${day} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][Number(m)-1]}`; })
       .join(" → ");
     const dragAttrs = state.editMode
       ? ` draggable="true" data-ai="${ai}" ondragstart="accomDragStart(event,${ai})" ondragover="accomDragOver(event,${ai})" ondrop="accomDrop(event,${ai})" ondragend="accomDragEnd()"`
       : "";
-    return `<div class="accom-card"${dragAttrs}>
+    let html = `<div class="accom-card"${dragAttrs}>
       <div class="accom-edit-controls">
         <button title="Edit" onclick="openAccomModal(${ai})">✏️</button>
         <button class="btn-delete" title="Delete" onclick="deleteAccom(${ai})">🗑</button>
@@ -1594,6 +1618,15 @@ function renderAccoms() {
       ${a.maps_url ? `<a class="maps-link" href="${escAttr(a.maps_url)}" target="_blank" rel="noopener">📍 Open in Maps</a>` : ""}
       ${a.note ? `<div class="accom-note">${renderNoteHtml(a.note)}</div>` : ""}
     </div>`;
+    const next = sorted[idx + 1];
+    if (next && a.checkout && next.a.checkin) {
+      const gap = daysBetween(a.checkout, next.a.checkin);
+      if (gap > 0) {
+        const label = `${gap} night${gap === 1 ? "" : "s"} without a stay`;
+        html += gapIndicatorHtml(label);
+      }
+    }
+    return html;
   }).join("");
 }
 
